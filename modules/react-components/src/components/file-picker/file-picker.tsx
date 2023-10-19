@@ -207,7 +207,7 @@ export const FilePicker: FC<FilePickerProps> = (props: FilePickerPropsAlias): Re
     useEffect(() => {
         if (emptyFileError) {
             setHasError(true);
-            setErrorMessage(emptyFileErrorMsg? emptyFileErrorMsg : "Please add a file");
+            setErrorMessage(emptyFileErrorMsg? emptyFileErrorMsg : t("components:filePicker.noFileError"));
         }
     },[ emptyFileError ]);
 
@@ -298,7 +298,7 @@ export const FilePicker: FC<FilePickerProps> = (props: FilePickerPropsAlias): Re
             } else if (isTypeValidationResult(error)) {
                 setErrorMessage(error.errorMessage ?? EMPTY_STRING);
             } else {
-                setErrorMessage("Your input has unknown errors.");
+                setErrorMessage(t("components:filePicker.unknownError"));
             }
         }
     };
@@ -443,8 +443,10 @@ export const FilePicker: FC<FilePickerProps> = (props: FilePickerPropsAlias): Re
                             size="auto"
                             icon={ placeholderIcon }
                         />
-                        <p>You have selected <em className="file-name">{ file?.name }</em> file</p>
-                        <p>Not this file?</p>
+                        <p>{ t("components:filePicker.fileSelected", {
+                            fileName: <em className="file-name">{ file?.name }</em>
+                        }) }</p>
+                        <p>{ t("components:filePicker.notThisFile") }</p>
                         <Button
                             inverted
                             color="red"
@@ -457,7 +459,7 @@ export const FilePicker: FC<FilePickerProps> = (props: FilePickerPropsAlias): Re
                                     normalizeSerializationOnFileRemoval();
                                 }
                             } }>
-                            <Icon name="trash alternate"/> Remove
+                            <Icon name="trash alternate"/> { t("common:remove") }
                         </Button>
                     </Segment>
                 </Segment>
@@ -496,7 +498,7 @@ export const FilePicker: FC<FilePickerProps> = (props: FilePickerPropsAlias): Re
             return (
                 <TextArea
                     rows={ 10 }
-                    placeholder={ pasteAreaPlaceholderText ?? "Paste your content in this area..." }
+                    placeholder={ pasteAreaPlaceholderText ?? t("components:filePicker.pasteAreaPlaceholder") }
                     value={ pastedContent }
                     onChange={ (event: React.ChangeEvent<HTMLTextAreaElement>) => {
                         if (event) {
@@ -711,7 +713,7 @@ export class XMLFileStrategy implements PickerStrategy<string> {
                         resolve(btoa(rawXML));
                     }).catch((error) => {
                         reject({
-                            errorMessage: error ?? "XML file content is invalid",
+                            errorMessage: error ?? t("components:filePicker.errors.invalidXMLFile"),
                             valid: false
                         });
                     });
@@ -721,7 +723,7 @@ export class XMLFileStrategy implements PickerStrategy<string> {
                     resolve(btoa(rawXML));
                 }).catch((error) => {
                     reject({
-                        errorMessage: error ?? "XML string is invalid",
+                        errorMessage: error ?? t("components:filePicker.errors.invalidXMLString"),
                         valid: false
                     });
                 });
@@ -736,7 +738,9 @@ export class XMLFileStrategy implements PickerStrategy<string> {
 
                 if ((data as File).size > expected) {
                     reject({
-                        errorMessage: `File exceeds max size of ${ XMLFileStrategy.MAX_FILE_SIZE } MB`,
+                        errorMessage: t("components:filePicker.errors.maxFileSizeExceededError", {
+                            maxFileSize: XMLFileStrategy.MAX_FILE_SIZE
+                        }),
                         valid: false
                     });
                 }
@@ -748,7 +752,7 @@ export class XMLFileStrategy implements PickerStrategy<string> {
                         resolve({ valid: true });
                     }).catch((error) => {
                         reject({
-                            errorMessage: error ?? "XML file has errors",
+                            errorMessage: error ?? t("components:filePicker.errors.xmlFileError"),
                             valid: false
                         });
                     });
@@ -758,7 +762,7 @@ export class XMLFileStrategy implements PickerStrategy<string> {
                     resolve({ valid: true });
                 }).catch((error) => {
                     reject({
-                        errorMessage: error ?? "XML string has errors",
+                        errorMessage: error ?? t("components:filePicker.errors.xmlStringError"),
                         valid: false
                     });
                 });
@@ -784,7 +788,7 @@ export class XMLFileStrategy implements PickerStrategy<string> {
         const dom = domParser.parseFromString(xml, "text/xml");
 
         if (dom.getElementsByTagName("parsererror").length > 0) {
-            throw "Error while parsing XML file";
+            throw t("components:filePicker.errors.xmlFileParseError");
         }
 
         return xml;
@@ -828,9 +832,9 @@ export class CertFileStrategy implements PickerStrategy<CertificateDecodeResult>
                     resolve({ valid: true });
                 }).catch(() => {
                     reject({
-                        errorMessage: "Invalid certificate file. " +
-                            "Please use one of the following formats " +
-                            this.mimeTypes.join(","),
+                        errorMessage: t("components:filePicker.errors.invalidCertificateError", {
+                            certTypesStr: this.mimeTypes.join(",")
+                        }),
                         valid: false
                     });
                 });
@@ -839,7 +843,7 @@ export class CertFileStrategy implements PickerStrategy<CertificateDecodeResult>
                     resolve({ valid: true });
                 }).catch(() => {
                     reject({
-                        errorMessage: "Invalid certificate pem string.",
+                        errorMessage: t("components:filePicker.errors.invalidCertificateStringError"),
                         valid: false
                     });
                 });
@@ -871,7 +875,7 @@ export class CertFileStrategy implements PickerStrategy<CertificateDecodeResult>
                         pemStripped: CertificateManagementUtils.stripPem(text)
                     });
                 } catch (error) {
-                    reject("Failed to decode pem certificate data.");
+                    reject(t("components:filePicker.errors.pemCertDecodeError"));
                 }
             }
         });
@@ -944,7 +948,7 @@ export class CertFileStrategy implements PickerStrategy<CertificateDecodeResult>
                                 });
                             } catch {
                                 reject({
-                                    errorMessage: "Certificate file has errors.",
+                                    errorMessage: t("components:filePicker.errors.certificateFileError"),
                                     valid: false
                                 });
                             }
@@ -1051,7 +1055,7 @@ export class CSVFileStrategy implements PickerStrategy<CSVResult> {
                 // Check MIME type.
                 if (!this.mimeTypes.includes(data.type)) {
                     reject({
-                        errorMessage: "Invalid file type. Only CSV files are allowed.",
+                        errorMessage: t("components:filePicker.errors.invalidFileError"),
                         valid: false
                     });
 
@@ -1061,7 +1065,9 @@ export class CSVFileStrategy implements PickerStrategy<CSVResult> {
                 // Check file size.
                 if (data.size > this.maxSize) {
                     reject({
-                        errorMessage: `File exceeds max size of ${this.maxSize / CSVFileStrategy.KILOBYTE} KB.`,
+                        errorMessage: t("components:filePicker.errors.maxFileSizeExceededError", {
+                            maxFileSize: `${this.maxSize / CSVFileStrategy.KILOBYTE} KB`
+                        }),
                         valid: false
                     });
 
@@ -1087,20 +1093,24 @@ export class CSVFileStrategy implements PickerStrategy<CSVResult> {
 
                         if (actualRowCount > this.maxRowCount) {
                             reject({
-                                errorMessage: `Row count exceeds max limit of ${this.maxRowCount}.`,
+                                errorMessage: t("components:filePicker.errors.rowCountExceededError", {
+                                    maxRowCount: this.maxRowCount
+                                }),
                                 valid: false
                             });
-                            throw `Row count exceeds max limit of ${this.maxRowCount}.`;
+                            throw t("components:filePicker.errors.rowCountExceededError", {
+                                maxRowCount: this.maxRowCount
+                            });
                         }
 
                         if (lines.length > 0 && lines[0] !== "" && lines[0].split(",").length > 0) {
                             resolve({ valid: true });
                         } else {
-                            throw "CSV file is empty or invalid.";
+                            throw t("components:filePicker.errors.emptyCSVFileError");
                         }
                     } catch (error) {
                         reject({
-                            errorMessage: error ?? "CSV file has errors.",
+                            errorMessage: error ?? t("components:filePicker.errors.csvFileError"),
                             valid: false
                         });
                     }
@@ -1112,11 +1122,11 @@ export class CSVFileStrategy implements PickerStrategy<CSVResult> {
                     if (lines.length > 0 && lines[0].split(",").length > 0) {
                         resolve({ valid: true });
                     } else {
-                        throw "CSV string is empty or invalid";
+                        throw t("components:filePicker.errors.emptyCSVStringError");
                     }
                 } catch (error) {
                     reject({
-                        errorMessage: error ?? "CSV string has errors",
+                        errorMessage: error ?? t("components:filePicker.errors.csvStringError"),
                         valid: false
                     });
                 }

@@ -224,12 +224,12 @@ export const AdvancedConfigurationsForm: FunctionComponent<AdvancedConfiguration
                             <Divider hidden />
                         </Grid.Column>
                         <Heading as="h4">
-                            { "API Based Authentication" }
+                            { "Application native authentication" }
                         </Heading>
                         <Field.CheckboxLegacy
                             ariaLabel="Enable apiBasedAuthentication"
                             name="enableAPIBasedAuthentication"
-                            label={ "Enable API Based Authentication" }
+                            label={ "Enable app-native authentication API" }
                             required={ false }
                             value={ config?.enableAPIBasedAuthentication ? [ "enableAPIBasedAuthentication" ] : [] }
                             data-testid={ `${testId}-enable-api-based-authentication` }

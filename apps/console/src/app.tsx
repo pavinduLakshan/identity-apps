@@ -310,6 +310,9 @@ export const App: FunctionComponent<Record<string, never>> = (): ReactElement =>
     };
 
     if (isEmpty(config?.deployment) || isEmpty(config?.endpoints)) {
+        // eslint-disable-next-line no-console
+        console.log(config?.deployment);
+
         return <PreLoader/>;
     }
 

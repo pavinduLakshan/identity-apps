@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2023, WSO2 LLC. (https://www.wso2.com).
+ * Copyright (c) 2023-2024, WSO2 LLC. (https://www.wso2.com).
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -16,12 +16,12 @@
  * under the License.
  */
 
-import useDeploymentConfig from "../../../admin.core.v1/hooks/use-app-configs";
 import { TestableComponentInterface } from "@wso2is/core/models";
 import { Encode } from "@wso2is/core/utils";
 import { CodeEditor, CopyInputField, Heading, Message } from "@wso2is/react-components";
 import React, { FunctionComponent, ReactElement } from "react";
 import { Divider } from "semantic-ui-react";
+import useDeploymentConfig from "../../../admin.core.v1/hooks/use-app-configs";
 
 /**
  * Wizard help message props interface.
@@ -122,6 +122,7 @@ CreateConnectionWizardHelpPropsInterface> = (
     };
 
     const renderPreRequisites = (): ReactElement => {
+
         return (
             <Message
                 type="info"
@@ -133,7 +134,11 @@ CreateConnectionWizardHelpPropsInterface> = (
                                 <p
                                     key={ index }
                                     // eslint-disable-next-line react/no-danger
-                                    dangerouslySetInnerHTML={ { __html: Encode.forHtml(paragraph) } }
+                                    dangerouslySetInnerHTML={ { __html: Encode.forHtml(paragraph, {
+                                        // Skipping `target='_blank'` from sanitization since the html string
+                                        // from API response has `rel="noopener noreferrer"`
+                                        ADD_ATTR: [ "target" ]
+                                    }) } }
                                 />
                             ))
                         }

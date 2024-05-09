@@ -38,9 +38,16 @@ export class Encode {
      * sanitizeHTMLString("<script>Test</script>");
      *
      * @param htmlString - HTML string to be sanitized.
+     * @param options - options to be passed to customize the sanitization
+     *
+     * @remarks
+     * Ensure that when passing additional options, the rationale is clearly documented in the appropriate locations.
+     *
      * @returns Sanitized HTML string.
      */
-    public static forHtml(htmlString: string): string {
-        return DOMPurify.sanitize(htmlString);
+    // DOMPurify doesn't provide types for the `options` parameter, hence the type is set to `any`.
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    public static forHtml(htmlString: string, options?: any): string {
+        return DOMPurify.sanitize(htmlString, options);
     }
 }

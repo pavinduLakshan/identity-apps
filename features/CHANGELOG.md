@@ -1,5 +1,18 @@
 # @wso2is/features
 
+## 2.19.5
+
+### Patch Changes
+
+- [#6278](https://github.com/wso2/identity-apps/pull/6278) [`6d99d83e90ad34e92acbddfe2d4b72e704848a87`](https://github.com/wso2/identity-apps/commit/6d99d83e90ad34e92acbddfe2d4b72e704848a87) Thanks [@RushanNanayakkara](https://github.com/RushanNanayakkara)! - Reverting Update recovery portal to support SMS OTP based password recovery
+
+* [#6264](https://github.com/wso2/identity-apps/pull/6264) [`284d29a9855f9748ba087073e8204f8197d4c05b`](https://github.com/wso2/identity-apps/commit/284d29a9855f9748ba087073e8204f8197d4c05b) Thanks [@pavinduLakshan](https://github.com/pavinduLakshan)! - Update modal dismiss action label when the inviting parent user process is completed
+
+- [#6277](https://github.com/wso2/identity-apps/pull/6277) [`1217047ab9d3a74df5250153a7a1916b3d6b8762`](https://github.com/wso2/identity-apps/commit/1217047ab9d3a74df5250153a7a1916b3d6b8762) Thanks [@RushanNanayakkara](https://github.com/RushanNanayakkara)! - Revert changes of 5808
+
+- Updated dependencies [[`6d99d83e90ad34e92acbddfe2d4b72e704848a87`](https://github.com/wso2/identity-apps/commit/6d99d83e90ad34e92acbddfe2d4b72e704848a87)]:
+  - @wso2is/i18n@2.3.2
+
 ## 2.19.4
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @wso2is/identity-apps-core
 
+## 2.2.2
+
+### Patch Changes
+
+- [#6278](https://github.com/wso2/identity-apps/pull/6278) [`6d99d83e90ad34e92acbddfe2d4b72e704848a87`](https://github.com/wso2/identity-apps/commit/6d99d83e90ad34e92acbddfe2d4b72e704848a87) Thanks [@RushanNanayakkara](https://github.com/RushanNanayakkara)! - Reverting Update recovery portal to support SMS OTP based password recovery
+
 ## 2.2.1
 
 ### Patch Changes

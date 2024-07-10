@@ -203,6 +203,13 @@ jobs:
           pnpm test:unit:coverage:aggregate
           pnpm nyc:text-summary-report
           pnpm nyc:text-report
+      
+      - name: Upload coverage reports to Codecov
+        id: collect-and-upload-coverage
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          files: ./core.json
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   build:
     name: 🚧 Build

@@ -208,7 +208,6 @@ jobs:
         id: collect-and-upload-coverage
         uses: codecov/codecov-action@v4.0.1
         with:
-          files: ./core.json
           token: ${{ secrets.CODECOV_TOKEN }}
 
   build:

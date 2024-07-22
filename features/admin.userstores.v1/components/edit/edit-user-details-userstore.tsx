@@ -197,6 +197,7 @@ export const EditUserDetails: FunctionComponent<EditUserDetailsPropsInterface> =
         patchUserStore(id, data)
             .then(() => {
                 dispatch(addAlert<AlertInterface>({
+                    alertId: "",
                     description: t("userstores:notifications." +
                         "updateUserstore.success.description"),
                     level: AlertLevels.SUCCESS,
@@ -209,6 +210,7 @@ export const EditUserDetails: FunctionComponent<EditUserDetailsPropsInterface> =
                 // See https://github.com/wso2/product-is/issues/9767 for updates on the backend improvement.
                 // TODO: Remove delay notification once the backend is fixed.
                 dispatch(addAlert<AlertInterface>({
+                    alertId: "",
                     description: t("userstores:notifications.updateDelay.description"),
                     level: AlertLevels.WARNING,
                     message: t("userstores:notifications.updateDelay.message")
@@ -219,6 +221,7 @@ export const EditUserDetails: FunctionComponent<EditUserDetailsPropsInterface> =
             })
             .catch((error: IdentityAppsError) => {
                 dispatch(addAlert<AlertInterface>({
+                    alertId: "",
                     description: error?.description
                         || t("userstores:notifications." +
                             "updateUserstore.genericError.description"),

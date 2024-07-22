@@ -24,6 +24,10 @@ import { Notification } from "react-notification-system";
  */
 export interface AlertInterface extends Notification {
     /**
+     * AlertId that is passed as the `data-alertid` attribute
+     */
+    alertId: string;
+    /**
      * Description for the alert.
      */
     description: string;

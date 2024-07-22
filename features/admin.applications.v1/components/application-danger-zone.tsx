@@ -97,6 +97,7 @@ export const ApplicationDangerZoneComponent: FunctionComponent<ApplicationDanger
             .then(() => {
                 setIsDeletionInProgress(false);
                 dispatch(addAlert({
+                    alertId: "",
                     description: t("applications:notifications.deleteApplication.success" +
                         ".description"),
                     level: AlertLevels.SUCCESS,
@@ -115,6 +116,7 @@ export const ApplicationDangerZoneComponent: FunctionComponent<ApplicationDanger
                 setIsDeletionInProgress(false);
                 if (error.response && error.response.data && error.response.data.description) {
                     dispatch(addAlert({
+                        alertId: "",
                         description: error.response.data.description,
                         level: AlertLevels.ERROR,
                         message: t("applications:notifications.deleteApplication.error" +
@@ -125,6 +127,7 @@ export const ApplicationDangerZoneComponent: FunctionComponent<ApplicationDanger
                 }
 
                 dispatch(addAlert({
+                    alertId: "",
                     description: t("applications:notifications.deleteApplication" +
                         ".genericError.description"),
                     level: AlertLevels.ERROR,

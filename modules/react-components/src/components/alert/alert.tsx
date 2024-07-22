@@ -38,7 +38,7 @@ export interface AlertPropsInterface extends TestableComponentInterface, Identif
     /**
      * Specifies the unique identifier for the alert.
      */
-    "data-alertid"?: "string";
+    "data-alertid": string;
     /**
      * Unset the position of the alert.
      */

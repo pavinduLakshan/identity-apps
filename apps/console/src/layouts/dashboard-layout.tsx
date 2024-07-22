@@ -382,6 +382,7 @@ const DashboardLayout: FunctionComponent<RouteComponentProps> = (
     return (
         <>
             <Alert
+                data-alertid={ alert?.alertId }
                 dismissInterval={ UIConstants.ALERT_DISMISS_INTERVAL }
                 alertsPosition="br"
                 alertSystem={ alertSystem }

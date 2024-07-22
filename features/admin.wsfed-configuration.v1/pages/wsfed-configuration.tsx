@@ -98,6 +98,7 @@ export const WSFederationConfigurationPage: FunctionComponent<WSFederationConfig
     const handleRetrieveError = (): void => {
         dispatch(
             addAlert({
+                alertId: "wsfed-config-update-error-alert",
                 description: t("wsFederationConfig:notifications." +
                 "getConfiguration.error.description"),
                 level: AlertLevels.ERROR,
@@ -113,6 +114,7 @@ export const WSFederationConfigurationPage: FunctionComponent<WSFederationConfig
     const handleUpdateSuccess = () => {
         dispatch(
             addAlert({
+                alertId: "wsfed-config-update-success-alert",
                 description: t("wsFederationConfig:notifications." +
                 "updateConfiguration.success.description"),
                 level: AlertLevels.SUCCESS,
@@ -128,6 +130,7 @@ export const WSFederationConfigurationPage: FunctionComponent<WSFederationConfig
     const handleUpdateError = () => {
         dispatch(
             addAlert({
+                alertId: "wsfed-config-update-error-alert",
                 description: t("wsFederationConfig:notifications." +
                 "updateConfiguration.error.description"),
                 level: AlertLevels.ERROR,

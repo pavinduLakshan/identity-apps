@@ -144,6 +144,7 @@ const ApplicationRoleAuthenticatorGroups = (props: ApplicationRoleAuthenticatorG
                 if (error?.response?.data?.description) {
                     dispatch(
                         addAlert({
+                            alertId: "",
                             description: t(
                                 "authenticationProvider:notifications" +
                                 ".getIDPList.error.message",

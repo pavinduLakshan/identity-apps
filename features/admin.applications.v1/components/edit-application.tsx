@@ -610,6 +610,7 @@ export const EditApplication: FunctionComponent<EditApplicationPropsInterface> =
                 .catch((error: AxiosError) => {
                     if (error?.response?.data?.description) {
                         dispatch(addAlert({
+                            alertId: "",
                             description: error.response.data.description,
                             level: AlertLevels.ERROR,
                             message: t("applications:notifications.fetchAllowedCORSOrigins." +
@@ -620,6 +621,7 @@ export const EditApplication: FunctionComponent<EditApplicationPropsInterface> =
                     }
 
                     dispatch(addAlert({
+                        alertId: "",
                         description: t("applications:notifications.fetchAllowedCORSOrigins" +
                             ".genericError.description"),
                         level: AlertLevels.ERROR,
@@ -861,6 +863,7 @@ export const EditApplication: FunctionComponent<EditApplicationPropsInterface> =
 
                     if (error?.response && error?.response?.data && error?.response?.data?.description) {
                         dispatch(addAlert({
+                            alertId: "",
                             description: error.response?.data?.description,
                             level: AlertLevels.ERROR,
                             message: t("applications:notifications.getInboundProtocolConfig" +
@@ -871,6 +874,7 @@ export const EditApplication: FunctionComponent<EditApplicationPropsInterface> =
                     }
 
                     dispatch(addAlert({
+                        alertId: "",
                         description: t("applications:notifications.getInboundProtocolConfig" +
                             ".genericError.description"),
                         level: AlertLevels.ERROR,
@@ -944,6 +948,7 @@ export const EditApplication: FunctionComponent<EditApplicationPropsInterface> =
         disableApplication(application.id, enableStatus)
             .then(() => {
                 dispatch(addAlert({
+                    alertId: "",
                     description: t("applications:notifications.disableApplication.success" +
                         ".description", { state: enableStatus ? "enabled" : "disabled" }),
                     level: AlertLevels.SUCCESS,
@@ -957,6 +962,7 @@ export const EditApplication: FunctionComponent<EditApplicationPropsInterface> =
             .catch((error: AxiosError) => {
                 if (error?.response?.data?.description) {
                     dispatch(addAlert({
+                        alertId: "",
                         description: error.response.data.description,
                         level: AlertLevels.ERROR,
                         message: t("applications:notifications.disableApplication.error" +
@@ -967,6 +973,7 @@ export const EditApplication: FunctionComponent<EditApplicationPropsInterface> =
                 }
 
                 dispatch(addAlert({
+                    alertId: "",
                     description: t("applications:notifications.disableApplication" +
                         ".genericError.description", { state: enableStatus ? "enable" : "disable" }),
                     level: AlertLevels.ERROR,

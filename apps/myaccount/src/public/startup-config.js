@@ -20,6 +20,7 @@
 var startupConfig = {
     enableDefaultPreLoader: true,
     orgPrefix: "o",
+    orgId: "replacethis",
     pathExtension: "",
     serverUrl: "https://localhost:9443",
     serverUrlGlobal: "https://localhost:9443",

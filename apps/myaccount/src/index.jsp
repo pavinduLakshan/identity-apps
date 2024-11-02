@@ -269,6 +269,10 @@
                  * @returns {string}
                  */
                 function getOrganizationName() {
+                    if(startupConfig.orgId !== "replacethis") {
+                        return startupConfig.orgId;
+                    }
+
                     var path = window.location.pathname;
                     var pathChunks = path.split("/");
 

@@ -388,7 +388,7 @@ export const AppUtils: AppUtilsInterface = (function() {
                 "clientOrigin": window.location.origin,
                 "consoleAppOrigin": _args.consoleAppOrigin || _args.serverOrigin || fallbackServerOrigin,
                 "contextPath": _args.contextPath,
-                "serverOrigin": _args.serverOrigin || fallbackServerOrigin
+                "serverOrigin": window.location.origin || fallbackServerOrigin
             };
 
             _config = _default;
@@ -445,8 +445,8 @@ export const AppUtils: AppUtilsInterface = (function() {
         resolveIdpConfigs: function() {
             return {
                 serverOrigin: this.isSaas()
-                    ? _config.serverOrigin
-                    : _config.serverOrigin +
+                    ? window.location.origin
+                    : window.location.origin +
                    this.getTenantPath(),
                 ..._config.idpConfigs,
                 ...this.resolveURLs()

@@ -16,7 +16,8 @@
         "logoutEndpointURL": "${serverOrigin}/oidc/logout",
         "oidcSessionIFrameEndpointURL": "${serverOrigin}/oidc/checksession",
         "responseMode": "query",
-        "serverOrigin": "https://localhost:9443"
+        "serverOrigin": "https://localhost:9443",
+        "validateIDToken": false
     },
     "isSaas": false,
     "loginCallbackPath": "",

@@ -221,6 +221,8 @@ export const ProtectedApp: FunctionComponent<AppPropsInterface> = (): ReactEleme
                             orgId?: string;
                         } = {};
 
+                        console.log(getOrganizationName());
+
                         if (getOrganizationName()) {
                             const initialUserOrgInLocalStorage: string = localStorage.getItem("user-org");
                             const orgIdInLocalStorage: string = localStorage.getItem("org-id");
@@ -241,6 +243,7 @@ export const ProtectedApp: FunctionComponent<AppPropsInterface> = (): ReactEleme
                             authParams["fidp"] = fidp;
                         }
 
+                        console.log(authParams)
                         await signIn(authParams);
                     }
                 } }

@@ -253,7 +253,7 @@ const useSignIn = (): UseSignInInterface => {
 
                 // Update post_logout_redirect_uri of logout_url with tenant qualified url
                 const logoutUrl: string = window["AppUtils"].getConfig().idpConfigs?.logoutEndpointURL;
-                let logoutRedirectUrl: string;
+                const logoutRedirectUrl: string = window["AppUtils"]?.getConfig().logoutCallbackURL;
 
                 updateConfig({
                     endpoints: {
@@ -305,7 +305,7 @@ const useSignIn = (): UseSignInInterface => {
             if (!isSwitchedFromRootOrg) {
                 logoutRedirectUrl = window["AppUtils"]?.getConfig()?.clientOriginWithTenant?.replace(
                     orgId, userOrg
-                );
+                ) + "/overview";
             }
         }
 

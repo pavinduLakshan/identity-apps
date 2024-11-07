@@ -169,9 +169,9 @@
 
             if(isSignOutSuccess && userTenant) {
                 if (startupConfig.subdomainApplication) {
-                    window.location.href = applicationDomain + "/" + startupConfig.tenantPrefix + "/" + userTenant;
+                    window.location.href = applicationDomain + "/" + startupConfig.tenantPrefix + "/" + userTenant + "/overview";
                 } else {
-                    window.location.href = applicationDomain + "/" + startupConfig.tenantPrefix + "/" + userTenant + "/myaccount";
+                    window.location.href = applicationDomain + "/" + startupConfig.tenantPrefix + "/" + userTenant + "/myaccount/overview";
                 }
             }
 
@@ -260,7 +260,7 @@
                         return applicationDomain.replace(/\/+$/, '');
                     }
 
-                    return applicationDomain.replace(/\/+$/, '') + getTenantPath();
+                    return applicationDomain.replace(/\/+$/, '') + getTenantPath() + "/overview";
                 }
 
                 /**
@@ -362,6 +362,7 @@
                     enablePKCE: true
                 }
 
+                console.log("index.jsp: " + authConfig)
                 auth.initialize(authConfig);
                 auth.signIn(getAuthParamsForOrganizationLogins({}));
             }

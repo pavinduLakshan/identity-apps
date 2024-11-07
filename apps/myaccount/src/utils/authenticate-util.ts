@@ -137,7 +137,7 @@ export const getAuthInitializeConfig = (): AuthReactConfig => {
         sendCookiesInRequests: true,
         sessionRefreshInterval: window["AppUtils"]?.getConfig()?.session?.sessionRefreshTimeOut,
         signInRedirectURL: window["AppUtils"]?.getConfig().loginCallbackURL,
-        signOutRedirectURL: window["AppUtils"]?.getConfig().loginCallbackURL,
+        signOutRedirectURL: window["AppUtils"]?.getConfig().logoutCallbackURL,
         storage: resolveStorage() as Storage.WebWorker,
         validateIDTokenIssuer: window["AppUtils"]?.getConfig()?.idpConfigs?.validateIDTokenIssuer,
         ...window["AppUtils"]?.getConfig().idpConfigs

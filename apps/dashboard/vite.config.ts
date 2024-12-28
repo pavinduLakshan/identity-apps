@@ -10,4 +10,7 @@ export default defineConfig({
   optimizeDeps: {
     include: ['@wso2is/react-components']
   },
+  define: {
+    global: {},
+  }
 })

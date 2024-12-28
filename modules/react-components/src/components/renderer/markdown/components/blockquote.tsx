@@ -18,10 +18,10 @@
 
 import Alert, { AlertProps } from "@oxygen-ui/react/Alert";
 import AlertTitle from "@oxygen-ui/react/AlertTitle";
-import { MarkdownCustomComponentPropsInterface } from "@wso2is/react-components";
 import classNames from "classnames";
 import React, { FunctionComponent, ReactElement } from "react";
 import { childRenderer } from "./utils";
+import { MarkdownCustomComponentPropsInterface } from "../markdown";
 import "./blockquote.scss";
 
 /**

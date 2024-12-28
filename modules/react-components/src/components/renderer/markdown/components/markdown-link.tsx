@@ -17,14 +17,12 @@
  */
 
 import { URLUtils } from "@wso2is/core/utils";
-import {
-    Link,
-    MarkdownCustomComponentPropsInterface,
-    PrimaryButton
-} from "@wso2is/react-components";
 import { saveAs } from "file-saver";
 import React, { FunctionComponent, ReactElement, useMemo } from "react";
 import useGlobalMarkdown from "../../../../hooks/use-global-markdown";
+import { PrimaryButton } from "../../../button/primary-button";
+import { Link } from "../../../links/link";
+import { MarkdownCustomComponentPropsInterface } from "../markdown";
 
 const DEFAULT_DOWNLOAD_FILE_NAME: string = "download";
 

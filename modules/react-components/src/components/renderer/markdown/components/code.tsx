@@ -16,8 +16,9 @@
  * under the License.
  */
 
-import { Code, MarkdownCustomComponentPropsInterface } from "@wso2is/react-components";
 import React, { FunctionComponent, ReactElement } from "react";
+import { Code } from "../../../typography/code";
+import { MarkdownCustomComponentPropsInterface } from "../markdown";
 
 /**
  * Markdown custom component for the code element.

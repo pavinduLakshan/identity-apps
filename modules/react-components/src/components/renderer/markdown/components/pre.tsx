@@ -16,8 +16,9 @@
  * under the License.
  */
 
-import { CodeEditor, MarkdownCustomComponentPropsInterface } from "@wso2is/react-components";
 import React, { FunctionComponent, ReactElement } from "react";
+import { CodeEditor } from "../../../code-editor";
+import { MarkdownCustomComponentPropsInterface } from "../markdown";
 
 /**
  * Props interface for the `MarkdownPre` component.

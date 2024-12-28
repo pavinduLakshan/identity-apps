@@ -16,9 +16,9 @@
  * under the License.
  */
 
-import { MarkdownCustomComponentPropsInterface } from "@wso2is/react-components";
 import React, { FunctionComponent, ReactElement } from "react";
 import { childRenderer } from "./utils";
+import { MarkdownCustomComponentPropsInterface } from "../markdown";
 
 /**
  * Markdown custom component for the ul element.

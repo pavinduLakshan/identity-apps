@@ -316,6 +316,21 @@ const ReduxStoreStateMock: any = {
                         ]
                     }
                 },
+                insights: {
+                    disabledFeatures: [],
+                    enabled: true,
+                    scopes: {
+                        create: [],
+                        delete: [],
+                        feature: [
+                            "console:insights"
+                        ],
+                        read: [
+                            "internal_insights_view"
+                        ],
+                        update: []
+                    }
+                },
                 oidcScopes: {
                     enabled: true,
                     disabledFeatures: [],

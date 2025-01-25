@@ -18,7 +18,8 @@
 
 import { SelectChangeEvent } from "@mui/material";
 import MenuItem from "@oxygen-ui/react/MenuItem";
-import Select from "@oxygen-ui/react/Select";
+// eslint-disable-next-line no-restricted-imports
+import { Select } from "@mui/material";
 import { DocumentationLink, Hint, PageLayout, useDocumentation } from "@wso2is/react-components";
 import moment from "moment";
 import React, { FunctionComponent, useState } from "react";
@@ -44,7 +45,7 @@ const OrgInsightsPage: FunctionComponent = () => {
     const { t } = useTranslation();
     const { getLink } = useDocumentation();
 
-    const handleDurationChange = (event: SelectChangeEvent) => {
+    const handleDurationChange = (event: SelectChangeEvent<number>) => {
         setDuration(Number(event.target.value));
     };
 
@@ -89,7 +90,7 @@ const OrgInsightsPage: FunctionComponent = () => {
                         data-componentid="org-insights-duration-dropdown"
                         defaultValue={ duration }
                         onChange={ handleDurationChange }
-                        renderValue={ (value: string) => <p>Duration: Last { value } days</p> }
+                        renderValue={ (value: number) => <p>Duration: Last { value } days</p> }
                     >
                         { OrgInsightsConstants.DURATION_OPTIONS.map((option: DurationDropdownOption) => (
                             <MenuItem

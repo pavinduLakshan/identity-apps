@@ -17,12 +17,16 @@
  */
 
 import { HorizontalBarsFilterIcon } from "@oxygen-ui/react-icons";
+import { FeatureAccessConfigInterface } from "@wso2is/access-control";
+import { AppState } from "@wso2is/admin.core.v1/store";
+import { isFeatureEnabled } from "@wso2is/core/helpers";
 import { IdentifiableComponentInterface } from "@wso2is/core/models";
 import { DropdownChild, Field, FormValue, Forms, Validation } from "@wso2is/forms";
 import { I18n } from "@wso2is/i18n";
 import { LinkButton, Popup, PrimaryButton } from "@wso2is/react-components";
 import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { Divider, Form, Grid } from "semantic-ui-react";
 import { getFilterAttributeListByActivityType } from "../config/org-insights";
 import { OrgInsightsConstants } from "../constants/org-insights";
@@ -32,7 +36,6 @@ import {
     FilterCondition,
     OnboardingMethodFilterValue
 } from "../models/insights";
-import { getAllDisabledFeaturesForInsights } from "../utils/insights";
 
 const dropdownInputRequiredAttributesForFilterValue: string[] = [ "onboardingMethod", "authenticator" ];
 
@@ -43,7 +46,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "basic"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.BASIC
         },
         {
@@ -51,7 +54,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "identifierFirst"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.IDENTIFIER_FIRST
         },
         {
@@ -59,7 +62,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "fido2"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.FIDO2
         },
         {
@@ -67,7 +70,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "magicLink"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.MAGIC_LINK
         },
         {
@@ -75,7 +78,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "emailOtp"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.EMAIL_OTP
         },
         {
@@ -83,7 +86,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "smsOtp"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.SMS_OTP
         },
         {
@@ -91,7 +94,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "totp"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.TOTP
         },
         {
@@ -99,7 +102,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "backupCodes"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.BACK_UP_CODE
         },
         {
@@ -107,7 +110,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "google"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.GOOGLE
         },
         {
@@ -115,7 +118,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "facebook"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.FACEBOOK
         },
         {
@@ -123,7 +126,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "github"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.GITHUB
         },
         {
@@ -131,7 +134,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "apple"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.APPLE
         },
         {
@@ -139,7 +142,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "oidc"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.OIDC
         },
         {
@@ -147,7 +150,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "saml"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.SAML
         },
         {
@@ -155,7 +158,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "hypr"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.HYPR
         },
         {
@@ -163,7 +166,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.login.filters.authenticator.values." +
                 "iproov"
-            ).toString(),
+            ) as ReactNode,
             value: AuthenticatorFilterValue.IPROOV
         }
     ],
@@ -173,7 +176,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.registration.filters.onboardingMethod.values." +
                 "adminInitiated"
-            ).toString(),
+            ) as ReactNode,
             value: OnboardingMethodFilterValue.ADMIN_INITIATED
         },
         {
@@ -181,7 +184,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.registration.filters.onboardingMethod.values." +
                 "userInvited"
-            ).toString(),
+            ) as ReactNode,
             value: OnboardingMethodFilterValue.USER_INVITE
         },
         {
@@ -189,7 +192,7 @@ const filterValueDropdownItems: Record<string,DropdownChild[]> = {
             text:  I18n.instance.t(
                 "insights:activityType.registration.filters.onboardingMethod.values." +
                 "selfSignUp"
-            ).toString(),
+            ) as ReactNode,
             value: OnboardingMethodFilterValue.SELF_SIGN_UP
         }
     ]
@@ -218,6 +221,10 @@ export const InsightsFilter = (props: InsightsFilterProps): ReactElement => {
     } = props;
 
     const { t } = useTranslation();
+
+    const insightsFeatureConfig: FeatureAccessConfigInterface = useSelector(
+        (state: AppState) => state?.config?.ui?.features?.insights
+    );
 
     const [ isFilteringModalOpen, setIsFilteringModalOpen ] = useState<boolean>(false);
     const [ isFiltersReset, setIsFiltersReset ] = useState<boolean>(false);
@@ -286,165 +293,6 @@ export const InsightsFilter = (props: InsightsFilterProps): ReactElement => {
     };
 
     return (
-        <Popup
-            open={ isFilteringModalOpen }
-            onClose={ () => setIsFilteringModalOpen(false) }
-            content={
-                (
-                    <Grid>
-                        <Grid.Row columns={ 1 }>
-                            <Grid.Column width={ 16 }>
-                                <Forms
-                                    onSubmit={ handleFormSubmit }
-                                    resetState={ isFiltersReset }
-                                >
-                                    <Field
-                                        children={
-                                            getFilterAttributeListByActivityType(selectedActivityType)?.filter(
-                                                (attribute: DropdownChild) =>  !getAllDisabledFeaturesForInsights().
-                                                    includes(
-                                                        "filterBy:" + attribute.value
-                                                    )
-                                            )
-                                        }
-                                        label={
-                                            t("console:common.advancedSearch.form.inputs.filterAttribute.label")
-                                        }
-                                        name={ "filterAttribute" }
-                                        requiredErrorMessage={
-                                            t("console:common.advancedSearch.form.inputs.filterAttribute" +
-                                        ".validations.empty")
-                                        }
-                                        type="dropdown"
-                                        listen={ (data: Map<string, FormValue>) => {
-                                            setSelectedFilterAttribute(data.get("filterAttribute")?.toString());
-                                        } }
-                                        value={ selectedFilterAttribute }
-                                        data-componentid={ `${ componentId }-attribute-dropdown` }
-                                    />
-                                    <Form.Group widths="equal">
-                                        <Field
-                                            children={
-                                                filterConditions.map(
-                                                    (attribute: DropdownChild, index: number) => {
-                                                        return {
-                                                            key: index,
-                                                            text: attribute.text,
-                                                            value: attribute.value
-                                                        };
-                                                    })
-                                            }
-                                            label={
-                                                t("console:common.advancedSearch.form.inputs.filterCondition.label")
-                                            }
-                                            name={ "filterCondition" }
-                                            requiredErrorMessage={ t("console:common.advancedSearch.form.inputs" +
-                                        ".filterCondition.validations.empty") }
-                                            type="dropdown"
-                                            value={ selectedFilterCondition }
-                                            data-testid={ `${ componentId }-condition-dropdown` }
-                                        />
-                                        { dropdownInputRequiredAttributesForFilterValue.includes(
-                                            selectedFilterAttribute) ?
-
-                                            (<Field
-                                                children={
-                                                    filterValueDropdownItems[selectedFilterAttribute].map(
-                                                        (attribute: DropdownChild, index: number) => {
-                                                            return {
-                                                                key: index,
-                                                                text: attribute.text,
-                                                                value: attribute.value
-                                                            };
-                                                        })
-                                                }
-                                                label={
-                                                    t("console:common.advancedSearch.form.inputs.filterValue." +
-                                                         "label")
-                                                }
-                                                name={ "filterValue" }
-                                                required={ true }
-                                                requiredErrorMessage={
-                                                    t("console:common.advancedSearch.form.inputs" +
-                                                        ".filterCondition.validations.empty")
-                                                }
-                                                value={ selectedFilterValue }
-                                                type="dropdown"
-                                                data-testid={ `${ componentId }-value-dropdown` }
-                                            />) :
-                                            (<Field
-                                                label={
-                                                    t("console:common.advancedSearch.form.inputs.filterValue." +
-                                                        "label")
-                                                }
-                                                name={ "filterValue" }
-                                                required
-                                                requiredErrorMessage={
-                                                    t("console:common.advancedSearch.form." +
-                                                        "inputs.filterValue.validations.empty")
-                                                }
-                                                type="text"
-                                                validation={ (value: string, _validation: Validation) => {
-                                                    if (
-                                                        value.length >
-                                                        OrgInsightsConstants.FILTER_VALUE_INPUT_MAX_LENGTH
-                                                    ) {
-                                                        _validation.isValid = false;
-                                                        _validation.errorMessages.push(t("common:maxValidation", {
-                                                            max: OrgInsightsConstants.FILTER_VALUE_INPUT_MAX_LENGTH
-                                                        }));
-                                                    }
-                                                } }
-                                                value={ selectedFilterValue }
-                                                data-componentid={ `${ componentId }-value-input` }
-                                            />)
-                                        }
-
-                                    </Form.Group>
-                                    <Divider hidden/>
-                                    <Form.Group inline>
-                                        <PrimaryButton
-                                            size="small"
-                                            type="submit"
-                                            data-testid={ `${ componentId }-submit-button` }
-                                            data-componentid={ `${ componentId }-submit-button` }
-                                        >
-                                            { t("common:search") }
-                                        </PrimaryButton>
-                                        {
-                                            showResetButton && (
-                                                <LinkButton
-                                                    size="small"
-                                                    type="reset"
-                                                    data-testid={ `${ componentId }-reset-button` }
-                                                    data-componentid={ `${ componentId }-reset-button` }
-                                                    onClick={ () => handleResetFilter() }
-                                                >
-                                                    { t("common:resetFilters") }
-                                                </LinkButton>
-                                            )
-                                        }
-                                    </Form.Group>
-                                </Forms>
-                            </Grid.Column>
-                        </Grid.Row>
-                    </Grid>
-                )
-            }
-            on="click"
-            position="bottom right"
-            size="small"
-            trigger={
-                (
-                    <div
-                        data-componentid={ componentId + "-trigger" }
-                        className="org-insights-advanced-filter-trigger"
-                        onClick={ () => setIsFilteringModalOpen(!isFilteringModalOpen) }
-                    >
-                        <HorizontalBarsFilterIcon className="org-insights-filter-icon" />
-                    </div>
-                )
-            }
-        />
+        <>filter</>
     );
 };

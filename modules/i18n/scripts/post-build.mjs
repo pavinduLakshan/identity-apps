@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020, WSO2 LLC. (https://www.wso2.com). All Rights Reserved.
+ * Copyright (c) 2020-2025, WSO2 LLC. (https://www.wso2.com).
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -16,14 +16,19 @@
  * under the License.
  */
 
-const { execSync } = require("child_process");
-const crypto = require("crypto");
-const path = require("path");
-const fs = require("fs-extra");
-
+import { fileURLToPath } from 'url';
+import { execSync } from "child_process";
+import crypto from "crypto";
+import path from "path";
+import fs from "fs-extra";
 
 // eslint-disable-next-line no-console
 const log = console.log;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+console.log("dirname: ", __dirname)
 
 const OUTPUT_DIR_NAME = "bundle";
 const META_FILE_NAME = "meta.{hash}.json";
@@ -34,7 +39,7 @@ const EXTENSIONS_FILENAME = "extensions.{hash}.json";
 const dist = path.join(__dirname, "..", "dist");
 
 // Path for the translations after the build.
-const translationsPath = path.join(dist, "src", TRANSLATIONS_FOLDER_NAME);
+const translationsPath = path.join(dist, "src", TRANSLATIONS_FOLDER_NAME, "index.js");
 
 // Path for the directory to store final transpiled JSON files.
 const outputPath = path.join(dist, OUTPUT_DIR_NAME);
@@ -64,7 +69,10 @@ if (fs.existsSync(outputPath)) {
 createDirectory(outputPath, true);
 
 // Load the translations.
-const translations = require(translationsPath);
+// const translations = require(translationsPath);
+
+const translations = await import(translationsPath).then(module => module.default);
+
 
 // Object to store the meta info of all the languages.
 let metaFileContent = {};

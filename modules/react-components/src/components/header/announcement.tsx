@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020, WSO2 LLC. (https://www.wso2.com). All Rights Reserved.
+ * Copyright (c) 2020-2025, WSO2 LLC. (https://www.wso2.com).
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -94,7 +94,7 @@ export const Announcement: FunctionComponent<AnnouncementPropsInterface> = (
     const classes = classNames(
         "announcement",
         {
-            [ color ]: !isFeatureAnnouncement ?? color
+            [ color ]: !isFeatureAnnouncement
         }
         , className
     );
@@ -131,7 +131,7 @@ export const Announcement: FunctionComponent<AnnouncementPropsInterface> = (
                                     size="nano"
                                     floated="right"
                                     onClick={ (e: React.MouseEvent<HTMLDivElement>) => onDismiss(e) }
-                                    fill={ !isFeatureAnnouncement ?? "white" }
+                                    fill={ !isFeatureAnnouncement }
                                     inline
                                     link
                                     transparent

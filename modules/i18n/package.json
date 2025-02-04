@@ -15,10 +15,11 @@
     ],
     "main": "dist/src/index.js",
     "types": "dist/types/index.d.ts",
+    "type": "module",
     "scripts": {
         "prebuild": "pnpm clean:build",
         "build": "pnpm prebuild && pnpm run compile && pnpm postbuild",
-        "postbuild": "node scripts/post-build.js",
+        "postbuild": "node scripts/post-build.mjs",
         "clean": "pnpm clean:lock-files && pnpm clean:build && pnpm clean:node-modules",
         "clean:build": "pnpm rimraf dist",
         "clean:lock-files": "pnpm rimraf package-lock.json && pnpm rimraf pnpm-lock.yaml && pnpm rimraf yarn.lock",

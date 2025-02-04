@@ -18,7 +18,6 @@
 
 import { IdentifiableComponentInterface } from "@wso2is/core/models";
 import { CertificateManagementUtils } from "@wso2is/core/utils";
-import { ConfirmationModal, UserAvatar } from "@wso2is/react-components";
 import { KJUR, X509 } from "jsrsasign";
 import * as forge from "node-forge";
 import React, { FC, PropsWithChildren, ReactElement, useEffect, useRef, useState } from "react";
@@ -36,8 +35,10 @@ import {
     TabPaneProps,
     TextArea
 } from "semantic-ui-react";
+import { UserAvatar } from "../avatar/user-avatar";
 import { GenericIcon } from "../icon";
 import { ResourceList, ResourceListItem } from "../list";
+import { ConfirmationModal } from "../modal/confirmation-modal";
 
 // TODO: Move polyfills to a generalized module.
 

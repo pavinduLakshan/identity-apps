@@ -34,7 +34,8 @@
     },
     "author": "WSO2",
     "license": "Apache-2.0",
-    "main": "dist/index.js",
+    "main": "dist/index.esm.js",
+    "type": "module",
     "types": "dist/src/index.d.ts",
     "dependencies": {
         "@artsy/fresnel": "^6.1.0",

@@ -13,6 +13,7 @@
         "utils"
     ],
     "main": "dist/src/index.js",
+    "type": "module",
     "types": "dist/types/index.d.ts",
     "exports": {
         ".": "./dist/src/index.js",

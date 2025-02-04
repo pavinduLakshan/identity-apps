@@ -17,9 +17,9 @@
  */
 
 import Typography from "@oxygen-ui/react/Typography";
-import { MarkdownCustomComponentPropsInterface } from "@wso2is/react-components";
 import React, { FunctionComponent, ReactElement } from "react";
 import { childRenderer } from "./utils";
+import { MarkdownCustomComponentPropsInterface } from "../markdown";
 
 /**
  * Markdown custom component for the h6 element.

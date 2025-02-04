@@ -17,9 +17,9 @@
  */
 
 import Box from "@oxygen-ui/react/Box";
-import { MarkdownCustomComponentPropsInterface } from "@wso2is/react-components";
 import classNames from "classnames";
 import React, { FunctionComponent, ReactElement } from "react";
+import { MarkdownCustomComponentPropsInterface } from "../markdown";
 import "./image.scss";
 
 /**

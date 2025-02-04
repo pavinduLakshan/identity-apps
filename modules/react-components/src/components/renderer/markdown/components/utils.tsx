@@ -16,9 +16,9 @@
  * under the License.
  */
 
-import { MarkdownCustomComponentPropsInterface } from "@wso2is/react-components";
 import React, { FunctionComponent, ReactElement } from "react";
 import * as CustomMarkdownComponents from ".";
+import { MarkdownCustomComponentPropsInterface } from "../markdown";
 
 export const childRenderer = <
     TagName extends keyof JSX.IntrinsicElements

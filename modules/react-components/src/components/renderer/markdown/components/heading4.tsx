@@ -17,10 +17,10 @@
  */
 
 import Typography from "@oxygen-ui/react/Typography";
-import { MarkdownCustomComponentPropsInterface } from "@wso2is/react-components";
 import classNames from "classnames";
 import React, { FunctionComponent, ReactElement } from "react";
 import { childRenderer } from "./utils";
+import { MarkdownCustomComponentPropsInterface } from "../markdown";
 import "./heading.scss";
 
 /**

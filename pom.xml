@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <!--
- * Copyright (c) 2023, WSO2 LLC. (https://www.wso2.com).
+ * Copyright (c) 2025, WSO2 LLC. (https://www.wso2.com).
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -17,16 +15,15 @@
  * specific language governing permissions and limitations
  * under the License.
 -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.identity.apps</groupId>
-    <artifactId>identity-apps-console</artifactId>
+    <artifactId>identity-apps-core-parent</artifactId>
+    <version>2.14.2.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <version>2.41.45-SNAPSHOT</version>
-    <name>WSO2 Identity Server Console - Parent</name>
-    <description>WSO2 Identity Server Console Parent</description>
+    <name>WSO2 Identity Server Apps - Core Parent</name>
+    <description>WSO2 Identity Server Web Apps</description>
 
     <url>http://wso2.org</url>
 
@@ -37,15 +34,14 @@
     </parent>
 
     <scm>
-        <url>https://github.com/wso2/identity-apps.git</url>
-        <developerConnection>scm:git:https://github.com/wso2/identity-apps.git</developerConnection>
-        <connection>scm:git:https://github.com/wso2/identity-apps.git</connection>
-        <tag>HEAD</tag>
+        <url>https://github.com/wso2-support/identity-apps</url>
+        <developerConnection>scm:git:https://github.com/wso2-support/identity-apps</developerConnection>
+        <connection>scm:git:https://github.com/wso2-support/identity-apps</connection>
+        <tag>support-2.14.2.x-full</tag>
     </scm>
 
     <modules>
-        <module>webapp</module>
-        <module>org.wso2.identity.apps.console.server.feature</module>
+        <module>identity-apps-core</module>
     </modules>
 
     <repositories>
@@ -99,6 +95,7 @@
             <url>https://maven.wso2.org/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
+
 
     <pluginRepositories>
         <pluginRepository>
@@ -189,10 +186,39 @@
                 <artifactId>org.wso2.carbon.identity.organization.management.service</artifactId>
                 <version>${identity.organization.management.core.service.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.identity.organization.management</groupId>
+                <artifactId>org.wso2.carbon.identity.organization.management.application</artifactId>
+                <version>${identity.organization.management.application.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.wso2.identity.apps</groupId>
+                <artifactId>myaccount</artifactId>
+                <version>${project.version}</version>
+                <type>war</type>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.identity.apps</groupId>
                 <artifactId>console</artifactId>
+                <version>${project.version}</version>
+                <type>war</type>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.identity.apps</groupId>
+                <artifactId>authentication-portal</artifactId>
+                <version>${project.version}</version>
+                <type>war</type>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.identity.apps</groupId>
+                <artifactId>recovery-portal</artifactId>
+                <version>${project.version}</version>
+                <type>war</type>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.identity.apps</groupId>
+                <artifactId>x509-certificate-authentication-portal</artifactId>
                 <version>${project.version}</version>
                 <type>war</type>
             </dependency>
@@ -294,6 +320,11 @@
                 <version>${carbon.extension.identity.authenticator.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.wso2.carbon.identity.framework</groupId>
+                <artifactId>org.wso2.carbon.identity.role.v2.mgt.core</artifactId>
+                <version>${carbon.identity.framework.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.core</artifactId>
                 <version>${carbon.kernel.version}</version>
@@ -351,6 +382,16 @@
             <dependency>
                 <groupId>org.wso2.carbon.identity.framework</groupId>
                 <artifactId>org.wso2.carbon.idp.mgt</artifactId>
+                <version>${carbon.identity.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.identity.framework</groupId>
+                <artifactId>org.wso2.carbon.identity.api.resource.mgt</artifactId>
+                <version>${carbon.identity.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.identity.framework</groupId>
+                <artifactId>org.wso2.carbon.identity.api.resource.collection.mgt</artifactId>
                 <version>${carbon.identity.framework.version}</version>
             </dependency>
             <dependency>
@@ -469,6 +510,65 @@
                 <artifactId>tomcat-catalina</artifactId>
                 <version>${apache.tomcat-catalina.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.wso2.identity.apps</groupId>
+                <artifactId>org.wso2.identity.apps.common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.identity.apps</groupId>
+                <artifactId>org.wso2.identity.apps.common.server.feature</artifactId>
+                <version>${project.version}</version>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.identity.apps</groupId>
+                <artifactId>org.wso2.identity.apps.myaccount.server.feature</artifactId>
+                <version>${project.version}</version>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.identity.apps</groupId>
+                <artifactId>org.wso2.identity.apps.console.server.feature</artifactId>
+                <version>${project.version}</version>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.identity.apps</groupId>
+                <artifactId>org.wso2.identity.apps.authentication.portal.server.feature</artifactId>
+                <version>${project.version}</version>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.identity.apps</groupId>
+                <artifactId>org.wso2.identity.apps.recovery.portal.server.feature</artifactId>
+                <version>${project.version}</version>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.identity.apps</groupId>
+                <artifactId>org.wso2.identity.apps.x509certificate.portal.server.feature</artifactId>
+                <version>${project.version}</version>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.identity.apps</groupId>
+                <artifactId>org.wso2.identity.apps.taglibs.layout.controller</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- Testing related dependencies -->
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${testng.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -482,10 +582,6 @@
                     <preparationGoals>clean install</preparationGoals>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -507,15 +603,17 @@
                 <version>3.0.5</version>
             </plugin>
             <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.13</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>wso2.releases</serverId>
-                    <nexusUrl>https://maven.wso2.org/nexus</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>4.8.6.0</version>
+                <dependencies>
+                    <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
+                    <dependency>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs</artifactId>
+                        <version>4.8.6</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
@@ -525,31 +623,34 @@
 
         <equinox.osgi.services.version>3.5.100.v20160504-1419</equinox.osgi.services.version>
         <apache.felix.scr.ds.annotations.version>1.2.4</apache.felix.scr.ds.annotations.version>
-        <osgi.framework.imp.pkg.version.range>[1.7.0, 2.0.0]</osgi.framework.imp.pkg.version.range>
-        <osgi.service.component.imp.pkg.version.range>[1.2.0, 2.0.0]</osgi.service.component.imp.pkg.version.range>
+        <osgi.framework.imp.pkg.version.range>[1.7.0, 2.0.0)</osgi.framework.imp.pkg.version.range>
+        <osgi.service.component.imp.pkg.version.range>[1.2.0, 2.0.0)</osgi.service.component.imp.pkg.version.range>
 
-        <commons-lang.version.range>[2.6.0,3.0.0]</commons-lang.version.range>
-        <commons-logging.imp.pkg.version.range>[1.2, 2.0]</commons-logging.imp.pkg.version.range>
+        <commons-lang.version.range>[2.6.0,3.0.0)</commons-lang.version.range>
+        <commons-logging.imp.pkg.version.range>[1.2, 2.0)</commons-logging.imp.pkg.version.range>
 
         <carbon.identity.version>5.0.7</carbon.identity.version>
-        <carbon.kernel.version>4.9.11</carbon.kernel.version>
-        <carbon.kernel.imp.pkg.version.range>[4.9.1, 5.0.0]</carbon.kernel.imp.pkg.version.range>
-        <carbon.user.api.imp.pkg.version.range>[1.0.1, 2.0.0]</carbon.user.api.imp.pkg.version.range>
+        <carbon.kernel.version>4.9.16</carbon.kernel.version>
+        <carbon.kernel.imp.pkg.version.range>[4.9.16, 5.0.0)</carbon.kernel.imp.pkg.version.range>
+        <carbon.commons.imp.pkg.version>[4.7.2, 5.0.0)</carbon.commons.imp.pkg.version>
+        <carbon.user.api.imp.pkg.version.range>[1.0.1, 2.0.0)</carbon.user.api.imp.pkg.version.range>
         <carbon.commons.version>4.7.22</carbon.commons.version>
-        <carbon.commons.imp.pkg.version.range>[4.7.0, 5.0.0]</carbon.commons.imp.pkg.version.range>
+        <carbon.commons.imp.pkg.version.range>[4.7.0, 5.0.0)</carbon.commons.imp.pkg.version.range>
         <carbon.logging.version>4.4.39</carbon.logging.version>
 
-        <carbon.base.imp.pkg.version.range>[1.0.0, 2.0.0]</carbon.base.imp.pkg.version.range>
+        <carbon.base.imp.pkg.version.range>[1.0.0, 2.0.0)</carbon.base.imp.pkg.version.range>
         <org.wso2.carbon.identity.outbound.auth.oidc>5.1.20</org.wso2.carbon.identity.outbound.auth.oidc>
 
         <carbon.extension.identity.authenticator.version>3.0.0</carbon.extension.identity.authenticator.version>
         <org.wso2.carbon.identity.association.account>5.1.5</org.wso2.carbon.identity.association.account>
         <identity.extension.utils>1.0.8</identity.extension.utils>
-        <carbon.identity.framework.version>5.25.271</carbon.identity.framework.version>
+        <carbon.identity.framework.version>7.7.176</carbon.identity.framework.version>
         <carbon.identity.framework.imp.pkg.version.range>[5.0.0, 8.0.0)</carbon.identity.framework.imp.pkg.version.range>
-        <identity.organization.management.core.service.version>1.0.0
+        <identity.organization.management.core.service.version>1.0.77
         </identity.organization.management.core.service.version>
-        <identity.org.mgt.core.version.range>[1.0.0, 2.0.0]</identity.org.mgt.core.version.range>
+        <identity.org.mgt.core.version.range>[1.0.77, 2.0.0)</identity.org.mgt.core.version.range>
+        <identity.organization.management.application.version>1.3.89</identity.organization.management.application.version>
+        <identity.org.mgt.application.version.range>[1.3.89, 2.0.0)</identity.org.mgt.application.version.range>
         <carbon.identity.oauth.version>6.7.130</carbon.identity.oauth.version>
         <carbon.identity.oauth.imp.pkg.version.range>[6.1.0, 8.0.0)</carbon.identity.oauth.imp.pkg.version.range>
         <identity.governance.version>1.8.41</identity.governance.version>
@@ -581,5 +682,10 @@
 
         <lint.exec.skip>true</lint.exec.skip>
         <bootstrap.exec.skip>false</bootstrap.exec.skip>
+
+        <!-- Unit test versions -->
+        <testng.version>7.10.1</testng.version>
+        <mockito.version>5.3.1</mockito.version>
     </properties>
+
 </project>

@@ -81,17 +81,6 @@
             </releases>
         </repository>
 
-        <repository>
-            <id>wso2-nexus-u2-update-repo</id>
-            <name>WSO2 internal Repository</name>
-            <url>https://support-maven.wso2.org/nexus/content/repositories/updates-2.0/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-                <checksumPolicy>ignore</checksumPolicy>
-            </releases>
-        </repository>
-
     </repositories>
 
     <distributionManagement>

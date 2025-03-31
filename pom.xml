@@ -686,6 +686,7 @@
         <!-- Unit test versions -->
         <testng.version>7.10.1</testng.version>
         <mockito.version>5.3.1</mockito.version>
+        <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
     </properties>
 
 </project>

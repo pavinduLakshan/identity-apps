@@ -37,7 +37,8 @@
         "update-version": "node scripts/update-version.js",
         "lint": "pnpm nx run-many --target=lint --all --parallel",
         "lint:autofix": "pnpm nx run-many --target=lint:autofix --all --parallel",
-        "typecheck": "pnpm nx run-many --target=typecheck --all --parallel"
+        "typecheck": "pnpm nx run-many --target=typecheck --all --parallel",
+        "knip": "knip --config knip.jsonc"
     },
     "dependencies": {
         "@svgr/webpack": "^6.1.2",
@@ -151,6 +152,7 @@
         "identity-obj-proxy": "^3.0.0",
         "jest": "29.4.3",
         "jsonc-eslint-parser": "^2.1.0",
+        "knip": "^5.50.2",
         "lerna": "^5.1.2",
         "less-loader": "^5.0.0",
         "less-plugin-inline-urls": "^1.2.0",

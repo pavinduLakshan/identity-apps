@@ -17,13 +17,14 @@
  */
 
 import { CardActions, Grid, Typography } from "@mui/material";
+import Box from "@oxygen-ui/react/Box";
 import Card from "@oxygen-ui/react/Card";
 import CardContent from "@oxygen-ui/react/CardContent";
 import { useApplicationList } from "@wso2is/admin.applications.v1/api/application";
 import { APIAuthorization } from "@wso2is/admin.applications.v1/components/api-authorization/api-authorization";
 import { getEmptyPlaceholderIllustrations } from "@wso2is/admin.core.v1/configs/ui";
 import { EmphasizedSegment, Message } from "@wso2is/react-components";
-import { EmptyPlaceholder } from "@wso2is/react-components/src/components";
+import { EmptyPlaceholder, PrimaryButton } from "@wso2is/react-components/src/components";
 import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Icon, Input } from "semantic-ui-react";
@@ -108,12 +109,29 @@ export default function AgentConnectedApps () {
     // )
     return (
         <EmphasizedSegment padded="very" style={ { border: "none", padding: "21px" } }>
-            <Typography variant="h5">
+
+
+
+<Box display="flex" justifyContent="space-between">
+<div>
+                <Typography variant="h5">
                 Applications
             </Typography>
-            <Typography variant="body1" className="mb-5" style={ { color: "#9c9c9c" } }>
+            <Typography variant="body1" className="mt-2 mb-5" style={ { color: "#9c9c9c" } }>
                 Enable this agent to access and interact with applications.
             </Typography>
+            </div>
+            <PrimaryButton
+                            data-testid="user-mgt-groups-list-update-button"
+                            onClick={ () => null }
+                            style={{ padding: "1.7%", height: "50%"}}
+                        >
+                            <Icon name="plus"/>
+                            Connect application
+                        </PrimaryButton>
+</Box>
+
+
 
             <Input
                 data-testid="user-mgt-groups-list-search-input"

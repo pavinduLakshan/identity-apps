@@ -65,14 +65,15 @@ export default function AgentCredentials({
             <Grid container>
                 <Grid xs={ 8 }>
                     <div style={ { marginBottom: "20px" } }>
-                        <label>Client ID</label>
-                        <CopyInputField value={ "dZBvthATdJmUNb_knryEiKZ26Xoa" } />
+                        <label>Agent ID</label>
+                        <CopyInputField value={ agentId } />
                     </div>
 
-                    <label className="mt-5">Client secret</label>
+                    <label className="mt-5">Agent secret</label>
                     <div style={ { display: "flex", flexDirection: "row" } }>
                         <CopyInputField
                             secret
+                            showSecret={ false }
                             value={ "sdjskjksjkdjkjsdk" }
                             hideSecretLabel={ "Hide secret" }
                             showSecretLabel={ "Show secret" }

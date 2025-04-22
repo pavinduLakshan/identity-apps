@@ -105,7 +105,8 @@ export default function AgentOverview({ agentId }: AgentOverviewProps) {
                                                 maxRows={ 6 }
                                                 component={ TextFieldAdapter }
                                             ></FinalFormField>
-                                            <Grid><Grid.Row>
+                                            
+                                            {/* <Grid><Grid.Row>
                                                 <Grid.Column computer={ 11 }>
                                                 <FinalFormField
                                 name="manager"
@@ -134,7 +135,7 @@ export default function AgentOverview({ agentId }: AgentOverviewProps) {
                                             </Grid.Row>
                                  
                                                 
-                                            </Grid>
+                                            </Grid> */}
                                                        
                                             <FinalFormField
                                                 name="logo"

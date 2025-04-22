@@ -79,16 +79,6 @@ export default function EditAgent({
             )
         },
         {
-            componentId: "api-resources",
-            menuItem: "API Resources",
-            render: () =>  <ResourceTab.Pane><AgentConnectedApps /></ResourceTab.Pane>
-        },
-        {
-            componentId: "connections",
-            menuItem: "Connections",
-            render: () =>  <ResourceTab.Pane><AgentIntegrations /></ResourceTab.Pane>
-        },
-        {
             componentId: "roles",
             menuItem: "Roles",
             render: () =>  <ResourceTab.Pane><AgentRoles /></ResourceTab.Pane>
@@ -98,6 +88,16 @@ export default function EditAgent({
             menuItem: "Groups",
             render: () =>  <ResourceTab.Pane><AgentGroups /></ResourceTab.Pane>
         },
+        {
+            componentId: "applications",
+            menuItem: "Applications",
+            render: () =>  <ResourceTab.Pane><AgentConnectedApps /></ResourceTab.Pane>
+        },
+        {
+            componentId: "connections",
+            menuItem: "Connections",
+            render: () =>  <ResourceTab.Pane><AgentIntegrations /></ResourceTab.Pane>
+        }
         // {
         //     componentId: "logs",
         //     menuItem: "Audit Logs",

@@ -449,6 +449,8 @@ export const UserGroupsList: FunctionComponent<UserGroupsPropsInterface> = (
         </Modal>
     );
 
+    console.log(user)
+
     return (
         <>
             <UserGroupsListTable

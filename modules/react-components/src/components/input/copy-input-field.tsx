@@ -57,6 +57,7 @@ export interface CopyInputFieldPropsInterface extends IdentifiableComponentInter
      * Label of the input field.
      */
     label?: string;
+    copyable?: boolean;
 }
 
 /**
@@ -73,6 +74,7 @@ export const CopyInputField: FunctionComponent<CopyInputFieldPropsInterface> = (
         value,
         className,
         showSecret,
+        copyable = true,
         hideSecretLabel,
         secret,
         showSecretLabel,
@@ -112,7 +114,7 @@ export const CopyInputField: FunctionComponent<CopyInputFieldPropsInterface> = (
         setCopied(true);
     };
 
-    return (
+    return copyable ? (
         <Input
             label={ label }
             ref={ inputRef }
@@ -174,6 +176,8 @@ export const CopyInputField: FunctionComponent<CopyInputFieldPropsInterface> = (
             data-componentid={ `${ componentId }-wrapper` }
             data-testid={ `${ testId }-wrapper` }
         />
+    ) : (
+        <Input type="password" value={ value }  style={{ width: "100%" }}          className={ classes } />
     );
 };
 

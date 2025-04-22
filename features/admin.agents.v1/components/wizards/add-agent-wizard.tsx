@@ -70,7 +70,7 @@ export default function AddAgentWizard({
             closeOnEscape
         >
             <Modal.Header>
-                Create Agent
+                { showSecret ? "Agent created successfully" : "Create Agent" }
             </Modal.Header>
             <Modal.Content>
                 { !showSecret ?
@@ -136,16 +136,30 @@ export default function AddAgentWizard({
                     : (
                         <>
                             <Message warning>
-                    Make sure to copy this agent secret now as you will not be able to see this again.
+                            Important: Please copy and securely store the Agent ID and Agent Secret.
+                            <strong>The Agent Secret is displayed only once and cannot be recovered.</strong>
                             </Message>
 
+                            <label>Agent ID</label>
+                            <div style={{ marginTop: "1%", marginBottom: "3%" }}>
+                            <CopyInputField
+                                value={ newAgent?.id }
+                                data-componentid={ "client-secret-readonly-input" }
+                            />
+                            </div>
+
+                            <label>Agent secret</label>
+                            <div style={{ marginTop: "1%" }}>
                             <CopyInputField
                                 secret
-                                value={ "sdjskjksjkdjkjsdk" }
+                                showSecret={ true }
+                                value={ "ecxozaOTjkxh8cfRK_xaXI2ODf498HNn3LCzZMs60cwa" }
                                 hideSecretLabel={ "Hide secret" }
                                 showSecretLabel={ "Show secret" }
                                 data-componentid={ "client-secret-readonly-input" }
                             />
+                            </div>
+                        
                         </>
                     ) }
 

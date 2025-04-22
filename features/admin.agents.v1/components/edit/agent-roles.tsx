@@ -45,8 +45,8 @@ export default function AgentRoles() {
             <ReadOnlyRoleList
                 totalRoleList={ [
                     {
-                        display: "customer support",
-                        audienceType: "application",
+                        display: "Front Desk Agent",
+                        audienceType: "organization",
                         value: "0000aef5-01b6-4cca-af3f-efce472b9b38",
                         $ref: "https://localhost:9443/scim2/v2/Roles/0000aef5-01b6-4cca-af3f-efce472b9b38",
                         audienceDisplay: "Support Portal",

@@ -78,6 +78,7 @@ interface UserGroupsEditPropsInterface extends IdentifiableComponentInterface {
      * Handle user update callback.
      */
     handleUserUpdate: (userId: string) => void;
+    agentView?: boolean;
 }
 
 /**
@@ -97,6 +98,7 @@ export const UserGroupsListTable: FunctionComponent<UserGroupsEditPropsInterface
         isReadOnly,
         handleOpenAddNewGroupModal,
         handleUserUpdate,
+        agentView,
         "data-componentid": componentId = "edit-user-groups"
     } = props;
 
@@ -146,6 +148,8 @@ export const UserGroupsListTable: FunctionComponent<UserGroupsEditPropsInterface
             const filteredList: GroupsMemberInterface[] = list.filter((group: GroupsMemberInterface) => {
                 return group.display.toLowerCase().includes(searchQuery.toLowerCase());
             });
+
+            console.log(filteredList?.slice(offsetValue, itemLimit + offsetValue));
 
             setPaginatedGroups(filteredList?.slice(offsetValue, itemLimit + offsetValue));
 
@@ -264,6 +268,7 @@ export const UserGroupsListTable: FunctionComponent<UserGroupsEditPropsInterface
                 dataIndex: "domain",
                 id: "domain",
                 key: "domain",
+                hidden: agentView,
                 render: (group: GroupsMemberInterface): ReactNode => {
                     const groupNameSegments: string[] = group?.display?.split("/");
                     const domain: string = groupNameSegments.length === 1
@@ -395,33 +400,36 @@ export const UserGroupsListTable: FunctionComponent<UserGroupsEditPropsInterface
 
     return (
         <EmphasizedSegment
-            className="list-user-roles-section"
+            className={ agentView ? "agent-groups-section" : "list-user-roles-section" }
             data-testid="user-mgt-groups-list"
             padded="very"
         >
-            <Box display="flex" justifyContent="space-between" alignItems="center">
-                {
-                    (!!searchQuery || paginatedGroups?.length > 0) &&  (
-                        <div>
-                            <Heading as="h4">
-                                { t("user:updateUser.groups.editGroups.heading") }
-                            </Heading>
-                            <Heading subHeading ellipsis as="h6">
-                                { t("user:updateUser.groups.editGroups.subHeading") }
-                            </Heading>
-                        </div>
-                    )
-                }
-                { !isReadOnly && (!!searchQuery || paginatedGroups?.length > 0) && (
-                    <PrimaryButton
-                        data-testid="user-mgt-groups-list-update-button"
-                        onClick={ handleOpenAddNewGroupModal }
-                    >
-                        <Icon name="plus"/>
-                        { t("applicationRoles:roleGroups.assignGroup") }
-                    </PrimaryButton>
-                ) }
-            </Box>
+            { !agentView && (
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                    {
+                        (!!searchQuery || paginatedGroups?.length > 0) &&  (
+                            <div>
+                                <Heading as="h4">
+                                    { t("user:updateUser.groups.editGroups.heading") }
+                                </Heading>
+                                <Heading subHeading ellipsis as="h6">
+                                    { t("user:updateUser.groups.editGroups.subHeading") }
+                                </Heading>
+                            </div>
+                        )
+                    }
+                    { !isReadOnly && (!!searchQuery || paginatedGroups?.length > 0) && (
+                        <PrimaryButton
+                            data-testid="user-mgt-groups-list-update-button"
+                            onClick={ handleOpenAddNewGroupModal }
+                        >
+                            <Icon name="plus"/>
+                            { t("applicationRoles:roleGroups.assignGroup") }
+                        </PrimaryButton>
+                    ) }
+                </Box>
+            ) }
+
             <Divider hidden/>
             <ListLayout
                 advancedSearch={ (

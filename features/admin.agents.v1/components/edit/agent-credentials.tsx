@@ -60,7 +60,7 @@ export default function AgentCredentials({
                 Credentials
             </Typography>
             <Typography variant="body1" className="mt-1 mb-5" style={ { color: "#9c9c9c" } }>
-            Authentication details for this agent to securely access applications and API resources.
+            Digital identifiers for the agent to securely authenticate itself and gain authorized access
             </Typography>
             <Grid container>
                 <Grid xs={ 8 }>
@@ -69,12 +69,16 @@ export default function AgentCredentials({
                         <CopyInputField value={ agentId } />
                     </div>
 
-                    <label className="mt-5">Agent secret</label>
+                    <Divider />
+                    <Heading as="h4">
+                        Agent Secret
+                    </Heading>
                     <div style={ { display: "flex", flexDirection: "row" } }>
                         <CopyInputField
                             secret
                             showSecret={ false }
-                            value={ "sdjskjksjkdjkjsdk" }
+                            copyable={ false }
+                            value={ "ecxozaOTjkxh8cfRK_xaXI2ODf498HNn3LCzZMs60cwa" }
                             hideSecretLabel={ "Hide secret" }
                             showSecretLabel={ "Show secret" }
                             data-componentid={ "client-secret-readonly-input" }
@@ -87,9 +91,6 @@ export default function AgentCredentials({
                             Regenerate
                         </Button>
                     </div>
-
-
-
 
                     <>
                         <Divider />

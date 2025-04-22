@@ -93,7 +93,7 @@ export default function AddIntegrationWizard({
                     style={ { width: "100%", marginBottom: "15px", marginTop: "15px" } }
                 />
 
-                <div style={ { height: "130px", overflow: "scroll", overflowX: "hidden" } }>
+                <div style={ { height: "250px", overflow: "scroll", overflowX: "hidden" } }>
 
                     <div style={ { display: "flex", flexDirection: "row", alignItems: "center" } }>
                         <Checkbox

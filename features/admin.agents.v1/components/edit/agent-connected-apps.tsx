@@ -21,11 +21,17 @@ import Card from "@oxygen-ui/react/Card";
 import CardContent from "@oxygen-ui/react/CardContent";
 import { useApplicationList } from "@wso2is/admin.applications.v1/api/application";
 import { APIAuthorization } from "@wso2is/admin.applications.v1/components/api-authorization/api-authorization";
+import { getEmptyPlaceholderIllustrations } from "@wso2is/admin.core.v1/configs/ui";
 import { EmphasizedSegment, Message } from "@wso2is/react-components";
-import React, { useEffect, useState } from "react";
+import { EmptyPlaceholder } from "@wso2is/react-components/src/components";
+import React, { ReactElement, ReactNode, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Icon, Input } from "semantic-ui-react";
 
 export default function AgentConnectedApps () {
+
+    const { t } = useTranslation();
+    
     const [ apps, setApps ] = useState([
         { configured: false, description: "Legacy API that connects to an old enterprise CRM system.",
             id: 1, name: "Legacy CRM" },
@@ -70,6 +76,29 @@ export default function AgentConnectedApps () {
         setTrigger(!trigger);
     };
 
+    /**
+     * Shows list placeholders.
+     *
+     * @returns Placeholder component.
+     */
+    const showPlaceholders = (): ReactElement => {
+      
+        return (
+            <div style={{ display: "flex", width: "100vw", marginTop: "3%", flexDirection: "row", justifyContent: "center"}}>
+            <EmptyPlaceholder
+                data-testid={ `-empty-placeholder` }
+                image={ getEmptyPlaceholderIllustrations().newList }
+                imageSize="tiny"
+                title={ "No applications found" }
+                subtitle={ [
+                    "There are currently no applications for this agent to connect" as ReactNode
+                ] }
+            />
+            </div>
+
+        );
+    };
+
     // return (
     //     <APIAuthorization
     //                                 templateId={ "custom-oidc-application" }
@@ -97,7 +126,9 @@ export default function AgentConnectedApps () {
             />
 
             <Grid container spacing={ 2 }>
-                { applicationListData?.applications?.map((integration: any) =>
+                { applicationListData?.applications?.length > 0 ?
+                
+                    applicationListData?.applications?.map((integration: any) =>
  (
                         <Grid
                             item
@@ -109,8 +140,8 @@ export default function AgentConnectedApps () {
                             <Card
                                 style={ { cursor: "pointer" } }
                             >
-                                <CardContent style={ { minHeight: "100px", paddingLeft: 0 } }>
-                                    <Typography variant="h6">{ integration.name }</Typography>
+                                <CardContent style={ { minHeight: "80px", paddingLeft: 0 } }>
+                                    <Typography variant="h5">{ integration.name }</Typography>
                                     <Typography variant="body1">{ integration.templateId }</Typography>
                                     <Typography variant="body2" className="mt-1" style={ { color: "orange" } }>
                                         { integration?.configured && (<>
@@ -133,7 +164,9 @@ export default function AgentConnectedApps () {
                                 </CardActions>
                             </Card>
                         </Grid>
-                    )) }
+                    )) 
+                :  showPlaceholders()
+                }
             </Grid>
         </EmphasizedSegment>
     );

@@ -45,20 +45,11 @@ export default function AgentRoles() {
             <ReadOnlyRoleList
                 totalRoleList={ [
                     {
-                        display: "Customer Support",
+                        display: "customer support",
                         audienceType: "application",
                         value: "0000aef5-01b6-4cca-af3f-efce472b9b38",
                         $ref: "https://localhost:9443/scim2/v2/Roles/0000aef5-01b6-4cca-af3f-efce472b9b38",
                         audienceDisplay: "Support Portal",
-                        orgId: "",
-                        orgName: ""
-                    },
-                    {
-                        display: "everyone",
-                        audienceType: "organization",
-                        value: "5db9f4b9-54aa-4a3f-8a03-156744d73b14",
-                        $ref: "https://localhost:9443/scim2/v2/Roles/5db9f4b9-54aa-4a3f-8a03-156744d73b14",
-                        audienceDisplay: "Super",
                         orgId: "",
                         orgName: ""
                     }

@@ -33,7 +33,7 @@ export default function AgentGroups() {
 
     const assignedGroups: any = [
         {
-            "display": "HumanResources",
+            "display": "Support",
             "value": "9fd55b9d-f1a1-41f5-be20-a54088693c1e",
             "$ref": "https://localhost:9443/scim2/Groups/9fd55b9d-f1a1-41f5-be20-a54088693c1e"
         }

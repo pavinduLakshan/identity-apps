@@ -30,7 +30,8 @@
 <jsp:directive.include file="./branding-preferences.jsp"/>
 
 <%
-    if (!StringUtils.isBlank(cookiePolicyURL)) {
+    boolean isCookieConsentBannerEnabled = Boolean.parseBoolean(application.getInitParameter("isCookieConsentBannerEnabled"));
+    if (!StringUtils.isBlank(cookiePolicyURL) && isCookieConsentBannerEnabled) {
 %>
 <div id="cookie-consent-banner" data-testid="cookie-consent-banner" class="ui segment cookie-consent-banner inverted aligned-right hidden transition">
     <div class="banner-image" data-testid="cookie-consent-banner-image">

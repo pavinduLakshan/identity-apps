@@ -67,6 +67,9 @@
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="org.json.JSONArray" %>
+<%@ page import="java.io.BufferedReader" %>
+<%@ page import="java.io.FileReader" %>
+<%@ page import="java.util.Properties" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="layout" uri="org.wso2.identity.apps.taglibs.layout.controller" %>
@@ -424,6 +427,50 @@
         }
 
         return mapCountries;
+    }
+%>
+
+<%!
+    /**
+     * Retrieve all available locales and their display names for the Local dropdown.
+     *
+     * @return {List<Map<String, String>>}
+     */
+    private List<Map<String, String>> getLocaleList(ServletContext context) {
+        List<Map<String, String>> localeList = new ArrayList<>();
+        String localeOptionsFilePath = context.getRealPath("/WEB-INF/classes/LocaleOptions.properties");
+
+        try (BufferedReader localeReader = new BufferedReader(new FileReader(localeOptionsFilePath, java.nio.charset.StandardCharsets.UTF_8))) {
+            Properties localeProperties = new Properties();
+            localeProperties.load(localeReader);
+
+            for (String key : localeProperties.stringPropertyNames()) {
+                String[] values = localeProperties.getProperty(key).split(",");
+                
+                // Validate the number of values
+                if (values.length == 3) {
+                    String flagCode = values[0].trim();
+                    String displayName = values[1].trim();
+                    String localeCode = values[2].trim();
+
+                    // Avoid null or empty values
+                    if (!flagCode.isEmpty() && !displayName.isEmpty() && !localeCode.isEmpty()) {
+                        Map<String, String> localeMap = new HashMap<>();
+                        localeMap.put("flagCode", flagCode);
+                        localeMap.put("displayName", displayName);
+                        localeMap.put("localeCode", localeCode);
+                        localeList.add(localeMap);
+                    }
+                } else {
+                    System.err.println("Invalid locale entry in LocaleOptions.properties for key: " + key);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error reading LocaleOptions.properties: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return localeList;
     }
 %>
 
@@ -1070,6 +1117,38 @@
                                                 </c:forEach>
                                             </div>
                                         </div>
+                                    <% } else if (StringUtils.equals(claim.getUri(), "http://wso2.org/claims/local")) { %>
+                                        <div class="ui fluid search selection dropdown" id="local-dropdown" data-testid="local-dropdown">
+                                            <input type="hidden" id="local-input" name="<%= Encode.forHtmlAttribute(claimURI) %>"
+                                                <% if (StringUtils.isNotEmpty(claimValue)) { %>
+                                                    value="<%= Encode.forHtmlAttribute(claimValue) %>"
+                                                <% } %>
+                                            />
+                                            <i class="dropdown icon"></i>
+                                            <div class="default text">
+                                                <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle, "Enter Local")%>
+                                            </div>
+                                            <div class="menu">
+                                                <%
+                                                    List<Map<String, String>> localeList = getLocaleList(application);
+                                                    for (Map<String, String> localeItem : localeList) {
+                                                %>
+                                                    <div class="item" data-value="<%= localeItem.get("localeCode") %>">
+                                                        <i class="<%= localeItem.get("flagCode").toLowerCase() %> flag"></i>
+                                                        <%= localeItem.get("displayName") %>
+                                                    </div>
+                                                <%
+                                                    }
+                                                %>
+                                            </div>                                            
+                                        </div>
+                                        <% if (StringUtils.isNotEmpty(claimValue)) { %>
+                                            <script type="text/javascript">
+                                                $(document).ready(function() {
+                                                    $("#local-dropdown").dropdown("set selected", "<%= Encode.forHtmlAttribute(claimValue) %>");
+                                                });
+                                            </script>
+                                        <% } %>
                                     <% } else if (StringUtils.equals(claim.getUri(), "http://wso2.org/claims/dob")) { %>
                                         <div class="ui calendar" id="date_picker">
                                             <div class="ui input right icon" style="width: 100%;">
@@ -1873,9 +1952,16 @@
 
             var agreementChk = $(".agreement-checkbox input");
             var countryDropdown = $("#country-dropdown");
+            var localDropdown = $("#local-dropdown");
 
             countryDropdown.dropdown('hide');
             $("> input.search", countryDropdown).attr("role", "presentation");
+
+            localDropdown.dropdown({
+                onChange: function (value) {
+                    $("#local-input").val(value);
+                }
+            });
 
             $("#date_picker").calendar({
                 type: 'date',

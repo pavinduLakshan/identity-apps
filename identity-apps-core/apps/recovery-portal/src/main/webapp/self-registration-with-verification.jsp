@@ -688,6 +688,34 @@
                                                 </c:forEach>
                                             </div>
                                         </div>
+                                    <% } else if (StringUtils.equals(claim.getUri(), "http://wso2.org/claims/local")) { %>
+                                        <div class="ui fluid search selection dropdown" id="local-dropdown" data-testid="local-dropdown">
+                                            <input type="hidden" id="local-input" name="<%= Encode.forHtmlAttribute(claimURI) %>"
+                                                <% if (claim.getRequired()) { %>
+                                                    required
+                                                <% }%>
+                                                <% if (skipSignUpEnableCheck && StringUtils.isNotEmpty(claimValue)) {%> disabled <%}%>
+                                                <% if (StringUtils.isNotEmpty(claimValue)) { %>
+                                                value="<%= Encode.forHtmlAttribute(claimValue) %>"<% } %>
+                                            />
+                                            <i class="dropdown icon"></i>
+                                            <div class="default text">
+                                                <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle, "enter.local")%>
+                                            </div>
+                                            <div class="menu">
+                                                <%
+                                                    List<Map<String, String>> localeList = getLocaleList(application);
+                                                    for (Map<String, String> localeItem : localeList) {
+                                                %>
+                                                    <div class="item" data-value="<%= localeItem.get(LOCALE_CODE_KEY) %>">
+                                                        <i class="<%= localeItem.get(FLAG_CODE_KEY).toLowerCase() %> flag"></i>
+                                                        <%= localeItem.get(DISPLAY_NAME_KEY) %>
+                                                    </div>
+                                                <%
+                                                    }
+                                                %>
+                                            </div>                                            
+                                        </div>  
                                     <% } else if (StringUtils.equals(claim.getUri(), "http://wso2.org/claims/dob")) { %>
                                         <div class="ui calendar" id="date_picker">
                                             <div class="ui input right icon" style="width: 100%;">
@@ -1119,6 +1147,7 @@
             var agreementChk = $(".agreement-checkbox input");
             var registrationBtn = $("#registrationSubmit");
             var countryDropdown = $("#country-dropdown");
+            var localDropdown = $("#local-dropdown");
 
             if (agreementChk.length > 0) {
                 registrationBtn.prop("disabled", true).addClass("disabled");
@@ -1133,6 +1162,12 @@
 
             countryDropdown.dropdown('hide');
             $("> input.search", countryDropdown).attr("role", "presentation");
+
+            localDropdown.dropdown({
+                onChange: function (value) {
+                    $("#local-input").val(value);
+                }
+            });
 
             $("#date_picker").calendar({
                 type: 'date',

@@ -1562,6 +1562,11 @@
             showCountryValidationStatus();
         });
 
+        // Fires when local field lose focus.
+        $('#local-input').bind('blur', function () {
+            showLocalValidationStatus();
+        });
+
         // Fires on username field input.
         $('#usernameUserInput').bind('input', function () {
             hideUsernameValidationStatus();
@@ -2164,6 +2169,11 @@
                             validInput = false;
                         }
 
+                        // Local validation
+                        if (!showLocalValidationStatus()) {
+                            validInput = false;
+                        }
+
                         // Validate the custom input fields.
                         // If at least one of the fields return false,
                         // the input will be invalid.
@@ -2274,6 +2284,12 @@
                 if (!showCountryValidationStatus()) {
                     validInput = false;
                 }
+
+                // Local validation
+                if (!showLocalValidationStatus()) {
+                    validInput = false;
+                }
+
                 // Validate the custom input fields.
                 // If at least one of the fields return false,
                 // the input will be invalid.
@@ -3061,6 +3077,32 @@
 
             country_error.hide();
             country_field.removeClass("error");
+        }
+
+        function showLocalValidationStatus() {
+            var local = document.getElementById("local-input");
+            var local_error = $("#local_error");
+            var local_error_msg_text = $("#local_error_text");
+            var local_field = $("#local_field");
+
+            if (local != null && local.value == "" && local.required) {
+                local_error_msg_text.text("<%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle, "For.required.fields.cannot.be.empty")%>")
+                local_error.show();
+                local_field.addClass("error");
+                return false;
+            }
+
+            hideLocalValidationStatus();
+
+            return true;
+        }
+
+        function hideLocalValidationStatus() {
+            var local_error = $("#local_error");
+            var local_field = $("#local_field");
+
+            local_error.hide();
+            local_field.removeClass("error");
         }
 
         function showMobileNumberValidationStatus() {

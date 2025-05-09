@@ -654,17 +654,17 @@
                                                 !(claim.getReadOnly() != null ? claim.getReadOnly() : false)) {
                                             String claimURI = claim.getUri();
                                             String claimValue = request.getParameter(claimURI);
+                                            String[] claimFields = claimURI.split("/");
+                                            String claimName = claimFields[claimFields.length-1];
+                                            String claimFieldID = claimName + "_field";
+                                            String claimErrorMsg = claimName + "_error";
+                                            String claimErrorMsgText = claimName + "_error_text";
                                 %>
-                                    <div class="field">
-                                    <% if (claim.getRequired()) { %>
-                                        <label class="control-label">
-                                            <%=IdentityManagementEndpointUtil.i18nBase64(recoveryResourceBundle, claim.getDisplayName())%>*
-                                        </label>
-                                    <% } else { %>
+                                    <div  id="<%=IdentityManagementEndpointUtil.i18nBase64(recoveryResourceBundle, claimFieldID)%>"
+                                        <% if (claim.getRequired()) { %> class="field form-group required" <%} else {%> class="field"<%}%>  >
                                         <label class="control-label">
                                             <%=IdentityManagementEndpointUtil.i18nBase64(recoveryResourceBundle, claim.getDisplayName())%>
                                         </label>
-                                    <% } %>
                                     <% if(StringUtils.equals(claim.getUri(), "http://wso2.org/claims/country")) {%>
                                         <div class="ui fluid search selection dropdown"  id="country-dropdown"
                                             data-testid="country-dropdown">
@@ -678,7 +678,9 @@
                                                 value="<%= Encode.forHtmlAttribute(claimValue)%>"<%}%>
                                             />
                                             <i class="dropdown icon"></i>
-                                            <div class="default text">Enter Country</div>
+                                            <div class="default text">
+                                                <%=IdentityManagementEndpointUtil.i18nBase64(recoveryResourceBundle, claim.getDisplayName())%>
+                                            </div>
                                             <div class="menu">
                                                 <c:forEach items="<%=getCountryList()%>" var="country">
                                                     <div class="item" data-value="${country.value}">
@@ -700,7 +702,7 @@
                                             />
                                             <i class="dropdown icon"></i>
                                             <div class="default text">
-                                                <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle, "enter.local")%>
+                                                <%=IdentityManagementEndpointUtil.i18nBase64(recoveryResourceBundle, claim.getDisplayName())%>
                                             </div>
                                             <div class="menu">
                                                 <%

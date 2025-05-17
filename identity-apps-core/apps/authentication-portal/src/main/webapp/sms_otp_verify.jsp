@@ -102,7 +102,7 @@
             List<Property> properties = new ArrayList<>();
             Property scenrioProperty = new Property();
             scenrioProperty.setKey("RecoveryScenario");
-            scenrioProperty.setValue("MOBILE_VERIFICATION_ON_UPDATE");
+            scenrioProperty.setValue((String) data.get("recoveryScenario"));
             properties.add(scenrioProperty);
             ResendCodeRequest resendCodeRequest = new ResendCodeRequest();
             resendCodeRequest.setUser(user);

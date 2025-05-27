@@ -1341,7 +1341,7 @@
                             <div class="field external-link-container text-small">
                                 <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle,
                                         "Already.have.an.account")%>
-                                <a href="<%=backToUrl%>">    
+                                <a href="<%=backToUrl%>">
                                     <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle, "Sign.in")%>
                                 </a>
                             </div>

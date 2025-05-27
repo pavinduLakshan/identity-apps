@@ -110,7 +110,7 @@
     PreferenceRetrievalClient preferenceRetrievalClient = new PreferenceRetrievalClient();
     boolean isSelfRegistrationLockOnCreationEnabled = preferenceRetrievalClient.checkSelfRegistrationLockOnCreation(tenantDomain);
     String callback = Encode.forHtmlAttribute(request.getParameter("callback"));
-    String backToUrl = callback;
+    String backToUrl = Encode.forHtmlAttribute(IdentityManagementEndpointUtil.encodeURL(request.getParameter("callback")));
     String sp = Encode.forHtmlAttribute(request.getParameter("sp"));
     String previousStep = Encode.forHtmlAttribute(request.getParameter("previous_step"));
     String username = request.getParameter("username");
@@ -748,7 +748,7 @@
                             <div class="field external-link-container text-small">
                                 <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle,
                                         "Already.have.an.account")%>
-                                <a href="<%=IdentityManagementEndpointUtil.encodeURL(backToUrl)%>">
+                                <a href="<%=backToUrl%>">
                                     <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle, "Sign.in")%>
                                 </a>
                             </div>
@@ -1341,7 +1341,7 @@
                             <div class="field external-link-container text-small">
                                 <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle,
                                         "Already.have.an.account")%>
-                                <a href="<%=IdentityManagementEndpointUtil.encodeURL(backToUrl)%>">    
+                                <a href="<%=backToUrl%>">    
                                     <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle, "Sign.in")%>
                                 </a>
                             </div>

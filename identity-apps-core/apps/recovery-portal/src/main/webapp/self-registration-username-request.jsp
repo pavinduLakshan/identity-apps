@@ -748,7 +748,7 @@
                             <div class="field external-link-container text-small">
                                 <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle,
                                         "Already.have.an.account")%>
-                                <a href="<%=Encode.forUri(backToUrl)%>">
+                                <a href="<%=IdentityManagementEndpointUtil.encodeURL(backToUrl)%>">
                                     <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle, "Sign.in")%>
                                 </a>
                             </div>
@@ -1341,7 +1341,7 @@
                             <div class="field external-link-container text-small">
                                 <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle,
                                         "Already.have.an.account")%>
-                                <a href="<%=Encode.forUri(backToUrl)%>"></a>    
+                                <a href="<%=IdentityManagementEndpointUtil.encodeURL(backToUrl)%>">    
                                     <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle, "Sign.in")%>
                                 </a>
                             </div>

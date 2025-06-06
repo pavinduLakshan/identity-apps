@@ -532,7 +532,7 @@
                             data-position="top left"
                             data-variation="inverted"
                             data-content="<%=Encode.forHtmlAttribute(sanitizeUserName)%>">
-                        <%=Encode.forHtmlAttribute(sanitizeUserName)%>
+                        <%=Encode.forHtmlContent(sanitizeUserName)%>
                     </span>
                 </div>
                 <% } %>

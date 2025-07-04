@@ -102,7 +102,7 @@
         const language = langSwitchForm.value;
         setUILocaleCookie(language);
 
-        if (isParamPrioritized) {
+        if (isParamPrioritized === true) {
             const urlParams = new URLSearchParams(window.location.search);
             urlParams.set("ui_locales", language);
 
@@ -116,7 +116,7 @@
     }
 
     function computeLocale(localeFromCookie, localeFromUrlParams, browserLocale) {
-        if (isParamPrioritized) {
+        if (isParamPrioritized === true) {
             if (localeFromUrlParams) {
                 const firstLangFromUrlParams = localeFromUrlParams.split(" ")[0];
                 return firstLangFromUrlParams;

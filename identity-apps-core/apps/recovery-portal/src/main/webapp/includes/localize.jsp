@@ -75,7 +75,7 @@
     }
 
     // Set lang from the priority order
-    if (isLocalizationParamPrioritized) {
+    if (isLocalizationParamPrioritized == true) {
         if (uiLocaleFromURL != null) {
             for (String localeStr : uiLocaleFromURL.split(" ")) {
                 String langStr = "en";

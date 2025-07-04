@@ -33,13 +33,12 @@
 
 <%-- Extract the name of the stylesheet--%>
 <%
-    Boolean isLocalizationParamPrioritized = StringUtils.equals("true", application.getInitParameter("isLocalizationParamPrioritized"));
     String themeName = "wso2is";
     String language = "en_US";
     Cookie[] userCookies = request.getCookies();
     String uiLocaleFromRequest = request.getParameter("ui_locales");
 
-    if (isLocalizationParamPrioritized) {
+    if (isLocalizationParamPrioritized == true) {
         if (uiLocaleFromRequest != null) {
             language = uiLocaleFromRequest.split("\\s+")[0];
         } else if (userCookies != null) {

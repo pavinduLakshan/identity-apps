@@ -34,7 +34,7 @@
 
 <!-- Extract the name of the stylesheet-->
 <%
-    Boolean isLocalizationParamPrioritized = StringUtils.equals("true", application.getInitParameter("isLocalizationParamPrioritized"))
+    Boolean isLocalizationParamPrioritized = StringUtils.equals("true", application.getInitParameter("isLocalizationParamPrioritized"));
     String themeName = "wso2is";
     String language = "en_US";
     Cookie[] userCookies = request.getCookies();

@@ -37,10 +37,11 @@
     String themeName = "wso2is";
     String language = "en_US";
     Cookie[] userCookies = request.getCookies();
+    String uiLocaleFromRequest = request.getParameter("ui_locales");
 
     if (isLocalizationParamPrioritized) {
-        if (request.getParameter("ui_locales") != null) {
-            language = request.getParameter("ui_locales").split("\\s+")[0];
+        if (uiLocaleFromRequest != null) {
+            language = uiLocaleFromRequest.split("\\s+")[0];
         } else if (userCookies != null) {
             for (Cookie cookie : userCookies) {
                 if ("ui_lang".equals(cookie.getName())) {
@@ -59,8 +60,8 @@
                     break;
                 }
             }
-        } else if (request.getParameter("ui_locales") != null) {
-            language = request.getParameter("ui_locales").split("\\s+")[0];
+        } else if (uiLocaleFromRequest != null) {
+            language = uiLocaleFromRequest.split("\\s+")[0];
         }
     }
 

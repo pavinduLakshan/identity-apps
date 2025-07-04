@@ -28,6 +28,7 @@
 
 <%
     String lang = "en_US"; // Default lang is en_US
+    String DEFAULT_LOCALE = "en_US";
     String COOKIE_NAME = "ui_lang";
     Locale browserLocale = request.getLocale();
     Locale userLocale = browserLocale;

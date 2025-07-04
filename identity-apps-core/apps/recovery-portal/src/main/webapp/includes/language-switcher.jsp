@@ -125,7 +125,7 @@
             } else if (browserLocale) {
                 return browserLocale;
             } else {
-                return "en_US";
+                return "<%= DEFAULT_LOCALE %>";
             }
         } else {
             if (localeFromCookie) {
@@ -136,7 +136,7 @@
             } else if (browserLocale) {
                 return browserLocale;
             } else {
-                return "en_US";
+                return "<%= DEFAULT_LOCALE %>";
             }
         }
     }

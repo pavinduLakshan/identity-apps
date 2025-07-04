@@ -34,6 +34,7 @@
     String uiLocaleFromURL = request.getParameter("ui_locales");
     String localeFromCookie = null;
     String BUNDLE = "org.wso2.carbon.identity.application.authentication.endpoint.i18n.Resources";
+    Boolean isLocalizationParamPrioritized = StringUtils.equals("true", application.getInitParameter("isLocalizationParamPrioritized"))
 
     // List of screen names for retrieving text branding customizations.
     List<String> screenNames = new ArrayList<>();
@@ -71,74 +72,147 @@
     }
 
     // Set lang from the priority order
-    if (localeFromCookie != null) {
-        lang = localeFromCookie;
-
-        try {
-            String langStr = "en";
-            String langLocale = "US";
-
-            if (lang.contains("_")) {
-                langStr = lang.split("_")[0];
-                langLocale = lang.split("_")[1];
-            } else if (lang.contains("-")) {
-                langStr = lang.split("-")[0];
-                langLocale = lang.split("-")[1];
-            }
-
-            userLocale = new Locale(langStr, langLocale);
-        } catch (Exception e) {
-            // In case the language is defined but not in the correct format
-            userLocale = browserLocale;
-        }
-    } else if (uiLocaleFromURL != null) {
-        for (String localeStr : uiLocaleFromURL.split(" ")) {
-            String langStr = "en";
-            String langLocale = "US";
-
-            if (localeStr.contains("_")) {
-                langStr = localeStr.split("_")[0];
-                langLocale = localeStr.split("_")[1];
-            } else if (localeStr.contains("-")) {
-                langStr = localeStr.split("-")[0];
-                langLocale = localeStr.split("-")[1];
-            }
-
-            Locale tempLocale = new Locale(langStr, langLocale);
-
-            // Trying to find out whether we have resource bundle for the given locale
-            try {
-                ResourceBundle foundBundle = ResourceBundle.getBundle(BUNDLE, tempLocale);
-
-                // If so, setting the userLocale to that locale. If not, set the browser locale as user locale
-                // Currently, we only care about the language - we do not compare about country locales since our
-                // supported locale set is limited.
-                if (tempLocale.getLanguage().equals(foundBundle.getLocale().getLanguage())) {
-                    userLocale = tempLocale;
-                    break;
-                } else if (tempLocale.getLanguage().equals("en") && foundBundle.getLocale().getLanguage().equals("")) {
-                    // When the given locale is en - which is our fallback one, we have to handle it separately because
-                    // returns and empty string as locale language
-                    userLocale = tempLocale;
-                    break;
-                } else {
+    if (isLocalizationParamPrioritized) {
+        if (uiLocaleFromURL != null) {
+            for (String localeStr : uiLocaleFromURL.split(" ")) {
+                String langStr = "en";
+                String langLocale = "US";
+    
+                if (localeStr.contains("_")) {
+                    langStr = localeStr.split("_")[0];
+                    langLocale = localeStr.split("_")[1];
+                } else if (localeStr.contains("-")) {
+                    langStr = localeStr.split("-")[0];
+                    langLocale = localeStr.split("-")[1];
+                }
+    
+                Locale tempLocale = new Locale(langStr, langLocale);
+    
+                // Trying to find out whether we have resource bundle for the given locale
+                try {
+                    ResourceBundle foundBundle = ResourceBundle.getBundle(BUNDLE, tempLocale);
+    
+                    // If so, setting the userLocale to that locale. If not, set the browser locale as user locale
+                    // Currently, we only care about the language - we do not compare about country locales since our
+                    // supported locale set is limited.
+                    if (tempLocale.getLanguage().equals(foundBundle.getLocale().getLanguage())) {
+                        userLocale = tempLocale;
+                        break;
+                    } else if (tempLocale.getLanguage().equals("en") && foundBundle.getLocale().getLanguage().equals("")) {
+                        // When the given locale is en - which is our fallback one, we have to handle it separately because
+                        // returns and empty string as locale language
+                        userLocale = tempLocale;
+                        break;
+                    } else {
+                        userLocale = browserLocale;
+                    }
+                } catch (Exception e) {
                     userLocale = browserLocale;
                 }
+            }
+        } else if (localeFromCookie != null) {
+            lang = localeFromCookie;
+    
+            try {
+                String langStr = "en";
+                String langLocale = "US";
+    
+                if (lang.contains("_")) {
+                    langStr = lang.split("_")[0];
+                    langLocale = lang.split("_")[1];
+                } else if (lang.contains("-")) {
+                    langStr = lang.split("-")[0];
+                    langLocale = lang.split("-")[1];
+                }
+    
+                userLocale = new Locale(langStr, langLocale);
             } catch (Exception e) {
+                // In case the language is defined but not in the correct format
                 userLocale = browserLocale;
+            }
+        } else {
+            // `browserLocale` is coming as `en` instead of `en_US` for the first render before switching the language from the dropdown.
+            String countryCode = browserLocale.getCountry();
+            String fallbackCountryCode = supportedLanguages.get(browserLocale.getLanguage());
+    
+            if (StringUtils.isNotBlank(countryCode) && languageSupportedCountries.contains(countryCode)) {
+                userLocale = new Locale(browserLocale.getLanguage(), countryCode);
+            } else if (StringUtils.isNotBlank(fallbackCountryCode)){
+                userLocale = new Locale(browserLocale.getLanguage(), fallbackCountryCode);
+            } else {
+                userLocale = new Locale("en","US");
             }
         }
     } else {
-        // `browserLocale` is coming as `en` instead of `en_US` for the first render before switching the language from the dropdown.
-        String countryCode = browserLocale.getCountry();
-        String fallbackCountryCode = supportedLanguages.get(browserLocale.getLanguage());
-
-        if (StringUtils.isNotBlank(countryCode) && languageSupportedCountries.contains(countryCode)) {
-            userLocale = new Locale(browserLocale.getLanguage(), countryCode);
-        } else if (StringUtils.isNotBlank(fallbackCountryCode)){
-            userLocale = new Locale(browserLocale.getLanguage(), fallbackCountryCode);
+        if (localeFromCookie != null) {
+            lang = localeFromCookie;
+    
+            try {
+                String langStr = "en";
+                String langLocale = "US";
+    
+                if (lang.contains("_")) {
+                    langStr = lang.split("_")[0];
+                    langLocale = lang.split("_")[1];
+                } else if (lang.contains("-")) {
+                    langStr = lang.split("-")[0];
+                    langLocale = lang.split("-")[1];
+                }
+    
+                userLocale = new Locale(langStr, langLocale);
+            } catch (Exception e) {
+                // In case the language is defined but not in the correct format
+                userLocale = browserLocale;
+            }
+        } else if (uiLocaleFromURL != null) {
+            for (String localeStr : uiLocaleFromURL.split(" ")) {
+                String langStr = "en";
+                String langLocale = "US";
+    
+                if (localeStr.contains("_")) {
+                    langStr = localeStr.split("_")[0];
+                    langLocale = localeStr.split("_")[1];
+                } else if (localeStr.contains("-")) {
+                    langStr = localeStr.split("-")[0];
+                    langLocale = localeStr.split("-")[1];
+                }
+    
+                Locale tempLocale = new Locale(langStr, langLocale);
+    
+                // Trying to find out whether we have resource bundle for the given locale
+                try {
+                    ResourceBundle foundBundle = ResourceBundle.getBundle(BUNDLE, tempLocale);
+    
+                    // If so, setting the userLocale to that locale. If not, set the browser locale as user locale
+                    // Currently, we only care about the language - we do not compare about country locales since our
+                    // supported locale set is limited.
+                    if (tempLocale.getLanguage().equals(foundBundle.getLocale().getLanguage())) {
+                        userLocale = tempLocale;
+                        break;
+                    } else if (tempLocale.getLanguage().equals("en") && foundBundle.getLocale().getLanguage().equals("")) {
+                        // When the given locale is en - which is our fallback one, we have to handle it separately because
+                        // returns and empty string as locale language
+                        userLocale = tempLocale;
+                        break;
+                    } else {
+                        userLocale = browserLocale;
+                    }
+                } catch (Exception e) {
+                    userLocale = browserLocale;
+                }
+            }
         } else {
-            userLocale = new Locale("en","US");
+            // `browserLocale` is coming as `en` instead of `en_US` for the first render before switching the language from the dropdown.
+            String countryCode = browserLocale.getCountry();
+            String fallbackCountryCode = supportedLanguages.get(browserLocale.getLanguage());
+    
+            if (StringUtils.isNotBlank(countryCode) && languageSupportedCountries.contains(countryCode)) {
+                userLocale = new Locale(browserLocale.getLanguage(), countryCode);
+            } else if (StringUtils.isNotBlank(fallbackCountryCode)){
+                userLocale = new Locale(browserLocale.getLanguage(), fallbackCountryCode);
+            } else {
+                userLocale = new Locale("en","US");
+            }
         }
     }
 

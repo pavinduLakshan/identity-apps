@@ -33,17 +33,34 @@
 
 <%-- Extract the name of the stylesheet--%>
 <%
+    Boolean isLocalizationParamPrioritized = StringUtils.equals("true", application.getInitParameter("isLocalizationParamPrioritized"))
     String themeName = "wso2is";
     String language = "en_US";
     Cookie[] userCookies = request.getCookies();
 
-    if (userCookies != null) {
-        for (Cookie cookie : userCookies) {
-            if ("ui_lang".equals(cookie.getName())) {
-                language = cookie.getValue();
-
-                break;
+    if (isLocalizationParamPrioritized) {
+        if (request.getParameter("ui_locales") != null) {
+            language = request.getParameter("ui_locales").split("\\s+")[0];
+        } else if (userCookies != null) {
+            for (Cookie cookie : userCookies) {
+                if ("ui_lang".equals(cookie.getName())) {
+                    language = cookie.getValue();
+    
+                    break;
+                }
             }
+        }
+    } else {
+        if (userCookies != null) {
+            for (Cookie cookie : userCookies) {
+                if ("ui_lang".equals(cookie.getName())) {
+                    language = cookie.getValue();
+    
+                    break;
+                }
+            }
+        } else if (request.getParameter("ui_locales") != null) {
+            language = request.getParameter("ui_locales").split("\\s+")[0];
         }
     }
 

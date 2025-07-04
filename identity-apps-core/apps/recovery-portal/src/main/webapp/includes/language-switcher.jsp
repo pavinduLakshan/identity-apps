@@ -30,6 +30,8 @@
 
 <script src="libs/jquery_3.6.0/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
+    const isParamPrioritized = "<%= isLocalizationParamPrioritized %>";
+
     $(document).ready(function(){
         const languageDropdown = $("#language-selector-dropdown");
         const languageSelectionInput = $("#language-selector-input");
@@ -100,19 +102,42 @@
         const language = langSwitchForm.value;
         setUILocaleCookie(language);
 
-        window.location.reload();
+        if (isParamPrioritized) {
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.set("ui_locales", language);
+
+            const newQueryString = urlParams.toString();
+            const newUrl = window.location.pathname + (newQueryString ? '?' + newQueryString : '');
+
+            window.location.href = newUrl;
+        } else {
+            window.location.reload();
+        }
     }
 
     function computeLocale(localeFromCookie, localeFromUrlParams, browserLocale) {
-        if (localeFromUrlParams) {
-            const firstLangFromUrlParams = localeFromUrlParams.split(" ")[0];
-            return firstLangFromUrlParams;
-        } else if (localeFromCookie) {
-            return localeFromCookie;
-        } else if (browserLocale) {
-            return browserLocale;
+        if (isParamPrioritized) {
+            if (localeFromUrlParams) {
+                const firstLangFromUrlParams = localeFromUrlParams.split(" ")[0];
+                return firstLangFromUrlParams;
+            } else if (localeFromCookie) {
+                return localeFromCookie;
+            } else if (browserLocale) {
+                return browserLocale;
+            } else {
+                return "en_US";
+            }
         } else {
-            return "en_US";
+            if (localeFromCookie) {
+                return localeFromCookie;
+            } else if (localeFromUrlParams) {
+                const firstLangFromUrlParams = localeFromUrlParams.split(" ")[0];
+                return firstLangFromUrlParams;
+            } else if (browserLocale) {
+                return browserLocale;
+            } else {
+                return "en_US";
+            }
         }
     }
 </script>

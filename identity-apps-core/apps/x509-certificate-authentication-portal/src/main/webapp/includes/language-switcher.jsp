@@ -30,7 +30,8 @@
 
 <script src="libs/jquery_3.6.0/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-    const isParamPrioritized = "<%= isLocalizationParamPrioritized %>";
+    const isParamPrioritized = <%= isLocalizationParamPrioritized %>;
+    const uiLocales = <%= (uiLocaleFromURL == null) ? "null" : "\"" + Encode.forJavaScript(uiLocaleFromURL) + "\"" %>;
 
     $(document).ready(function(){
         const languageDropdown = $("#language-selector-dropdown");
@@ -42,11 +43,10 @@
         $("> input.search", languageDropdown).attr("role", "presentation");
 
         // Set current lang value coming from cookie
-        const urlParams = new URLSearchParams(window.location.search);
         const localeFromCookie = getCookie("ui_lang");
         var localeFromUrlParams = null;
-        if (urlParams.has('ui_locales')) {
-            localeFromUrlParams ="<%= Encode.forHtmlAttribute(request.getParameter("ui_locales")) %>";
+        if (uiLocales) {
+            localeFromUrlParams = uiLocales;
         }
         const browserLocale = "<%= userLocale %>"
         const computedLocale = computeLocale(localeFromCookie, localeFromUrlParams, browserLocale);

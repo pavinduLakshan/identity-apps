@@ -103,13 +103,12 @@
         setUILocaleCookie(language);
 
         if (isParamPrioritized === true) {
-            const urlParams = new URLSearchParams(window.location.search);
-            urlParams.set("ui_locales", language);
+            const url = new URL(window.location.href);
+            url.searchParams.set("ui_locales", language);
 
-            const newQueryString = urlParams.toString();
-            const newUrl = window.location.pathname + (newQueryString ? '?' + newQueryString : '');
+            window.history.replaceState(null, "", url.toString());
 
-            window.location.href = newUrl;
+            window.location.reload();
         } else {
             window.location.reload();
         }
@@ -140,6 +139,18 @@
             }
         }
     }
+
+    (function stripUiLocalesOnce () {
+        const cookieLang = getCookie("ui_lang");
+        const url = new URL(location.href);
+        const paramLang = url.searchParams.get("ui_locales");
+
+        if (paramLang && cookieLang && paramLang === cookieLang) {
+            url.searchParams.delete("ui_locales");
+            history.replaceState(null, "", url.pathname +
+                (url.search ? "?" + url.search : "") + url.hash);
+        }
+    })();
 </script>
 
 <link href="css/language-selector.css" rel="stylesheet">

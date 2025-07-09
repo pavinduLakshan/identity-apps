@@ -31,7 +31,7 @@
 <script src="libs/jquery_3.6.0/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
     const isParamPrioritized = <%= isLocalizationParamPrioritized %>;
-    const uiLocales = <%= (uiLocaleFromURL == null) ? "null" : "\"" + Encode.forJavaScript(uiLocaleFromURL) + "\"" %>;
+    const userLocaleFromLocalize = "<%= userLocale %>";
 
     $(document).ready(function(){
         const languageDropdown = $("#language-selector-dropdown");
@@ -42,25 +42,16 @@
         languageDropdown.dropdown('hide');
         $("> input.search", languageDropdown).attr("role", "presentation");
 
-        // Set current lang value coming from cookie
-        const localeFromCookie = getCookie("ui_lang");
-        var localeFromUrlParams = null;
-        if (uiLocales) {
-            localeFromUrlParams = uiLocales;
-        }
-        const browserLocale = "<%= userLocale %>"
-        const computedLocale = computeLocale(localeFromCookie, localeFromUrlParams, browserLocale);
+        languageSelectionInput.val(userLocaleFromLocalize);
+        setUILocaleCookie(userLocaleFromLocalize);
 
-        languageSelectionInput.val(computedLocale);
-        setUILocaleCookie(computedLocale);
-
-        const dataOption = $( "div[data-value='" + computedLocale + "']" );
+        const dataOption = $( "div[data-value='" + userLocaleFromLocalize + "']" );
         dataOption.addClass("active selected")
 
         selectedLanguageText.removeClass("default");
         selectedLanguageText.html(dataOption.html());
 
-        document.documentElement.lang = computedLocale;
+        document.documentElement.lang = userLocaleFromLocalize;
     });
 
 
@@ -119,51 +110,11 @@
             const url = new URL(window.location.href);
             url.searchParams.set("ui_locales", language);
 
-            window.history.replaceState(null, "", url.toString());
-
-            window.location.reload();
+            location.replace(url.toString())
         } else {
             window.location.reload();
         }
     }
-
-    function computeLocale(localeFromCookie, localeFromUrlParams, browserLocale) {
-        if (isParamPrioritized === true) {
-            if (localeFromUrlParams) {
-                const firstLangFromUrlParams = localeFromUrlParams.split(" ")[0];
-                return firstLangFromUrlParams;
-            } else if (localeFromCookie) {
-                return localeFromCookie;
-            } else if (browserLocale) {
-                return browserLocale;
-            } else {
-                return "<%= DEFAULT_LOCALE %>";
-            }
-        } else {
-            if (localeFromCookie) {
-                return localeFromCookie;
-            } else if (localeFromUrlParams) {
-                const firstLangFromUrlParams = localeFromUrlParams.split(" ")[0];
-                return firstLangFromUrlParams;
-            } else if (browserLocale) {
-                return browserLocale;
-            } else {
-                return "<%= DEFAULT_LOCALE %>";
-            }
-        }
-    }
-
-    (function stripUiLocalesOnce () {
-        const cookieLang = getCookie("ui_lang");
-        const url = new URL(location.href);
-        const paramLang = url.searchParams.get("ui_locales");
-
-        if (paramLang && cookieLang && paramLang === cookieLang) {
-            url.searchParams.delete("ui_locales");
-            history.replaceState(null, "", url.pathname +
-                (url.search ? "?" + url.search : "") + url.hash);
-        }
-    })();
 </script>
 
 <link href="css/language-selector.css" rel="stylesheet">

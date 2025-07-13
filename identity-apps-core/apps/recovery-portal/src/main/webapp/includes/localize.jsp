@@ -29,15 +29,78 @@
 <%@ page import="java.io.FileReader" %>
 
 <%
+    String uiLocaleFromURL = request.getParameter("ui_locales");
+    Boolean isLocalizationParamPrioritized = StringUtils.equals("true", application.getInitParameter("isLocalizationParamPrioritized"));
+%>
+
+<script src="util/url-utils.js"></script>
+<script type="text/javascript">
+    if ("<%= isLocalizationParamPrioritized %>" === "true") {
+        function getCookie(name) {
+            const cookieMatch = document.cookie.match(new RegExp('(?:^|;\\s*)' + name + '=([^;]+)'));
+            return cookieMatch ? cookieMatch[1] : null;
+        }
+
+        function setUILangCookie(name, value, days, options) {
+            var expires = "";
+            var domain = ";domain=" + URLUtils.getDomain(window.location.href);
+
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+
+            var httpOnlyString = (options && options.httpOnly) ? "; HttpOnly" : "";
+            var secureString = (options && options.secure) ? "; Secure" : "";
+
+            document.cookie = name + "=" + (value || "") + expires + domain + "; path=/" + httpOnlyString + secureString;
+        }
+
+        function reconcileLocale() {
+            const cookie = getCookie('ui_lang');
+            const url = new URL(location.href);
+            let param = ""
+
+            if (url.searchParams.get('ui_locales')) {
+                param = url.searchParams.get('ui_locales');
+            } else if ("<%= uiLocaleFromURL %>") {
+                param = "<%= uiLocaleFromURL %>";
+            }
+
+            const onBack = performance.getEntriesByType('navigation')[0]?.type === 'back_forward';
+
+            if (onBack) {
+                if (cookie && param !== cookie) {
+                    url.searchParams.set('ui_locales', cookie);
+                    history.replaceState(null, '', url.toString());
+                    location.reload();
+                }
+                return;
+            }
+
+            if (param && param !== cookie) {
+                setUILangCookie(param);
+
+            }
+        }
+
+        reconcileLocale();
+
+        window.addEventListener('pageshow', e => {
+            if (e.persisted) { reconcileLocale(); }
+        });
+    }
+</script>
+
+<%
     String lang = "en_US"; // Default lang is en_US
     String DEFAULT_LOCALE = "en_US";
     String COOKIE_NAME = "ui_lang";
     Locale browserLocale = request.getLocale();
     Locale userLocale = browserLocale;
-    String uiLocaleFromURL = request.getParameter("ui_locales");
     String localeFromCookie = null;
     String BUNDLE = "org.wso2.carbon.identity.mgt.recovery.endpoint.i18n.Resources";
-    Boolean isLocalizationParamPrioritized = StringUtils.equals("true", application.getInitParameter("isLocalizationParamPrioritized"));
 
     // List of screen names for retrieving text branding customizations.
     List<String> screenNames = new ArrayList<>();

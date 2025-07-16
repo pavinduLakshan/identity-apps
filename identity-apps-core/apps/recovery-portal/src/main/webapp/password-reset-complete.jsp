@@ -110,14 +110,14 @@
             applicationName = sp;
         } else if (callback.contains(CONSOLE_APP_NAME.toLowerCase())) {
             applicationName = CONSOLE_APP_NAME;
-        } else if (callback.contains(MY_ACCOUNT_APP_NAME.toLowerCase().replaceAll("\\s+", "")) || 
+        } else if (callback.contains(MY_ACCOUNT_APP_NAME.toLowerCase().replaceAll("\\s+", "")) ||
                 isUserPortalUrl(callback, tenantDomain, application)) {
             applicationName = MY_ACCOUNT_APP_NAME;
         }
     } else {
-            if (StringUtils.isNotBlank(spId)) {
+        if (StringUtils.isNotBlank(spId) && !StringUtils.equalsIgnoreCase(spId, "null")) {
             try {
-                if (spId.equals(MY_ACCOUNT_APP_ID) || isUserPortalUrl(callback, tenantDomain, application)) {
+                if (spId.equals(MY_ACCOUNT_APP_ID)) {
                     applicationName = MY_ACCOUNT_APP_NAME;
                 } else {
                     applicationName = applicationDataRetrieval.getApplicationName(tenantDomain,spId);
@@ -125,6 +125,8 @@
             } catch (Exception e) {
                 // Ignored and fallback to my account page url.
             }
+        } else if (isUserPortalUrl(callback, tenantDomain, application)) {
+            applicationName = MY_ACCOUNT_APP_NAME;
         }
     }
 
@@ -287,9 +289,9 @@
     session.invalidate();
 %>
 
-<%! 
+<%!
     private boolean isUserPortalUrl(String callback, String tenantDomain, ServletContext application) {
-        
+
         String userPortalUrl = IdentityManagementEndpointUtil.getUserPortalUrl(
                 application.getInitParameter(IdentityManagementEndpointConstants.ConfigConstants.USER_PORTAL_URL),
                 tenantDomain);

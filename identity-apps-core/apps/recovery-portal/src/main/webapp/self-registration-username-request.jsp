@@ -1072,8 +1072,8 @@
                                         </div>
                                     <% } else if (StringUtils.equals(claim.getUri(), "http://wso2.org/claims/local")) { %>
                                         <div class="ui fluid search selection dropdown" id="local-dropdown" data-testid="local-dropdown">
-                                            <input type="hidden" 
-                                                id="local-input" 
+                                            <input type="hidden"
+                                                id="local-input"
                                                 name="<%= Encode.forHtmlAttribute(claimURI) %>"
                                                 <% if (claim.getRequired()) { %>
                                                     required
@@ -1097,7 +1097,7 @@
                                                 <%
                                                     }
                                                 %>
-                                            </div>                                            
+                                            </div>
                                         </div>
                                     <% } else if (StringUtils.equals(claim.getUri(), "http://wso2.org/claims/dob")) { %>
                                         <div class="ui calendar" id="date_picker">
@@ -1503,6 +1503,10 @@
         }
         if (!<%=isUsernameValidationEnabled%>) {
             $("#alphanumericUsernameField").show();
+        }
+
+        if (<%=isEmailUsernameEnabled%> && <%=hideUsernameFieldWhenEmailAsUsernameIsEnabled%>) {
+            $("#alphanumericUsernameField").hide();
         }
 
         // Reloads the page if the page is loaded by going back in history.

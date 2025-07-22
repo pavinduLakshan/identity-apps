@@ -171,11 +171,13 @@
     Boolean isEmailRecoveryAvailable = isEmailNotificationEnabled && isEmailLinkBasedPasswordRecoveryEnabledByTenant;
 
     String emailUsernameEnable = application.getInitParameter("EnableEmailUserName");
-    Boolean isEmailUsernameEnabled = false;
+    Boolean isEmailUsernameEnabled = MultitenantUtils.isEmailUserName();
+    boolean hideUsernameFieldWhenEmailAsUsernameIsEnabled = Boolean.parseBoolean(config.getServletContext().getInitParameter(
+        "HideUsernameWhenEmailAsUsernameEnabled"));
     String usernameLabel = "Username";
     String usernamePlaceHolder = "Enter.your.username.here";
 
-    if (StringUtils.isNotBlank(emailUsernameEnable) && Boolean.parseBoolean(emailUsernameEnable)) {
+    if (isEmailUsernameEnabled && hideUsernameFieldWhenEmailAsUsernameIsEnabled) {
         usernameLabel = "email.username";
         usernamePlaceHolder = "enter.your.email";
     } else if (isMultiAttributeLoginEnabledInTenant) {

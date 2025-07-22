@@ -174,16 +174,20 @@
     Boolean isEmailUsernameEnabled = MultitenantUtils.isEmailUserName();
     boolean hideUsernameFieldWhenEmailAsUsernameIsEnabled = Boolean.parseBoolean(config.getServletContext().getInitParameter(
         "HideUsernameWhenEmailAsUsernameEnabled"));
+    
     String usernameLabel = "Username";
     String usernamePlaceHolder = "Enter.your.username.here";
+    String passwordRecoveryBody = "password.recovery.body";
 
     if (isEmailUsernameEnabled && hideUsernameFieldWhenEmailAsUsernameIsEnabled) {
         usernameLabel = "email.username";
         usernamePlaceHolder = "enter.your.email";
+        passwordRecoveryBody = "password.recovery.email.username.body";
     } else if (isMultiAttributeLoginEnabledInTenant) {
         if (allowedAttributes != null) {
             usernameLabel = getUsernameLabel(recoveryResourceBundle, allowedAttributes);
             usernamePlaceHolder = "Enter.your.identifier";
+            passwordRecoveryBody = "password.recovery.indentifier.body";
         }
     }
 %>
@@ -260,7 +264,7 @@
                         if (StringUtils.isNotEmpty(username) && !error) {
                         %>
                         <div class="field mb-5">
-                            <%=i18n(recoveryResourceBundle, customText, "password.recovery.body")%>
+                            <%=i18n(recoveryResourceBundle, customText, passwordRecoveryBody)%>
                         </div>
                         <div class="field">
                             <label for="username">
@@ -294,7 +298,7 @@
                         } else {
                         %>
                         <div class="field mb-5">
-                            <%=i18n(recoveryResourceBundle, customText, "password.recovery.body")%>
+                            <%=i18n(recoveryResourceBundle, customText, passwordRecoveryBody)%>
                         </div>
                         <div class="field">
                             <label for="username">

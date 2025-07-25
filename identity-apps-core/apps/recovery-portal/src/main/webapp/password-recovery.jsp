@@ -172,7 +172,7 @@
 
     String emailUsernameEnable = application.getInitParameter("EnableEmailUserName");
     Boolean isEmailUsernameEnabled = false;
-    Boolean isEmaiAslUsernameEnabled = MultitenantUtils.isEmailUserName();
+    Boolean isEmailAsUsernameEnabled = MultitenantUtils.isEmailUserName();
     boolean hideUsernameFieldWhenEmailAsUsernameIsEnabled = Boolean.parseBoolean(config.getServletContext().getInitParameter(
         "HideUsernameWhenEmailAsUsernameEnabled"));
     

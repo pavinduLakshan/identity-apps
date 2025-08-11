@@ -104,7 +104,7 @@
     try {
         ApplicationDataRetrievalClient applicationDataRetrievalClient = new ApplicationDataRetrievalClient();
         applicationAccessURLWithoutEncoding = applicationDataRetrievalClient.getApplicationAccessURL(tenantDomain,
-                Encode.forJava(sp));
+            Encode.forJava(sp));
         applicationAccessURLWithoutEncoding = IdentityManagementEndpointUtil.replaceUserTenantHintPlaceholder(
                                                                 applicationAccessURLWithoutEncoding, userTenantDomain);
     } catch (ApplicationDataRetrievalClientException e) {

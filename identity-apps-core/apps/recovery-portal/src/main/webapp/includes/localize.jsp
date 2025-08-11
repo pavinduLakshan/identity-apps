@@ -64,8 +64,8 @@
 
             if (url.searchParams.get('ui_locales')) {
                 param = url.searchParams.get('ui_locales');
-            } else if ("<%= uiLocaleFromURL %>") {
-                param = "<%= uiLocaleFromURL %>";
+            } else if ("<%= Encode.forJavaScript(uiLocaleFromURL) %>") {
+                param = "<%= Encode.forJavaScript(uiLocaleFromURL) %>";
             }
 
             const onBack = performance.getEntriesByType('navigation')[0]?.type === 'back_forward';

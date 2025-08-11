@@ -152,7 +152,7 @@
                             <%
                             if (StringUtils.isNotBlank(spId)) {
                             %>
-                            <input id="spId" name="spId" type="hidden" value="<%=spId%>"/>
+                            <input id="spId" name="spId" type="hidden" value="<%=Encode.forHtmlAttribute(spId)%>"/>
                             <%
                             }
                             %>

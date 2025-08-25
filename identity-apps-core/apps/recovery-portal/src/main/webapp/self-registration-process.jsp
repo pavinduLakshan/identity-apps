@@ -257,7 +257,7 @@
                     errorMsg = user.getUsername() + " is an invalid user name. Please pick a valid username.";
                 }
             } else {
-                errorMsg = errorMsg + " To fix this issue, please contact the administrator.");
+                errorMsg = errorMsg + " To fix this issue, please contact the administrator.";
             }
             request.setAttribute("errorMsg", errorMsg);
             request.setAttribute("errorCode", errorCode);

@@ -59,6 +59,11 @@
 <%-- Include tenant context --%>
 <jsp:directive.include file="tenant-resolve.jsp"/>
 
+<%
+    // Add the sign-up screen to the list to retrieve text branding customizations.
+    screenNames.add("sign-up");
+%>
+
 <%-- Branding Preferences --%>
 <jsp:directive.include file="includes/branding-preferences.jsp"/>
 
@@ -218,7 +223,6 @@
 
     Integer userNameValidityStatusCode = usernameValidityResponse.getInt("code");
     String errorCode = String.valueOf(userNameValidityStatusCode);
-    Boolean isUsernameErrorMessageEnabled = Boolean.parseBoolean(IdentityUtil.getProperty("SelfRegistration.EnableUsernameRegexViolationErrorMsg"));
     String usernameErrorMessage = usernameValidityResponse.has("message") ? usernameValidityResponse.getString("message") : null;
 
     if (!SelfRegistrationStatusCodes.CODE_USER_NAME_AVAILABLE.equalsIgnoreCase(userNameValidityStatusCode.toString())) {
@@ -248,18 +252,35 @@
             return;
         } else {
             if (SelfRegistrationStatusCodes.ERROR_CODE_INVALID_TENANT.equalsIgnoreCase(errorCode)) {
-                errorMsg = "Invalid tenant domain - " + user.getTenantDomain() + ".";
+                errorMsg = i18n(recoveryResourceBundle, customText, "invalid.tenant.domain") +
+                    " - " + user.getTenantDomain() + ".";
             } else if (SelfRegistrationStatusCodes.ERROR_CODE_USER_ALREADY_EXISTS.equalsIgnoreCase(errorCode)) {
-                errorMsg = "Username '" + username + "' is already taken.";
+                errorMsg = i18n(recoveryResourceBundle, customText, "Username") +
+                    " " + username + " " + i18n(recoveryResourceBundle, customText, "is.already.taken");
             } else if (SelfRegistrationStatusCodes.CODE_USER_NAME_INVALID.equalsIgnoreCase(errorCode)) {
-                // Attempt to fetch the username regex violation error message from deployment.toml
-                if (isUsernameErrorMessageEnabled && StringUtils.isNotBlank(usernameErrorMessage)) {
-                    errorMsg = usernameErrorMessage.toString();
+                // If there is a custom error message configured in Resources.properties file or in
+                // Branding preferences, sign.up.username.validation.error.message will use that message
+                String i18nUsernameValidationErrorMessage = i18n(recoveryResourceBundle, customText,
+                    "sign.up.username.validation.error.message");
+
+                if (StringUtils.isNotBlank(i18nUsernameValidationErrorMessage) &&
+                    !i18nUsernameValidationErrorMessage.equals("sign.up.username.validation.error.message")) {
+                    errorMsg = i18nUsernameValidationErrorMessage;
                 } else {
-                    errorMsg = user.getUsername() + " is an invalid user name. Please pick a valid username.";
+                    // If there is no i18n entry for the error message, check if there is a custom error message
+                    // UsernameJavaRegExViolationErrorMsg configured in deployment.toml
+                    // Else, use the default error message
+                    if (StringUtils.isNotBlank(usernameErrorMessage)) {
+                        errorMsg = usernameErrorMessage;
+                    } else {
+                        errorMsg = user.getUsername() + " " + i18n(recoveryResourceBundle, customText,
+                            "invalid.username.pick.a.valid.username");
+                    }
                 }
             } else {
-                errorMsg = errorMsg + " To fix this issue, please contact the administrator.";
+                // Generic error message for other error codes
+                errorMsg = errorMsg + i18n(recoveryResourceBundle, customText,
+                    "please.contact.administrator.to.fix.issue");
             }
             request.setAttribute("errorMsg", errorMsg);
             request.setAttribute("errorCode", errorCode);

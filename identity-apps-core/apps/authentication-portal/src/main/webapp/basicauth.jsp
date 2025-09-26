@@ -478,7 +478,7 @@
             <%=AuthenticationEndpointUtil.i18n(resourceBundle, "Updated.the.password.successfully")%>
         </div>
    <% } %>
-    <% if (!isIdentifierFirstLogin(inputType) && !isLoginHintAvailable(inputType)) { %>
+    <% if (!isIdentifierFirstLogin(inputType) && !isLoginHintAvailable(inputType, request)) { %>
             <div class="field m-0">
                 <% String loginInputLabel=i18n(resourceBundle, customText, "login.identifier.input.label" , "", false); %>
                     <% if (StringUtils.isNotBlank(loginInputLabel)) { %>
@@ -629,7 +629,7 @@
         <% if (isRecoveryEPAvailable && (isUsernameRecoveryEnabledInTenant || isPasswordRecoveryEnabledInTenant)) { %>
         <div class="field external-link-container text-small">
             <%=AuthenticationEndpointUtil.i18n(resourceBundle, "forgot.username.password")%>
-            <% if (!isIdentifierFirstLogin(inputType) && !isLoginHintAvailable(inputType) && isUsernameRecoveryEnabledInTenant) { %>
+            <% if (!isIdentifierFirstLogin(inputType) && !isLoginHintAvailable(inputType, request) && isUsernameRecoveryEnabledInTenant) { %>
             <a
                 id="usernameRecoverLink"
                 href="<%=StringEscapeUtils.escapeHtml4(getRecoverAccountUrl(identityMgtEndpointContext, urlEncodedURL, true, urlParameters))%>"
@@ -638,7 +638,7 @@
                 <%=AuthenticationEndpointUtil.i18n(resourceBundle, "forgot.username")%>
             </a>
             <% }
-              if (!isIdentifierFirstLogin(inputType) && !isLoginHintAvailable(inputType) && isUsernameRecoveryEnabledInTenant && isPasswordRecoveryEnabledInTenant) { %>
+              if (!isIdentifierFirstLogin(inputType) && !isLoginHintAvailable(inputType, request) && isUsernameRecoveryEnabledInTenant && isPasswordRecoveryEnabledInTenant) { %>
             <%=AuthenticationEndpointUtil.i18n(resourceBundle, "forgot.username.password.or")%>
             <% }
               if (isPasswordRecoveryEnabledInTenant && isPasswordRecoveryEnabledInTenantPreferences) { %>
@@ -694,7 +694,7 @@
         </div>
     </div>
 
-    <% if (isSelfSignUpEPAvailable && !isIdentifierFirstLogin(inputType) && !isLoginHintAvailable(inputType) && isSelfSignUpEnabledInTenant && isSelfSignUpEnabledInTenantPreferences) { %>
+    <% if (isSelfSignUpEPAvailable && !isIdentifierFirstLogin(inputType) && !isLoginHintAvailable(inputType, request) && isSelfSignUpEnabledInTenant && isSelfSignUpEnabledInTenantPreferences) { %>
         <div class="mt-4 mb-4">
             <div class="mt-3 external-link-container text-small">
                 <%=AuthenticationEndpointUtil.i18n(resourceBundle, "dont.have.an.account")%>

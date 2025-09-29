@@ -115,7 +115,7 @@
                         <%=i18n(recoveryResourceBundle, customText, "password.reset.success.body")%>
                     </span>
                     <%
-                        if(StringUtils.isNotBlank(accessUrl) && isValidCallBackURL) {
+                        if(StringUtils.isNotBlank(accessUrl) && isValidAccessURL) {
                     %>
                         <br/><br/>
                         <i class="caret left icon primary"></i>

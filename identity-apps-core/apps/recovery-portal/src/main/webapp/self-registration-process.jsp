@@ -79,6 +79,7 @@
     String usernamePatternErrorCode = "20045";
     String duplicateClaimValueErrorCode = "60007";
     String usernameAlreadyExistsErrorCode = "20030";
+    String invalidCharErrorCode = "20067";
     String AUTO_LOGIN_COOKIE_NAME = "ALOR";
     String AUTO_LOGIN_COOKIE_DOMAIN = "AutoLoginCookieDomain";
     String AUTO_LOGIN_FLOW_TYPE = "SELF_SIGNUP";
@@ -465,7 +466,9 @@
         IdentityManagementEndpointUtil.addErrorInformation(request, e);
         String errorCode1 = (String) request.getAttribute("errorCode");
         String errorMsg1 = (String) request.getAttribute("errorMsg");
-        if (passwordPatternErrorCode.equals(errorCode1) || duplicateClaimValueErrorCode.equals(errorCode1)) {
+        if (passwordPatternErrorCode.equals(errorCode1) ||
+            duplicateClaimValueErrorCode.equals(errorCode1) ||
+            invalidCharErrorCode.equals(errorCode1)) {
             String i18Resource = IdentityManagementEndpointUtil.i18n(recoveryResourceBundle, errorCode1);
             if (!i18Resource.equals(errorCode1)) {
                 request.setAttribute(ERROR_MESSAGE, i18Resource);

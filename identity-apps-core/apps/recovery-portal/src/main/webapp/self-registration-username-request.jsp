@@ -310,6 +310,15 @@
     }
 
     /**
+     * Validate the back to login URL. If invalid, set the callback to null.
+     */
+    if (!StringUtils.isBlank(backToUrl)
+        && !StringUtils.equalsIgnoreCase(backToUrl, "null")
+        && !AuthenticationEndpointUtil.isValidMultiOptionURI(backToUrl)) {
+        backToUrl = null;
+    }
+
+    /**
     * If backToUrl is null get to access url of the application.
     */
     if (StringUtils.equalsIgnoreCase(backToUrl,"null")) {

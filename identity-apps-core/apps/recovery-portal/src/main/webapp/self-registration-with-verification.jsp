@@ -1,5 +1,5 @@
 <%--
-  ~ Copyright (c) 2016-2024, WSO2 LLC. (https://www.wso2.com).
+  ~ Copyright (c) 2016-2025, WSO2 LLC. (https://www.wso2.com).
   ~
   ~ WSO2 LLC. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -187,6 +187,20 @@
         return;
     }
 
+    /**
+     * Validate the back to login URL. If invalid, set the callback to null.
+     */
+    if (!StringUtils.isBlank(callback) && !StringUtils.equalsIgnoreCase(callback, "null")) {
+        String encodedCallback = IdentityManagementEndpointUtil.getURLEncodedCallback(callback);
+
+        if (!AuthenticationEndpointUtil.isValidMultiOptionURI(encodedCallback)) {
+            callback = null;
+        }
+    }
+
+    /**
+     * If the callback is blank, it is set to user portal URL.
+     */
     if (StringUtils.isBlank(callback)) {
         callback = Encode.forHtmlAttribute(IdentityManagementEndpointUtil.getUserPortalUrl(
                 application.getInitParameter(IdentityManagementEndpointConstants.ConfigConstants.USER_PORTAL_URL), tenantDomain));

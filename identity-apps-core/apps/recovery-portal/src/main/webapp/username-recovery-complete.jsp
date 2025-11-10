@@ -78,7 +78,6 @@
                 // If the application access URL is not present, callback should be a valid multi option URL.
                 String encodedCallback = IdentityManagementEndpointUtil.getURLEncodedCallback(callback);
                 isValidCallBackURL = AuthenticationEndpointUtil.isValidMultiOptionURI(encodedCallback);
-                System.out.println("isValidCallBackURL: " + AuthenticationEndpointUtil.isValidMultiOptionURI(encodedCallback));
             }
         }
     } catch (Exception e) {

@@ -28,6 +28,7 @@
 <%@ page import="javax.servlet.http.HttpServletResponse" %>
 <%@ page import="javax.servlet.ServletException" %>
 <%@ page import="org.apache.commons.collections.map.HashedMap" %>
+<%@ page import="org.wso2.carbon.identity.core.util.IdentityUtil" %>
 <%@ page import="org.wso2.carbon.identity.mgt.endpoint.util.client.ApiException" %>
 <%@ page import="org.wso2.carbon.identity.mgt.endpoint.util.client.api.RecoveryApiV2" %>
 <%@ page import="org.wso2.carbon.identity.mgt.endpoint.util.client.model.recovery.v2.AccountRecoveryType" %>
@@ -46,6 +47,7 @@
 <%@ page import="org.wso2.carbon.identity.mgt.endpoint.util.client.PreferenceRetrievalClient" %>
 <%@ page import="org.wso2.carbon.identity.mgt.endpoint.util.client.PreferenceRetrievalClientException" %>
 <%@ page import="org.wso2.carbon.identity.mgt.endpoint.util.IdentityManagementEndpointConstants" %>
+<%@ page import="org.wso2.carbon.identity.recovery.IdentityRecoveryConstants" %>
 <%@ page import="org.owasp.encoder.Encode" %>
 
 <%-- Include tenant context --%>
@@ -181,12 +183,18 @@
             if (request.getParameter("g-recaptcha-response") != null) {
                 requestHeaders.put("g-recaptcha-response", request.getParameter("g-recaptcha-response"));
             }
+            Boolean showMaskedPhoneNumber = Boolean.parseBoolean(IdentityUtil
+                .getProperty("Recovery.Notification.Password.smsOtp.ShowMaskedNumber"));
             List<AccountRecoveryType> resp = 
                 recoveryApiV2.initiatePasswordRecovery(recoveryInitRequest, tenantDomain, requestHeaders);
+            
+            // Username is invalid
             if (resp == null) {
-                /** Handle invalid username scenario. proceeds to next level without warning to 
-                avoid an attacker bruteforcing to learn the usernames. */
-                request.setAttribute("screenValue", "******" + getRandomNumberString(4, username));
+                // Proceed to next level without warning to preserve same behavior as a valid scenario.
+                if (showMaskedPhoneNumber) {
+                    // Show a dummy masked phone number.
+                    request.setAttribute("screenValue", "******" + getRandomNumberString(4, username));
+                }
                 request.setAttribute("resendCode", UUID.randomUUID().toString());
                 request.setAttribute("flowConfirmationCode", UUID.randomUUID().toString());
                 request.getRequestDispatcher("sms-otp.jsp").forward(request, response);
@@ -211,10 +219,17 @@
                 }
             }
 
-            /**
-             * Manage user don't have phone number set up in the account.
-             */
+            // Manage user don't have phone number set up in the account.
             if (StringUtils.isBlank(channelId)) {
+                if (!showMaskedPhoneNumber) {
+                    // Proceed to next level without warning to preserve same behavior as a valid scenario.
+                    request.setAttribute("resendCode", UUID.randomUUID().toString());
+                    request.setAttribute("flowConfirmationCode", UUID.randomUUID().toString());
+                    request.getRequestDispatcher("sms-otp.jsp").forward(request, response);
+                    return;
+                }
+                // If show masked number is enabled, show error message as we cannot show a dummy phone number for a
+                // legitimate user.
                 String recoveryPageQueryString = request.getParameter("urlQuery");
                 request.setAttribute("error", true);
                 request.setAttribute("errorMsg", "Channel.unavailable.for.user");
@@ -234,6 +249,24 @@
             request.setAttribute("flowConfirmationCode", recoveryResponse.getFlowConfirmationCode());
         } catch (ApiException e) {
             IdentityManagementEndpointUtil.addErrorInformation(request, e);
+            String errorCode = IdentityManagementEndpointUtil.getStringValue(request.getAttribute("errorCode"));
+            
+            // Manage user don't have any recovery option set up.
+            if (errorCode.equals(
+                    IdentityRecoveryConstants.ErrorMessages.ERROR_CODE_NO_VERIFIED_CHANNELS_FOR_USER.getCode()
+                )) {
+                Boolean showMaskedPhoneNumber = Boolean.parseBoolean(IdentityUtil
+                    .getProperty("Recovery.Notification.Password.smsOtp.ShowMaskedNumber"));
+                // Proceed to next level without warning to preserve same behavior as a valid scenario.
+                if (!showMaskedPhoneNumber) {
+                    request.setAttribute("resendCode", UUID.randomUUID().toString());
+                    request.setAttribute("flowConfirmationCode", UUID.randomUUID().toString());
+                    request.getRequestDispatcher("sms-otp.jsp").forward(request, response);
+                    return;
+                }
+                // If show masked number is enabled, show error message as we cannot show a dummy phone number for a
+                // legitimate user.
+            }
             request.getRequestDispatcher("error.jsp").forward(request, response);
             return;
         }

@@ -162,7 +162,7 @@
                                 </button>
                                 <%
                                     String multiOptionURI = request.getParameter("multiOptionURI");
-                                    if (isMultiAuthAvailable(multiOptionURI)) {
+                                    if (isMultiAuthAvailable(multiOptionURI) && AuthenticationEndpointUtil.isValidMultiOptionURI(multiOptionURI)) {
                                 %>
                                     <div class="ui divider hidden"></div>
                                     <a

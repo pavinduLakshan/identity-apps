@@ -51,15 +51,20 @@
         authenticationFailed = true;
 
         if (request.getParameter(Constants.AUTH_FAILURE_MSG) != null) {
-            errorMessage = request.getParameter(Constants.AUTH_FAILURE_MSG);
+            String error = request.getParameter(Constants.AUTH_FAILURE_MSG);
 
-                if (errorMessage.equalsIgnoreCase("authentication.fail.message")) {
-                    errorMessage = AuthenticationEndpointUtil.i18n(resourceBundle, "authentication.failed.please.retry");
-                }
+            if (error.equalsIgnoreCase("authentication.fail.message")) {
+                errorMessage = AuthenticationEndpointUtil.i18n(resourceBundle, "authentication.failed.please.retry");
+            } else if (!error.equalsIgnoreCase(AuthenticationEndpointUtil.i18n(resourceBundle, error))) {
+                errorMessage = AuthenticationEndpointUtil.i18n(resourceBundle, error);
+            }
 
-                if (StringUtils.isNotBlank(request.getParameter("authFailureInfo"))) {
-                    errorMessage = request.getParameter("authFailureInfo");
+            if (StringUtils.isNotBlank(request.getParameter("authFailureInfo"))) {
+                String authFailureInfo = request.getParameter("authFailureInfo");
+                if (!authFailureInfo.equalsIgnoreCase(AuthenticationEndpointUtil.i18n(resourceBundle, authFailureInfo))) {
+                    errorMessage = AuthenticationEndpointUtil.i18n(resourceBundle, authFailureInfo);
                 }
+            }
         }
     }
 %>
@@ -173,17 +178,23 @@
         <jsp:include page="includes/footer.jsp"/>
         <% } %>
 
+        <div id="regexData" data-regex="<%=Encode.forHtmlAttribute(mobileRegex)%>" style="display:none;"></div>
+
         <script type="text/javascript">
             $(document).ready(function() {
                 $('#update').click(function() {
                     var mobileNumber = document.getElementById("MOBILE_NUMBER").value;
+                    var regexPattern = document.getElementById('regexData').dataset.regex;
+                    // Replicate javascript string literal parsing to keep backward compatibility.
+                    let stringParsedRegexPattern = regexPattern.replace(/\\([^bfnrtv0xu\'\"\\])/g, '$1');
                     if (mobileNumber == "") {
                         document.getElementById('alertDiv').innerHTML
                             = '<div id="error-msg" class="ui negative message"><%=AuthenticationEndpointUtil.i18n(resourceBundle, "please.enter.mobile.number")%></div>'
                               +'<div class="ui divider hidden"></div>';
+                    } else if (<%=validateMobileNumberFormat%> && !(mobileNumber.match(stringParsedRegexPattern))) {
                     } else if (<%=validateMobileNumberFormat%> && !(mobileNumber.match("<%=mobileRegex%>"))) {
                        document.getElementById('alertDiv').innerHTML
-                          = '<div id="error-msg" class="ui negative message"><%=mobileRegexPolicyValidationErrorMessage%></div>'
+                          = '<div id="error-msg" class="ui negative message"><%=Encode.forHtml(mobileRegexPolicyValidationErrorMessage)%></div>'
                             +'<div class="ui divider hidden"></div>';
                     } else {
                         $('#pin_form').submit();

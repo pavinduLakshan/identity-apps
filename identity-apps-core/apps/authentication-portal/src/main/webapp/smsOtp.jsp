@@ -76,10 +76,12 @@
         authenticationFailed = "true";
 
         if (request.getParameter(Constants.AUTH_FAILURE_MSG) != null) {
-            errorMessage = request.getParameter(Constants.AUTH_FAILURE_MSG);
+            String error = request.getParameter(Constants.AUTH_FAILURE_MSG);
 
-            if (errorMessage.equalsIgnoreCase("authentication.fail.message")) {
+            if (error.equalsIgnoreCase("authentication.fail.message")) {
                 errorMessage = AuthenticationEndpointUtil.i18n(resourceBundle, "error.retry.code.invalid");
+            } else if (!error.equalsIgnoreCase(AuthenticationEndpointUtil.i18n(resourceBundle, error))) {
+                errorMessage = AuthenticationEndpointUtil.i18n(resourceBundle, error);
             }
         }
     }
@@ -277,7 +279,7 @@
 
                                     <%
                                         String multiOptionURI = request.getParameter("multiOptionURI");
-                                        if (isMultiAuthAvailable(multiOptionURI)) {
+                                        if (isMultiAuthAvailable(multiOptionURI) && AuthenticationEndpointUtil.isValidMultiOptionURI(multiOptionURI)) {
                                     %>
                                         <div class="ui divider hidden"></div>
                                         <a

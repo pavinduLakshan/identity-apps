@@ -726,8 +726,8 @@
                                                 <%
                                                     }
                                                 %>
-                                            </div>
-                                        </div>
+                                            </div>                                            
+                                        </div>  
                                     <% } else if (StringUtils.equals(claim.getUri(), "http://wso2.org/claims/dob")) { %>
                                         <div class="ui calendar" id="date_picker">
                                             <div class="ui input right icon" style="width: 100%;">

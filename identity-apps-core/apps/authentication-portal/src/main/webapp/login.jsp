@@ -522,6 +522,10 @@
                     // Remove userstore domain from the username.
                     String[] usernameSplitItems = usernameIdentifier.split("/");
                     String sanitizeUserName = usernameSplitItems[usernameSplitItems.length - 1];
+                    String identifierFirstUserInput = request.getParameter(JS_IDENTIFIER_FIRST_USER_INPUT);
+                    if (StringUtils.isBlank(identifierFirstUserInput) || identifierFirstUserInput == "null") {
+                        identifierFirstUserInput = sanitizeUserName;
+                    }
                 %>
                 <div class="identifier-container">
                     <img
@@ -533,8 +537,8 @@
                             class="ellipsis"
                             data-position="top left"
                             data-variation="inverted"
-                            data-content="<%=Encode.forHtmlAttribute(request.getParameter(JS_IDENTIFIER_FIRST_USER_INPUT))%>">
-                        <%=Encode.forHtmlContent(request.getParameter(JS_IDENTIFIER_FIRST_USER_INPUT))%>
+                            data-content="<%=Encode.forHtmlAttribute(identifierFirstUserInput)%>">
+                        <%=Encode.forHtmlContent(identifierFirstUserInput)%>
                     </span>
                 </div>
                 <% } %>

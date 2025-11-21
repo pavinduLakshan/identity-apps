@@ -290,7 +290,7 @@
             var error_message = document.getElementById("error-msg");
             document.getElementById("loginForm").style.display = 'block';
             document.getElementById("inProgressDisplay").style.display = 'none';
-            error_message.innerHTML = msg;
+            error_message.innerHTML = Encode.forHtmlContent(msg);
             error_message.style.display = "block";
         }
 
@@ -298,7 +298,7 @@
             var error_message = document.getElementById("error-msg");
             document.getElementById("inProgressDisplay").style.display = 'none';
             document.getElementById("loginForm").style.display = 'none';
-            error_message.innerHTML = msg;
+            error_message.innerHTML = Encode.forHtmlContent(msg);
             error_message.style.display = "block";
         }
 

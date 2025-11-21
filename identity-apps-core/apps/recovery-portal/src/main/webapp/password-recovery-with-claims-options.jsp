@@ -1,5 +1,5 @@
 <%--
-  ~ Copyright (c) 2020-2024, WSO2 LLC. (https://www.wso2.com).
+  ~ Copyright (c) 2020-2025, WSO2 LLC. (https://www.wso2.com).
   ~
   ~ WSO2 LLC. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -284,6 +284,7 @@
                                 value="<%=Encode.forHtmlAttribute(tenantDomain) %>"/>
                             <input type="hidden" name="recoveryCode" value="<%=recoveryCode %>"/>
                             <input type="hidden" name="isPasswordRecoveryWithClaimsNotify" value="true">
+                            <input type="hidden" name="sp" value="<%=Encode.forHtmlAttribute(request.getParameter("sp"))%>"/>
                         </div>
                         <div class="ui divider hidden"></div>
                         <div class="align-right buttons">

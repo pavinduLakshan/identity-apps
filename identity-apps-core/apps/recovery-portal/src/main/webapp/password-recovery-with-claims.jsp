@@ -1,5 +1,5 @@
 <%--
-  ~ Copyright (c) 2020-2024, WSO2 LLC. (https://www.wso2.com).
+  ~ Copyright (c) 2020-2025, WSO2 LLC. (https://www.wso2.com).
   ~
   ~ WSO2 LLC. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -239,11 +239,13 @@
                         <%
                             }
 
+                        <input type="hidden" name="sp" value="<%=Encode.forHtmlAttribute(spAppName) %>"/>
+
                             if (isEmailInClaims) { %>
                         <div class="field">
                             <label class="control-label"><%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle,
                                     "Email")%></label>
-                            <input id="email" type="email" name="http://wso2.org/claims/emailaddress" 
+                            <input id="email" type="email" name="http://wso2.org/claims/emailaddress"
                                 class="form-control claims" data-validate="email"
                                 placeholder="<%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle,"Email")%>">
                         </div>

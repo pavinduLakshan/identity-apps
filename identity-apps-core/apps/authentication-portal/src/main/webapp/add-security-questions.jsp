@@ -33,11 +33,31 @@
 <jsp:directive.include file="includes/branding-preferences.jsp"/>
 
 <%
-    String urlData = request.getParameter("data");
+    final String CHALLENGE_QUESTIONS = "challengeQuestions";
+    String authAPIURL = application.getInitParameter(Constants.AUTHENTICATION_REST_ENDPOINT_URL);
+    if (StringUtils.isBlank(authAPIURL)) {
+        authAPIURL = IdentityManagementEndpointUtil.getBasePath(tenantDomain, "/api/identity/auth/v1.1/", true);
+    } else {
+        // Resolve tenant domain for the authentication API URl
+        authAPIURL = AuthenticationEndpointUtil.resolveTenantDomain(authAPIURL);
+    }
+    if (!authAPIURL.endsWith("/")) {
+        authAPIURL += "/";
+    }
+
+    authAPIURL += "context/" + request.getParameter("sessionDataKey");
+    String contextProperties = AuthContextAPIClient.getContextProperties(authAPIURL);
+
+
     // Extract the challenge questions from the request and add them into an array
     String[] questionSets = null;
-    if (urlData != null) {
-        questionSets = urlData.split("&");
+    if (contextProperties != null) {
+        Gson gson = new Gson();
+        Map endpointParam = gson.fromJson(contextProperties, Map.class);
+        String questionSetsStr = (String) endpointParam.get(CHALLENGE_QUESTIONS);
+        if (questionSetsStr != null) {
+            questionSets = questionSetsStr.split("&");
+        }
     }
     // Hash-map to hold available challenge questions in the system
     Map<String, List<ChallengeQuestion>> challengeQuestionMap = new HashMap<>();

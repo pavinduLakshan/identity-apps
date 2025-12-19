@@ -17,6 +17,7 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="org.wso2.carbon.identity.application.authentication.endpoint.util.client.model.AuthenticationRequestWrapper" %>
 <%@ page import="org.wso2.carbon.identity.application.authentication.endpoint.util.Constants" %>
 <%@ page import="org.wso2.carbon.identity.challenge.questions.ui.IdentityManagementAdminClient" %>
 <%@ page import="org.wso2.carbon.identity.challenge.questions.recovery.model.ChallengeQuestion" %>
@@ -33,31 +34,12 @@
 <jsp:directive.include file="includes/branding-preferences.jsp"/>
 
 <%
-    final String CHALLENGE_QUESTIONS = "challengeQuestions";
-    String authAPIURL = application.getInitParameter(Constants.AUTHENTICATION_REST_ENDPOINT_URL);
-    if (StringUtils.isBlank(authAPIURL)) {
-        authAPIURL = IdentityManagementEndpointUtil.getBasePath(tenantDomain, "/api/identity/auth/v1.1/", true);
-    } else {
-        // Resolve tenant domain for the authentication API URl
-        authAPIURL = AuthenticationEndpointUtil.resolveTenantDomain(authAPIURL);
-    }
-    if (!authAPIURL.endsWith("/")) {
-        authAPIURL += "/";
-    }
-
-    authAPIURL += "context/" + request.getParameter("sessionDataKey");
-    String contextProperties = AuthContextAPIClient.getContextProperties(authAPIURL);
-
-
+    AuthenticationRequestWrapper authRequest = (AuthenticationRequestWrapper) request;
+    String urlData = authRequest.getAuthParameter("challengeQuestions");
     // Extract the challenge questions from the request and add them into an array
     String[] questionSets = null;
-    if (contextProperties != null) {
-        Gson gson = new Gson();
-        Map endpointParam = gson.fromJson(contextProperties, Map.class);
-        String questionSetsStr = (String) endpointParam.get(CHALLENGE_QUESTIONS);
-        if (questionSetsStr != null) {
-            questionSets = questionSetsStr.split("&");
-        }
+    if (urlData != null) {
+        questionSets = urlData.split("&");
     }
     // Hash-map to hold available challenge questions in the system
     Map<String, List<ChallengeQuestion>> challengeQuestionMap = new HashMap<>();

@@ -20,6 +20,8 @@
 <%@ page import="org.wso2.carbon.identity.application.authentication.endpoint.util.EncodedControl" %>
 <%@ page import="java.nio.charset.StandardCharsets" %>
 <%@ page import="java.util.*" %>
+<%@ page import="java.io.FileReader" %>
+<%@ page import="java.io.BufferedReader" %>
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="java.util.Calendar" %>
 <%@ page import="org.apache.commons.lang.StringUtils" %>
@@ -101,6 +103,8 @@
     Locale userLocale = browserLocale;
     String localeFromCookie = null;
     String BUNDLE = "org.wso2.carbon.identity.mgt.recovery.endpoint.i18n.Resources";
+    String SUPPORTED_LANGUAGES_ATTR = "supportedLanguages";
+    String LANGUAGE_SUPPORTED_COUNTRIES_ATTR = "languageSupportedCountries";
 
     // List of screen names for retrieving text branding customizations.
     List<String> screenNames = new ArrayList<>();
@@ -109,23 +113,58 @@
     // Map to store default supported language codes.
     // TODO: Use this map to generate the `language-switcher.jsp`.
     Map<String, String> supportedLanguages = new HashMap<>();
-    supportedLanguages.put("en", "US");
-    supportedLanguages.put("fr", "FR");
-    supportedLanguages.put("es", "ES");
-    supportedLanguages.put("pt", "PT");
-    supportedLanguages.put("de", "DE");
-    supportedLanguages.put("zh", "CN");
-    supportedLanguages.put("ja", "JP");
-
     List<String> languageSupportedCountries = new ArrayList<>();
-    languageSupportedCountries.add("US");
-    languageSupportedCountries.add("FR");
-    languageSupportedCountries.add("ES");
-    languageSupportedCountries.add("PT");
-    languageSupportedCountries.add("DE");
-    languageSupportedCountries.add("CN");
-    languageSupportedCountries.add("JP");
-    languageSupportedCountries.add("BR");
+
+    // Dynamically load supported languages from languageOptions.properties
+    // Use application scope to cache the parsed language options
+    Map<String, String> cachedSupportedLanguages = (Map<String, String>) request.getAttribute(SUPPORTED_LANGUAGES_ATTR);
+    List<String> cachedLanguageSupportedCountries = (List<String>) request.getAttribute(LANGUAGE_SUPPORTED_COUNTRIES_ATTR);
+
+    if (cachedSupportedLanguages != null && cachedLanguageSupportedCountries != null) {
+        supportedLanguages = cachedSupportedLanguages;
+        languageSupportedCountries = cachedLanguageSupportedCountries;
+    } else {
+        // Specify the file path
+        String filePath = application.getRealPath("/") + "/WEB-INF/classes/LanguageOptions.properties";
+
+        // Use a BufferedReader to read the file content
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                // Ignore comments and empty lines
+                if (!line.trim().startsWith("#") && !line.trim().isEmpty()) {
+                    // Split the line into key and value using '=' as the delimiter
+                    String[] keyValue = line.split("=", 2);
+                    if (keyValue.length < 2) {
+                        continue; // Skip malformed lines
+                    }
+                    // Split the key further using '.' as the delimiter
+                    String[] parts = keyValue[0].split("\\.");
+                    if (parts.length == 0) {
+                        continue;
+                    }
+                    String languageCode = parts[parts.length - 1];
+                    // Split the value further using ',' as the delimiter
+                    String[] values = keyValue[1].split(",");
+                    if (values.length < 2) {
+                        continue; // Skip lines without proper country,displayName format
+                    }
+                    String country = values[0];
+                    // displayName is available in values[1] if needed in the future
+                    // Add the values to the list.
+                    supportedLanguages.put(languageCode, country);
+                    if (!languageSupportedCountries.contains(country)) {
+                        languageSupportedCountries.add(country);
+                    }
+                }
+            }
+
+            request.setAttribute(SUPPORTED_LANGUAGES_ATTR, supportedLanguages);
+            request.setAttribute(LANGUAGE_SUPPORTED_COUNTRIES_ATTR, languageSupportedCountries);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 
     // Check cookie for the user selected language first
     Cookie[] cookies = request.getCookies();
@@ -143,7 +182,7 @@
             for (String localeStr : uiLocaleFromURL.split(" ")) {
                 String langStr = "en";
                 String langLocale = "US";
-    
+
                 if (localeStr.contains("_")) {
                     langStr = localeStr.split("_")[0];
                     langLocale = localeStr.split("_")[1];
@@ -151,13 +190,13 @@
                     langStr = localeStr.split("-")[0];
                     langLocale = localeStr.split("-")[1];
                 }
-    
+
                 Locale tempLocale = new Locale(langStr, langLocale);
-    
+
                 // Trying to find out whether we have resource bundle for the given locale
                 try {
                     ResourceBundle foundBundle = ResourceBundle.getBundle(BUNDLE, tempLocale);
-    
+
                     // If so, setting the userLocale to that locale. If not, set the browser locale as user locale
                     // Currently, we only care about the language - we do not compare about country locales since our
                     // supported locale set is limited.
@@ -178,11 +217,11 @@
             }
         } else if (localeFromCookie != null) {
             lang = localeFromCookie;
-    
+
             try {
                 String langStr = "en";
                 String langLocale = "US";
-    
+
                 if (lang.contains("_")) {
                     langStr = lang.split("_")[0];
                     langLocale = lang.split("_")[1];
@@ -190,7 +229,7 @@
                     langStr = lang.split("-")[0];
                     langLocale = lang.split("-")[1];
                 }
-    
+
                 userLocale = new Locale(langStr, langLocale);
             } catch (Exception e) {
                 // In case the language is defined but not in the correct format
@@ -200,11 +239,19 @@
             // `browserLocale` is coming as `en` instead of `en_US` for the first render before switching the language from the dropdown.
             String countryCode = browserLocale.getCountry();
             String fallbackCountryCode = supportedLanguages.get(browserLocale.getLanguage());
-    
+
             if (StringUtils.isNotBlank(countryCode) && languageSupportedCountries.contains(countryCode)) {
                 userLocale = new Locale(browserLocale.getLanguage(), countryCode);
             } else if (StringUtils.isNotBlank(fallbackCountryCode)){
                 userLocale = new Locale(browserLocale.getLanguage(), fallbackCountryCode);
+            } else if (StringUtils.isNotBlank(browserLocale.getLanguage())){
+                for (String key : supportedLanguages.keySet()) {
+                        if (key.startsWith(browserLocale.getLanguage() + "_")) {
+                            String[] parts = key.split("_");
+                            userLocale = new Locale(parts[0], parts[1]);
+                            break;
+                        }
+                }
             } else {
                 userLocale = new Locale("en","US");
             }
@@ -212,11 +259,11 @@
     } else {
         if (localeFromCookie != null) {
             lang = localeFromCookie;
-    
+
             try {
                 String langStr = "en";
                 String langLocale = "US";
-    
+
                 if (lang.contains("_")) {
                     langStr = lang.split("_")[0];
                     langLocale = lang.split("_")[1];
@@ -224,7 +271,7 @@
                     langStr = lang.split("-")[0];
                     langLocale = lang.split("-")[1];
                 }
-    
+
                 userLocale = new Locale(langStr, langLocale);
             } catch (Exception e) {
                 // In case the language is defined but not in the correct format
@@ -234,7 +281,7 @@
             for (String localeStr : uiLocaleFromURL.split(" ")) {
                 String langStr = "en";
                 String langLocale = "US";
-    
+
                 if (localeStr.contains("_")) {
                     langStr = localeStr.split("_")[0];
                     langLocale = localeStr.split("_")[1];
@@ -242,13 +289,13 @@
                     langStr = localeStr.split("-")[0];
                     langLocale = localeStr.split("-")[1];
                 }
-    
+
                 Locale tempLocale = new Locale(langStr, langLocale);
-    
+
                 // Trying to find out whether we have resource bundle for the given locale
                 try {
                     ResourceBundle foundBundle = ResourceBundle.getBundle(BUNDLE, tempLocale);
-    
+
                     // If so, setting the userLocale to that locale. If not, set the browser locale as user locale
                     // Currently, we only care about the language - we do not compare about country locales since our
                     // supported locale set is limited.
@@ -271,11 +318,19 @@
             // `browserLocale` is coming as `en` instead of `en_US` for the first render before switching the language from the dropdown.
             String countryCode = browserLocale.getCountry();
             String fallbackCountryCode = supportedLanguages.get(browserLocale.getLanguage());
-    
+
             if (StringUtils.isNotBlank(countryCode) && languageSupportedCountries.contains(countryCode)) {
                 userLocale = new Locale(browserLocale.getLanguage(), countryCode);
             } else if (StringUtils.isNotBlank(fallbackCountryCode)){
                 userLocale = new Locale(browserLocale.getLanguage(), fallbackCountryCode);
+            } else if (StringUtils.isNotBlank(browserLocale.getLanguage())){
+                for (String key : supportedLanguages.keySet()) {
+                        if (key.startsWith(browserLocale.getLanguage() + "_")) {
+                            String[] parts = key.split("_");
+                            userLocale = new Locale(parts[0], parts[1]);
+                            break;
+                        }
+                }
             } else {
                 userLocale = new Locale("en","US");
             }
@@ -395,7 +450,7 @@
     }
 %>
 
-<%! 
+<%!
     private static final String LOCALE_CODE_KEY = "localeCode";
     private static final String FLAG_CODE_KEY = "flagCode";
     private static final String DISPLAY_NAME_KEY = "displayName";
@@ -417,7 +472,7 @@
 
             for (String key : localeProperties.stringPropertyNames()) {
                 String[] values = localeProperties.getProperty(key).split(",");
-                
+
                 // Validate the number of values
                 if (values.length == 3) {
                     String flagCode = values[0].trim();

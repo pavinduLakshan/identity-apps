@@ -114,7 +114,7 @@
     List<String> languageSupportedCountries = new ArrayList<>();
 
     // Dynamically load supported languages from languageOptions.properties
-    // Use application scope to cache the parsed language options
+    // Use request scope to cache the parsed language options
     Map<String, String> cachedSupportedLanguages = (Map<String, String>) request.getAttribute(SUPPORTED_LANGUAGES_ATTR);
     List<String> cachedLanguageSupportedCountries = (List<String>) request.getAttribute(LANGUAGE_SUPPORTED_COUNTRIES_ATTR);
 

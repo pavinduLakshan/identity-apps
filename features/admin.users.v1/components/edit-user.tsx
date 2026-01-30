@@ -39,6 +39,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { Divider, Grid, TabProps } from "semantic-ui-react";
+import { UserSharingForm } from "./share-user-form";
 import { UserGroupsList } from "./user-groups-edit";
 import { UserProfile } from "./user-profile";
 import { UserRolesList } from "./user-roles-list";
@@ -274,6 +275,22 @@ export const EditUser: FunctionComponent<EditUserPropsInterface> = (
                                     (!isSelectedSuperAdmin && isSuperAdmin) ||
                                     (!isSelectedSuperAdmin && !isSuperAdmin))
                             }
+                        />
+                    </ResourceTab.Pane>
+                )
+            },
+            {
+                menuItem: "Sharing",
+                render: () => (
+                    <ResourceTab.Pane controlledSegmentation attached={ false }>
+                        <UserSharingForm
+                            user={ user }
+                            initialValue="no-share"
+                            onValueChange={ (value: string) => {
+                                // Handle sharing option change
+                            } }
+                            disabled={ isReadOnly }
+                            data-componentid="user-sharing-tab"
                         />
                     </ResourceTab.Pane>
                 )

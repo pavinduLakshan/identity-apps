@@ -244,11 +244,11 @@
                 userLocale = new Locale(browserLocale.getLanguage(), fallbackCountryCode);
             } else if (StringUtils.isNotBlank(browserLocale.getLanguage())){
                 for (String key : supportedLanguages.keySet()) {
-                        if (key.startsWith(browserLocale.getLanguage() + "_")) {
-                            String[] parts = key.split("_");
-                            userLocale = new Locale(parts[0], parts[1]);
-                            break;
-                        }
+                    if (key.startsWith(browserLocale.getLanguage() + "_")) {
+                        String[] parts = key.split("_");
+                        userLocale = new Locale(parts[0], parts[1]);
+                        break;
+                    }
                 }
             } else {
                 userLocale = new Locale("en","US");

@@ -20,6 +20,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.TreeMap" %>
 <%@ page import="org.wso2.carbon.identity.application.authentication.endpoint.util.AuthenticationEndpointUtil" %>
+<%@ page import="org.owasp.encoder.Encode" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="./localize.jsp" %>
 
@@ -47,10 +48,14 @@
     }
 %>
 
+<%
+    String encodedClaim = Encode.forHtmlAttribute(request.getParameter("claim"));
+%>
+
 <div class="ui fluid search selection dropdown"  id="country-dropdown">
     <input type="hidden" required="${ param.required }"
-    data-testid="request-claims-page-form-field-claim-${param.claim}-input"
-    name="claim_mand_${param.claim}" id="claim_mand_${param.claim}">
+    data-testid="request-claims-page-form-field-claim-<%= encodedClaim %>-input"
+    name="claim_mand_<%= encodedClaim %>" id="claim_mand_<%= encodedClaim %>">
     <i class="dropdown icon"></i>
     <div class="default text"><%=AuthenticationEndpointUtil.i18n(resourceBundle, "select.country")%></div>
     <div class="menu">

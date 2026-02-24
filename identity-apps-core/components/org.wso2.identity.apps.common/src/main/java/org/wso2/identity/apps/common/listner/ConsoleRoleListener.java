@@ -44,8 +44,9 @@ import java.util.stream.Collectors;
 
 import static org.wso2.carbon.identity.api.resource.collection.mgt.constant.APIResourceCollectionManagementConstants.APIResourceCollectionConfigBuilderConstants.EDIT_FEATURE_SCOPE_SUFFIX;
 import static org.wso2.carbon.identity.api.resource.collection.mgt.constant.APIResourceCollectionManagementConstants.APIResourceCollectionConfigBuilderConstants.VIEW_FEATURE_SCOPE_SUFFIX;
-import static org.wso2.carbon.identity.role.v2.mgt.core.RoleConstants.*;
-
+import static org.wso2.carbon.identity.role.v2.mgt.core.RoleConstants.CONSOLE_APP_AUDIENCE_NAME;
+import static org.wso2.carbon.identity.role.v2.mgt.core.RoleConstants.CONSOLE_ORG_SCOPE_PREFIX;
+import static org.wso2.carbon.identity.role.v2.mgt.core.RoleConstants.CONSOLE_SCOPE_PREFIX;
 /**
  * Console role listener to populate organization console application roles permissions.
  */
@@ -68,7 +69,7 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
                            String audience, String audienceId, String tenantDomain)
         throws IdentityRoleManagementException {
 
-        if (isConsoleApp(audience, audienceId, tenantDomain) && !ADMINISTRATOR.equals(roleName)) {
+        if (isConsoleApp(audience, audienceId, tenantDomain) && !RoleConstants.ADMINISTRATOR.equals(roleName)) {
             List<Permission> consoleFeaturePermissions = getConsoleFeaturePermissions(permissions);
             if (consoleFeaturePermissions != null && !consoleFeaturePermissions.isEmpty()) {
                 // If console features are added to the role, then we need to we only need to persist the console
@@ -82,7 +83,7 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
     public void postGetRole(Role role, String roleId, String tenantDomain) throws IdentityRoleManagementException {
 
 
-        if (!ADMINISTRATOR.equals(role.getName()) &&
+        if (!RoleConstants.ADMINISTRATOR.equals(role.getName()) &&
             role.getAudienceName().equals(CONSOLE_APP_AUDIENCE_NAME)) {
             // Get updated console role permissions with newly added read and write scopes from API resource collection.
             List<Permission> rolePermissions = getUpgradedPermissions(role.getPermissions(), tenantDomain);
@@ -113,7 +114,7 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
             RoleBasicInfo role = getRoleBasicInfo(roleId, tenantDomain);
             if (CONSOLE_APP_AUDIENCE_NAME.equals(role.getAudienceName())) {
                 isConsoleRoleExist = true;
-                if (ADMINISTRATOR.equals(role.getName())) {
+                if (RoleConstants.ADMINISTRATOR.equals(role.getName())) {
                     isConsoleAdminRoleExist = true;
                     break;
                 }
@@ -239,7 +240,7 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
             return true;
         }
         // Console Administrator role has all the permissions.
-        return ADMINISTRATOR.equals(role.getName());
+        return RoleConstants.ADMINISTRATOR.equals(role.getName());
     }
 
     private RoleBasicInfo getRoleBasicInfo(String roleId, String tenantDomain)

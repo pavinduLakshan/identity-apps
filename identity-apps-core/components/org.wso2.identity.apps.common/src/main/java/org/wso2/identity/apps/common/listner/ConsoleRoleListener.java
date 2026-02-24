@@ -47,6 +47,7 @@ import static org.wso2.carbon.identity.api.resource.collection.mgt.constant.APIR
 import static org.wso2.carbon.identity.role.v2.mgt.core.RoleConstants.CONSOLE_APP_AUDIENCE_NAME;
 import static org.wso2.carbon.identity.role.v2.mgt.core.RoleConstants.CONSOLE_ORG_SCOPE_PREFIX;
 import static org.wso2.carbon.identity.role.v2.mgt.core.RoleConstants.CONSOLE_SCOPE_PREFIX;
+
 /**
  * Console role listener to populate organization console application roles permissions.
  */

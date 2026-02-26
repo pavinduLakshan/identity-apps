@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.identity.apps</groupId>
     <artifactId>identity-apps-core-parent</artifactId>
-    <version>2.14.2.65</version>
+    <version>2.14.2.66-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>WSO2 Identity Server Apps - Core Parent</name>
     <description>WSO2 Identity Server Web Apps</description>
@@ -37,7 +37,7 @@
         <url>https://github.com/wso2-support/identity-apps</url>
         <developerConnection>scm:git:https://github.com/wso2-support/identity-apps</developerConnection>
         <connection>scm:git:https://github.com/wso2-support/identity-apps</connection>
-        <tag>v2.14.2.65</tag>
+        <tag>support-2.14.2.x-full</tag>
     </scm>
 
     <modules>

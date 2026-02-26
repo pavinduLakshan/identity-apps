@@ -97,7 +97,7 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
         throws IdentityRoleManagementException {
 
         RoleBasicInfo role = getRoleBasicInfo(roleId, tenantDomain);
-        if (shouldSkipPermissionResolution(role)) {
+        if (!shouldSkipPermissionResolution(role)) {
             List<Permission> rolePermissions = getUpgradedPermissions(permissionListOfRole, tenantDomain);
             permissionListOfRole.clear();
             permissionListOfRole.addAll(rolePermissions);
@@ -144,7 +144,7 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
                                             String tenantDomain) throws IdentityRoleManagementException {
 
         RoleBasicInfo role = getRoleBasicInfo(roleId, tenantDomain);
-        if (shouldSkipPermissionResolution(role)) {
+        if (!shouldSkipPermissionResolution(role)) {
             List<Permission> consoleFeaturePermissions = getConsoleFeaturePermissions(addedPermissions);
             if (consoleFeaturePermissions != null && !consoleFeaturePermissions.isEmpty()) {
                 // If console features are added to the role, then we need to we only need to persist the console

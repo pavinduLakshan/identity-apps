@@ -1,5 +1,20 @@
 # @wso2is/admin.users.v1
 
+## 2.37.23
+
+### Patch Changes
+
+- [#9831](https://github.com/wso2/identity-apps/pull/9831) [`05441eece425cdba6eec9b03cebdfd30ba2a404e`](https://github.com/wso2/identity-apps/commit/05441eece425cdba6eec9b03cebdfd30ba2a404e) Thanks [@Malith-19](https://github.com/Malith-19)! - Handle the workflow scenario for user deletion.
+
+- Updated dependencies [[`05441eece425cdba6eec9b03cebdfd30ba2a404e`](https://github.com/wso2/identity-apps/commit/05441eece425cdba6eec9b03cebdfd30ba2a404e)]:
+  - @wso2is/admin.users.v1@2.37.23
+  - @wso2is/admin.core.v1@2.54.32
+  - @wso2is/admin.roles.v2@2.27.346
+  - @wso2is/admin.flow-builder-core.v1@0.10.176
+  - @wso2is/admin.flows.v1@1.0.145
+  - @wso2is/admin.server-configurations.v1@2.38.15
+  - @wso2is/admin.approval-workflows.v1@1.2.14
+
 ## 2.37.22
 
 ### Patch Changes

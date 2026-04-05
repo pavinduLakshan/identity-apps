@@ -34,35 +34,10 @@
 
 <%@ include file="includes/localize.jsp" %>
 <%@ include file="includes/init-url.jsp" %>
+<%@ include file="util/authenticator-utils.jsp" %>
 
 <%-- Branding Preferences --%>
 <jsp:directive.include file="includes/branding-preferences.jsp"/>
-
-<%!
-    private boolean isMultiAuthAvailable(String multiOptionURI) {
-
-        boolean isMultiAuthAvailable = true;
-        if (multiOptionURI == null || multiOptionURI.equals("null")) {
-            isMultiAuthAvailable = false;
-        } else {
-            int authenticatorIndex = multiOptionURI.indexOf("authenticators=");
-            if (authenticatorIndex == -1) {
-                isMultiAuthAvailable = false;
-            } else {
-                String authenticators = multiOptionURI.substring(authenticatorIndex + 15);
-                int authLastIndex = authenticators.indexOf("&") != -1 ? authenticators.indexOf("&") : authenticators.length();
-                authenticators = authenticators.substring(0, authLastIndex);
-                List<String> authList = Arrays.asList(authenticators.split("%3B"));
-                if (authList.size() < 2) {
-                    isMultiAuthAvailable = false;
-                } else if (authList.size() == 2 && authList.contains("backup-code-authenticator%3ALOCAL")) {
-                    isMultiAuthAvailable = false;
-                }
-            }
-        }
-        return isMultiAuthAvailable;
-    }
-%>
 
 <%
     request.getSession().invalidate();
@@ -162,7 +137,7 @@
                                 </button>
                                 <%
                                     String multiOptionURI = request.getParameter("multiOptionURI");
-                                    if (isMultiAuthAvailable(multiOptionURI) && AuthenticationEndpointUtil.isValidMultiOptionURI(multiOptionURI)) {
+                                    if (multiOptionURI != null && AuthenticationEndpointUtil.isValidMultiOptionURI(multiOptionURI) && isMultiAuthAvailable(multiOptionURI, request.getParameter("authenticators"))) {
                                 %>
                                     <div class="ui divider hidden"></div>
                                     <a

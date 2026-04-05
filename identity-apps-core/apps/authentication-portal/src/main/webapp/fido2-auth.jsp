@@ -31,32 +31,7 @@
 
 <%@include file="includes/localize.jsp" %>
 <%@include file="includes/init-url.jsp" %>
-
-<%!
-    private boolean isMultiAuthAvailable(String multiOptionURI) {
-
-        boolean isMultiAuthAvailable = true;
-        if (multiOptionURI == null || multiOptionURI.equals("null")) {
-            isMultiAuthAvailable = false;
-        } else {
-            int authenticatorIndex = multiOptionURI.indexOf("authenticators=");
-            if (authenticatorIndex == -1) {
-                isMultiAuthAvailable = false;
-            } else {
-                String authenticators = multiOptionURI.substring(authenticatorIndex + 15);
-                int authLastIndex = authenticators.indexOf("&") != -1 ? authenticators.indexOf("&") : authenticators.length();
-                authenticators = authenticators.substring(0, authLastIndex);
-                List<String> authList = Arrays.asList(authenticators.split("%3B"));
-                if (authList.size() < 2) {
-                    isMultiAuthAvailable = false;
-                } else if (authList.size() == 2 && authList.contains("backup-code-authenticator%3ALOCAL")) {
-                    isMultiAuthAvailable = false;
-                }
-            }
-        }
-        return isMultiAuthAvailable;
-    }
-%>
+<%@include file="util/authenticator-utils.jsp" %>
 
 <%
     String authRequest = Encode.forJavaScriptBlock(request.getParameter("data"));
@@ -179,7 +154,7 @@
                             <%
                                 String multiOptionURI = Encode.forJava(request.getParameter("multiOptionURI"));
                                 if (multiOptionURI != null && AuthenticationEndpointUtil.isValidMultiOptionURI(multiOptionURI) &&
-                                    isMultiAuthAvailable(multiOptionURI)) {
+                                    isMultiAuthAvailable(multiOptionURI, request.getParameter("authenticators"))) {
                             %>
                                 <div class="text-center mt-1">
                                     <a

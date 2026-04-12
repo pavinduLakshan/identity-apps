@@ -364,6 +364,10 @@ export interface DeploymentConfigInterface extends CommonDeploymentConfigInterfa
      */
     docSiteURL?: string;
     /**
+     * Documentation links tree.
+     */
+    documentation?: Record<string, unknown>;
+    /**
      * Configs of multiple application protocol.
      */
     allowMultipleAppProtocols?: boolean;

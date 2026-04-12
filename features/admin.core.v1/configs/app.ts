@@ -198,6 +198,7 @@ export class Config {
             customServerHost: window[ "AppUtils" ]?.getConfig()?.customServerHost,
             developerApp: window[ "AppUtils" ]?.getConfig()?.developerApp,
             docSiteURL: window[ "AppUtils" ]?.getConfig()?.docSiteUrl,
+            documentation: window[ "AppUtils" ]?.getConfig()?.documentation,
             extensions: window[ "AppUtils" ]?.getConfig()?.extensions,
             idpConfigs: window[ "AppUtils" ]?.getConfig()?.idpConfigs,
             loginCallbackUrl: window[ "AppUtils" ]?.getConfig()?.loginCallbackURL,

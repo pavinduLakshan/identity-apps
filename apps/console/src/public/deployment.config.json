@@ -28,6 +28,490 @@
         "path": "/applications"
     },
     "docSiteUrl": "https://is.docs.wso2.com/en/latest",
+    "documentation": {
+        "common": {
+            "cookiePolicy": "https://wso2.com/cookie-policy",
+            "docsHomePage": "https://is.docs.wso2.com/en/latest",
+            "privacyPolicy": "https://wso2.com/privacy-policy",
+            "termsOfService": "https://wso2.com/terms-of-use"
+        },
+        "develop": {
+            "actions": {
+                "learnMore": null,
+                "types": {
+                    "preIssueAccessToken": {
+                        "learnMore": null
+                    },
+                    "preRegistration": {
+                        "learnMore": null
+                    },
+                    "preUpdatePassword": {
+                        "learnMore": null
+                    },
+                    "preUpdateProfile": {
+                        "learnMore": null
+                    }
+                },
+                "versioning": {
+                    "learnMore": null
+                }
+            },
+            "apiResources": {
+                "addAPIResource": {
+                    "rbacInfoBox": {
+                        "learnMore": null
+                    },
+                    "requiredAuthorization": {
+                        "learnMore": null
+                    }
+                },
+                "learnMore": null
+            },
+            "applications": {
+                "apiAuthorization": {
+                    "learnMore": null,
+                    "policies": {
+                        "noPolicy": {
+                            "learnMore": null
+                        },
+                        "rbac": {
+                            "learnMore": null
+                        }
+                    }
+                },
+                "applicationsSettings": {
+                    "dcr": {
+                        "authenticationRequired": {
+                            "learnMore": null
+                        },
+                        "learnMore": null
+                    }
+                },
+                "editApplication": {
+                    "asgardeoTryitApplication": {
+                        "general": {
+                            "learnMore": null
+                        }
+                    },
+                    "attributeManagement": {
+                        "manageOIDCScopes": null
+                    },
+                    "common": {
+                        "advanced": {
+                            "trustedApps": {
+                                "learnMore": null
+                            }
+                        },
+                        "signInMethod": {
+                            "conditionalAuthenticaion": {
+                                "ai": {
+                                    "learnMore": null
+                                },
+                                "apiReference": null,
+                                "learnMore": null,
+                                "template": {
+                                    "deviceBased": {
+                                        "learnMore": null
+                                    },
+                                    "groupBased": {
+                                        "learnMore": null
+                                    },
+                                    "ipBased": {
+                                        "learnMore": null
+                                    },
+                                    "userAgeBased": {
+                                        "learnMore": null
+                                    }
+                                }
+                            },
+                            "learnMore": null
+                        }
+                    },
+                    "oidcApplication": {
+                        "advanced": {
+                            "learnMore": null
+                        },
+                        "attributes": {
+                            "learnMore": null
+                        },
+                        "info": {
+                            "learnMore": null
+                        },
+                        "protocol": {
+                            "learnMore": null
+                        },
+                        "quickStart": {
+                            "applicationScopes": {
+                                "learnMore": null
+                            },
+                            "customConfig": {
+                                "learnMore": null
+                            },
+                            "mavenDownload": null,
+                            "mobileApp": {
+                                "learnMore": null
+                            }
+                        }
+                    },
+                    "outdatedApplications": {
+                        "versions": {
+                            "version100": {
+                                "removeUsernameFromIntrospectionRespForAppTokens": {
+                                    "documentationLink": null
+                                },
+                                "useClientIdAsSubClaimOfAppTokens": {
+                                    "documentationLink": null
+                                }
+                            },
+                            "version200": {
+                                "addAllRequestedClaimsInJWTAccessToken": {
+                                    "documentationLink": null
+                                }
+                            },
+                            "version300": {
+                                "linkedLocalAccountAttributeHandling": {
+                                    "documentationLink": null
+                                }
+                            }
+                        }
+                    },
+                    "samlApplication": {
+                        "advanced": {
+                            "learnMore": null
+                        },
+                        "attributes": {
+                            "learnMore": null
+                        },
+                        "info": {
+                            "learnMore": null
+                        },
+                        "protocol": {
+                            "learnMore": null
+                        },
+                        "quickStart": {
+                            "customConfig": {
+                                "learnMore": null
+                            },
+                            "mavenDownload": null
+                        }
+                    },
+                    "signInMethod": {
+                        "fido": null,
+                        "totp": null
+                    },
+                    "singlePageApplication": {
+                        "info": {
+                            "learnMore": null
+                        },
+                        "quickStart": {
+                            "customConfig": {
+                                "learnMore": null
+                            },
+                            "nodejsDownload": null
+                        }
+                    },
+                    "standardBasedApplication": {
+                        "oauth2OIDC": {
+                            "protocol": {
+                                "learnMore": null
+                            }
+                        },
+                        "saml": {
+                            "protocol": {
+                                "learnMore": null
+                            }
+                        }
+                    }
+                },
+                "learnMore": null,
+                "managementApplication": {
+                    "learnMore": null,
+                    "selfServicePortal": null
+                },
+                "myaccount": {
+                    "learnMore": null,
+                    "overview": {
+                        "learnMore": null
+                    },
+                    "smsOtp": null
+                },
+                "newApplication": {
+                    "customApplication": {
+                        "learnMore": null
+                    },
+                    "m2mApplication": {
+                        "learnMore": null
+                    },
+                    "mobileApplication": {
+                        "learnMore": null
+                    },
+                    "oidcApplication": {
+                        "learnMore": null
+                    },
+                    "samlApplication": {
+                        "learnMore": null
+                    },
+                    "singlePageApplication": {
+                        "learnMore": null
+                    }
+                },
+                "roles": {
+                    "learnMore": null
+                },
+                "template": {
+                    "categories": {
+                        "default": {
+                            "learnMore": null
+                        },
+                        "ssoIntegration": {
+                            "learnMore": null
+                        },
+                        "technology": {
+                            "learnMore": null
+                        }
+                    }
+                }
+            },
+            "branding": {
+                "ai": {
+                    "learnMore": null
+                },
+                "layout": {
+                    "custom": {
+                        "editor": {
+                            "learnMore": null
+                        },
+                        "learnMore": null
+                    }
+                },
+                "learnMore": null
+            },
+            "connections": {
+                "edit": {
+                    "advancedSettings": {
+                        "jit": null
+                    },
+                    "quickStart": {
+                        "fido": {
+                            "learnMore": null
+                        }
+                    }
+                },
+                "learnMore": null,
+                "newConnection": {
+                    "apple": {
+                        "help": {
+                            "configureSignIn": null,
+                            "developerConsole": null
+                        },
+                        "learnMore": null,
+                        "setupGuide": null
+                    },
+                    "duo": {
+                        "learnMore": null
+                    },
+                    "enterprise": {
+                        "oidc": {
+                            "learnMore": null,
+                            "setupGuide": null
+                        },
+                        "saml": {
+                            "learnMore": null,
+                            "setupGuide": null
+                        }
+                    },
+                    "facebook": {
+                        "help": {
+                            "configureOAuth": null,
+                            "developerConsole": null
+                        },
+                        "learnMore": null,
+                        "setupGuide": null
+                    },
+                    "github": {
+                        "help": {
+                            "configureOAuth": null,
+                            "developerConsole": null
+                        },
+                        "learnMore": null,
+                        "setupGuide": null
+                    },
+                    "google": {
+                        "help": {
+                            "configureOAuth": null,
+                            "developerConsole": null
+                        },
+                        "learnMore": null,
+                        "setupGuide": null
+                    },
+                    "hypr": {
+                        "help": {
+                            "developerConsole": null,
+                            "token": null
+                        },
+                        "learnMore": null,
+                        "setupGuide": null
+                    },
+                    "iProov": {
+                        "learnMore": null
+                    },
+                    "learnMore": null,
+                    "microsoft": {
+                        "help": {
+                            "configureOAuth": null,
+                            "developerConsole": null
+                        },
+                        "learnMore": null,
+                        "setupGuide": null
+                    },
+                    "siwe": {
+                        "help": {
+                            "configureOIDC": null
+                        },
+                        "learnMore": null,
+                        "setupGuide": null
+                    },
+                    "sms-otp-authenticator": {
+                        "learnMore": null
+                    },
+                    "trustedTokenIssuer": {
+                        "learnMore": null
+                    }
+                }
+            },
+            "emailCustomization": {
+                "form": {
+                    "emailBody": {
+                        "learnMore": null
+                    }
+                },
+                "learnMore": null
+            },
+            "eventPublishing": {
+                "learnMore": null
+            },
+            "multiTenancy": {
+                "addTenant": {
+                    "learnMore": null
+                },
+                "learnMore": null,
+                "systemSettings": {
+                    "learnMore": null
+                }
+            },
+            "smsCustomization": {
+                "form": {
+                    "smsBody": {
+                        "learnMore": null
+                    }
+                },
+                "learnMore": null
+            },
+            "webhooks": {
+                "learnMore": null
+            }
+        },
+        "manage": {
+            "accountDisable": {
+                "learnMore": null
+            },
+            "accountRecovery": {
+                "passwordRecovery": {
+                    "learnMore": null
+                }
+            },
+            "administrators": {
+                "learnMore": null
+            },
+            "attributes": {
+                "attributes": {
+                    "learnMore": null
+                },
+                "oidcAttributes": {
+                    "learnMore": null
+                },
+                "scimAttributes": {
+                    "learnMore": null
+                }
+            },
+            "groups": {
+                "learnMore": null,
+                "roles": {
+                    "learnMore": null
+                }
+            },
+            "insights": {
+                "learnMore": null
+            },
+            "loginSecurity": {
+                "botDetection": {
+                    "learnMore": null
+                },
+                "loginAttempts": {
+                    "learnMore": null
+                },
+                "siftConnector": {
+                    "learnMore": null
+                }
+            },
+            "logs": {
+                "learnMore": null
+            },
+            "organizations": {
+                "learnMore": null
+            },
+            "privateKeyJWT": {
+                "learnMore": null
+            },
+            "selfRegistration": {
+                "learnMore": null
+            },
+            "userStores": {
+                "attributeMappings": {
+                    "learnMore": null
+                },
+                "createUserStore": {
+                    "learnMore": null
+                },
+                "highAvailability": {
+                    "learnMore": null
+                },
+                "userStoreProperties": {
+                    "learnMore": null
+                },
+                "userStoresList": {
+                    "learnMore": null
+                }
+            },
+            "users": {
+                "allUsers": {
+                    "learnMore": null
+                },
+                "bulkUsers": {
+                    "learnMore": null
+                },
+                "collaboratorAccounts": {
+                    "adminSettingsLearnMore": null,
+                    "learnMore": null,
+                    "roles": {
+                        "learnMore": null
+                    }
+                },
+                "customerAccounts": {
+                    "learnMore": null
+                },
+                "learnMore": null,
+                "newCollaboratorUser": {
+                    "learnMore": null
+                }
+            },
+            "validation": {
+                "passwordValidation": {
+                    "learnMore": null
+                }
+            }
+        }
+    },
     "extensions": {
         "analytics": {
             "moesif": {

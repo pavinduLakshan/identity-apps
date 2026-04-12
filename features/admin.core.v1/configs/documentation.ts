@@ -16,15 +16,14 @@
  * under the License.
  */
 
-// DO NOT SHORTEN THE IMPORT PATH as it could lead to circular dependencies.
-import { getDocumentationLinksExtension } from "@wso2is/admin.extensions.v1/configs/documentation";
+import { Config } from "./app";
 import { DocumentationLinksInterface } from "../models/documentation";
 
 /**
  * Get all the Features documentation links.
  *
- * @return {DocumentationLinksInterface}
+ * @returns the features documentation links.
  */
 export const DocumentationLinks: DocumentationLinksInterface = {
-    ...getDocumentationLinksExtension()
+    ...(Config?.getDeploymentConfig()?.documentation as unknown as DocumentationLinksInterface)
 };

@@ -188,3 +188,56 @@
         document.documentElement.setAttribute("dir", direction);
     }
 </script>
+
+<style type="text/css">
+    .segmented-otp-field {
+        position: relative;
+    }
+    .segmented-otp-field > input.segmented-otp-input {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        color: transparent !important;
+        background: transparent !important;
+        border: none !important;
+        outline: none !important;
+        caret-color: transparent !important;
+        z-index: 2;
+        padding: 0 !important;
+        margin: 0 !important;
+        font-size: 16px;
+        cursor: default;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+    }
+    div[id^="pincode-"] {
+        position: relative;
+        border: 1px solid var(--asg-input-field-base-border-color, rgba(34, 36, 38, .15));
+        border-radius: var(--asg-input-field-base-border-radius, 8px);
+        background: var(--asg-input-field-base-background-color, #fff);
+        font-size: 1em;
+        line-height: 1.21428571em;
+        color: var(--asg-input-field-base-text-color, rgba(0, 0, 0, .87));
+    }
+    div[id^="pincode-"].active-pincode {
+        border-color: var(--asg-colors-primary-main, #FF7300);
+    }
+    div[id^="pincode-"].active-pincode::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 1px;
+        height: 1em;
+        background-color: var(--asg-input-field-base-text-color, rgba(0, 0, 0, .87));
+        animation: otpCursorBlink 1s step-end infinite;
+    }
+    @keyframes otpCursorBlink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+</style>

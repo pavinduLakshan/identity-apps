@@ -132,7 +132,7 @@
     try {
         if (StringUtils.isNotBlank(sp)) {
             ApplicationDataRetrievalClient applicationDataRetrievalClient = new ApplicationDataRetrievalClient();
-            if (StringUtils.isBlank(request.getParameter("spId")) || StringUtils.equalsIgnoreCase(request.getParameter("spId"), "null")) {
+            if (StringUtils.isBlank(spId) || StringUtils.equalsIgnoreCase(spId, "null")) {
                 spId = applicationDataRetrievalClient.getApplicationID(tenantDomain, sp);
             }
             applicationAccessUrl = applicationDataRetrievalClient.getApplicationAccessURL(tenantDomain, sp);
@@ -291,12 +291,21 @@
             }
             
             request.setAttribute("recoveryChannelType", recoveryChannelType);
- 
+
             // Sending the notification if we only found a user.
             if (isUserFound){
                 RecoveryRequest recoveryRequest = new RecoveryRequest();
                 recoveryRequest.setRecoveryCode(recoveryCode);
                 recoveryRequest.setChannelId(recoveryChannelId);
+
+                if (StringUtils.isNotBlank(spId) && !StringUtils.equalsIgnoreCase(spId, "null")) {
+                    List<Property> properties = new ArrayList<>();
+                    Property spIdProperty = new Property();
+                    spIdProperty.setKey("spId");
+                    spIdProperty.setValue(spId);
+                    properties.add(spIdProperty);
+                    recoveryRequest.setProperties(properties);
+                }
 
                 Map<String, String> requestHeaders = new HashedMap();
                 if (request.getParameter("g-recaptcha-response") != null) {

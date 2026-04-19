@@ -37,6 +37,7 @@
 
 <%
     request.getSession().invalidate();
+    int otpLength = 6;
     String errorMessage = AuthenticationEndpointUtil.i18n(resourceBundle,"error.retry");
     String authenticationFailed = "false";
     if (Boolean.parseBoolean(request.getParameter(Constants.AUTH_FAILURE))) {
@@ -169,81 +170,31 @@
                                 <input hidden type="text"  id="BackupCode" name="BackupCode" class="form-control">
                             </div>
 
-                            <div class="equal width fields">
+                            <div class="equal width fields segmented-otp-field">
+                                <input
+                                    type="text"
+                                    id="backupOTPInput"
+                                    class="segmented-otp-input"
+                                    maxlength="<%= otpLength %>"
+                                    autocomplete="one-time-code"
+                                    autocorrect="off"
+                                    autocapitalize="off"
+                                    spellcheck="false"
+                                    autofocus
+                                    aria-label="<%=AuthenticationEndpointUtil.i18n(resourceBundle, "enter.backup.code")%>"
+                                >
+                                <% for (int i = 1; i <= otpLength; i++) { %>
                                 <div class="field mt-5">
-                                    <input 
-                                        class="text-center p-3" 
-                                        id="pincode-1" 
-                                        name="pincode-1"
-                                        tabindex="1" 
-                                        placeholder="·" 
-                                        maxlength="1"
-                                        onkeyup="movetoNext(this, 'pincode-2', null)"
-                                        autocomplete="off"
-                                        autofocus>
+                                    <div class="text-center p-1 pb-3 pt-3" id="pincode-<%=i%>" aria-hidden="true">·</div>
                                 </div>
-                                <div class="field mt-5">
-                                    <input 
-                                        class="text-center p-3" 
-                                        id="pincode-2" 
-                                        name="pincode-2"
-                                        onkeyup="movetoNext(this, 'pincode-3', 'pincode-1')"
-                                        tabindex="2"
-                                        placeholder="·"
-                                        maxlength="1"
-                                        autocomplete="off">
-                                </div>
-                                <div class="field mt-5">
-                                    <input 
-                                        class="text-center p-3" 
-                                        id="pincode-3" 
-                                        name="pincode-3"
-                                        tabindex="3"
-                                        placeholder="·" 
-                                        maxlength="1"
-                                        onkeyup="movetoNext(this, 'pincode-4', 'pincode-2')"
-                                        autocomplete="off">
-                                </div>
-                                <div class="field mt-5">
-                                    <input 
-                                        class="text-center p-3"
-                                        id="pincode-4"
-                                        name="pincode-4"
-                                        tabindex="4"
-                                        placeholder="·"
-                                        maxlength="1"
-                                        onkeyup="movetoNext(this, 'pincode-5', 'pincode-3')"
-                                        autocomplete="off">
-                                </div>
-                                <div class="field mt-5">
-                                    <input 
-                                        class="text-center p-3"
-                                        id="pincode-5"
-                                        name="pincode-5"
-                                        tabindex="5"
-                                        placeholder="·"
-                                        maxlength="1"
-                                        onkeyup="movetoNext(this, 'pincode-6', 'pincode-4')"
-                                        autocomplete="off">
-                                </div>
-                                <div class="field mt-5">
-                                    <input 
-                                        class="text-center p-3"
-                                        id="pincode-6"
-                                        name="pincode-6"
-                                        tabindex="6"
-                                        placeholder="·"
-                                        maxlength="1"
-                                        onkeyup="movetoNext(this, null, 'pincode-5')"
-                                        autocomplete="off">
-                                </div>
+                                <% } %>
                             </div>
 
                             <input id="sessionDataKey" type="hidden" name="sessionDataKey"
                                     value='<%=Encode.forHtmlAttribute(request.getParameter("sessionDataKey"))%>' />
                             <div class="ui divider hidden"></div>
                             <div>
-                                <input type="submit" id="subButton" onclick="sub(); return false;"
+                                <input type="submit" id="subButton" disabled
                                 value="<%=AuthenticationEndpointUtil.i18n(resourceBundle, "authenticate")%>"
                                 class="ui primary fluid large button" />
                             </div>
@@ -298,59 +249,66 @@
 
         <script type="text/javascript">
             var insightsTenantIdentifier = "<%=userTenant%>";
-            function movetoNext(current, nextFieldID, previousID) {
-                var key = event.keyCode || event.charCode;
-                if (nextFieldID != null && current.value.length >= current.maxLength) {
-                    document.getElementById(nextFieldID).focus();
-                }
-                if( key == 8 || key == 46 ) {
-                    if ( previousID != null) {
-                        document.getElementById(previousID).focus();
-                    }
+
+            function updateBackupDigitBoxes(value) {
+                for (var i = 1; i <= <%= otpLength %>; i++) {
+                    var box = document.getElementById('pincode-' + i);
+                    if (box) box.textContent = (value.length >= i) ? value[i - 1] : '·';
                 }
             }
-            function sub() {
-                var pin1 = document.getElementById("pincode-1").value;
-                var pin2 = document.getElementById("pincode-2").value;
-                var pin3 = document.getElementById("pincode-3").value;
-                var pin4 = document.getElementById("pincode-4").value;
-                var pin5 = document.getElementById("pincode-5").value;
-                var pin6 = document.getElementById("pincode-6").value;
-                var token = pin1 + pin2 + pin3 + pin4 + pin5 + pin6;
-                document.getElementById('BackupCode').value = token;
-                if ( pin1 !=null &  pin2 !=null & pin3 !=null & pin5 !=null & pin6 !=null) {
-                    trackEvent("authentication-portal-backup-code-click-continue", {
-                        "tenant": insightsTenantIdentifier != "null" ? insightsTenantIdentifier : ""
-                    });
-                    document.getElementById("backupCodeForm").submit();
+
+            var backupInput = document.getElementById('backupOTPInput');
+            var backupCodeField = document.getElementById('BackupCode');
+            var submitBtn = document.getElementById('subButton');
+
+            function updateBackupCursor(value) {
+                for (var i = 1; i <= <%= otpLength %>; i++) {
+                    var box = document.getElementById('pincode-' + i);
+                    if (box) box.classList.remove('active-pincode');
+                }
+                if (value.length < <%= otpLength %>) {
+                    var activeBox = document.getElementById('pincode-' + (value.length + 1));
+                    if (activeBox) activeBox.classList.add('active-pincode');
                 }
             }
-            // Handle paste events
+
             function handlePaste(e) {
-                var clipboardData, value;
-                // Stop data actually being pasted into element
-                e.stopPropagation();
                 e.preventDefault();
-                // Get pasted data via clipboard API
-                clipboardData = e.clipboardData || window.clipboardData;
-                value = clipboardData.getData('Text');
-                const reg = new RegExp(/^\d+$/);
-                if (reg.test(value)) {
-                    for (n = 0; n < 6; ++n) {
-                        $("#pincode-" + (n+1)).val(value[n]);
-                        $("#pincode-" + (n+1)).focus();
-                    }
-                }
+                var pasted = (e.clipboardData || window.clipboardData).getData('Text').replace(/\s/g, '');
+                if (!/^\d+$/.test(pasted)) return;
+                backupInput.value = pasted.slice(0, <%= otpLength %>);
+                backupInput.dispatchEvent(new InputEvent('input', { bubbles: true }));
             }
-            document.getElementById('pincode-1').addEventListener('paste', handlePaste);
-            $('#subButton').attr('disabled', true);
-            $('#pincode-6').on('keyup', function() {
-                if ($('#pincode-1').val() != '' && $('#pincode-2').val() != ''
-                && $('#pincode-3').val() != '' && $('#pincode-4').val() != '' && $('#pincode-5').val() != ''  && $('#pincode-6').val() != '') {
-                    $('#subButton').attr('disabled', false);
-                } else {
-                    $('#subButton').attr('disabled', true);
-                }
+
+            function handleInput() {
+                var sanitized = backupInput.value.replace(/\s/g, '');
+                if (sanitized !== backupInput.value) backupInput.value = sanitized;
+                backupCodeField.value = sanitized;
+                updateBackupDigitBoxes(sanitized);
+                updateBackupCursor(sanitized);
+                submitBtn.disabled = sanitized.length !== <%= otpLength %>;
+            }
+
+            if (backupInput) {
+                document.addEventListener('selectionchange', function () {
+                    if (document.activeElement === backupInput) {
+                        backupInput.selectionStart = backupInput.selectionEnd = backupInput.value.length;
+                    }
+                });
+                backupInput.addEventListener('copy', function (e) { e.preventDefault(); });
+                backupInput.addEventListener('cut', function (e) { e.preventDefault(); });
+                backupInput.addEventListener('focus', function () { updateBackupCursor(this.value); });
+                backupInput.addEventListener('blur', function () { updateBackupCursor('x'.repeat(<%= otpLength %>)); });
+                backupInput.addEventListener('paste', handlePaste);
+                backupInput.addEventListener('input', handleInput);
+                updateBackupCursor(backupInput.value);
+            }
+
+            document.getElementById('backupCodeForm').addEventListener('submit', function() {
+                if (backupInput) backupCodeField.value = backupInput.value;
+                trackEvent("authentication-portal-backup-code-click-continue", {
+                    "tenant": insightsTenantIdentifier != "null" ? insightsTenantIdentifier : ""
+                });
             });
         </script>
     </body>

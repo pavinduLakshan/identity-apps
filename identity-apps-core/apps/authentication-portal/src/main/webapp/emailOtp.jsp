@@ -221,7 +221,8 @@
                                     type="text"
                                     id='OTPCode'
                                     name="OTPCode"
-                                    c size='30'
+                                    size='30'
+                                    autocomplete="off"
                                     aria-describedby="OTPDescription"/>
                                 <i id="password-eye" class="eye icon right-align password-toggle slash" onclick="showOTPCode()"></i>
                             </div>
@@ -235,6 +236,7 @@
                                         id='OTPCode'
                                         name="OTPCode"
                                         size='30'
+                                        autocomplete="off"
                                         aria-describedby="OTPDescription"/>
                                     <i id="password-eye" class="eye icon right-align password-toggle slash" onclick="showOTPCode()"></i>
                                 </div>

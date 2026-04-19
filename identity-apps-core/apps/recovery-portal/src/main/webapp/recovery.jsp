@@ -112,7 +112,8 @@
     String sessionDataKey = request.getParameter("sessionDataKey");
     String confirmationKey = request.getParameter("confirmationKey");
     String callback = request.getParameter("callback");
-    String spId = request.getParameter("spId");
+    String sp = Encode.forJava(request.getParameter("sp"));
+    String spId = Encode.forJava(request.getParameter("spId"));
     String userTenantHint = request.getParameter("t");
     String applicationAccessUrl = "";
 
@@ -129,9 +130,11 @@
     String recoveryOption = request.getParameter("recoveryOption");
 
     try {
-        String sp = Encode.forJava(request.getParameter("sp"));
         if (StringUtils.isNotBlank(sp)) {
             ApplicationDataRetrievalClient applicationDataRetrievalClient = new ApplicationDataRetrievalClient();
+            if (StringUtils.isBlank(request.getParameter("spId")) || StringUtils.equalsIgnoreCase(request.getParameter("spId"), "null")) {
+                spId = applicationDataRetrievalClient.getApplicationID(tenantDomain, sp);
+            }
             applicationAccessUrl = applicationDataRetrievalClient.getApplicationAccessURL(tenantDomain, sp);
         }
     } catch (Exception e) {

@@ -191,6 +191,13 @@
             properties.add(property);
         }
 
+        if (StringUtils.isNotBlank(spId) && !StringUtils.equalsIgnoreCase(spId, "null")) {
+            Property spIdProperty = new Property();
+            spIdProperty.setKey("spId");
+            spIdProperty.setValue(spId);
+            properties.add(spIdProperty);
+        }
+
         Property appIsAccessUrlAvailableProperty = new Property();
         appIsAccessUrlAvailableProperty.setKey("isAccessUrlAvailable");
         appIsAccessUrlAvailableProperty.setValue(String.valueOf(StringUtils.isNotBlank(applicationAccessURLWithoutEncoding)));

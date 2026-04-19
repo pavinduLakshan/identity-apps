@@ -174,7 +174,7 @@
                     %>
                     <div id="alertDiv"></div>
                     <div class="segment-form">
-                        <form class="ui large form" id="codeForm" name="codeForm"
+                        <form class="ui large form otp-form" id="codeForm" name="codeForm"
                             action="passwordrecoveryotp.do" method="POST">
                             <%
                                 String loginFailed = request.getParameter("authFailure");

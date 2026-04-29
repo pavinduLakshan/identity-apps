@@ -179,7 +179,7 @@
 
     function showResendReCaptcha() {
         <% if (StringUtils.isNotBlank(request.getParameter("failedUsername"))){ %>
-            window.location.href="login.do?resend_username=<%=Encode.forHtml(URLEncoder.encode(request.getParameter("failedUsername"), UTF_8))%>&<%=AuthenticationEndpointUtil.cleanErrorMessages(Encode.forJava(request.getQueryString()))%>";
+            window.location.href="login.do?resend_username=<%=Encode.forHtml(URLEncoder.encode(request.getParameter("failedUsername"), UTF_8))%>&<%=Encode.forJavaScriptBlock(AuthenticationEndpointUtil.cleanErrorMessages(request.getQueryString()))%>";
         <% } %>
     }
 

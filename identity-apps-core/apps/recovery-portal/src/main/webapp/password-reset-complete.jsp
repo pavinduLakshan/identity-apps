@@ -41,6 +41,7 @@
 <%@ page import="java.net.URISyntaxException" %>
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
@@ -78,7 +79,8 @@
     String passwordPatternErrorCode = "20035";
     String confirmationKey =
             IdentityManagementEndpointUtil.getStringValue(request.getSession().getAttribute("confirmationKey"));
-    String newPassword = request.getParameter("reset-password");
+    String passwordParam = request.getParameter("reset-password");
+    char[] newPassword = passwordParam != null ? passwordParam.toCharArray() : null;
     String callback = request.getParameter("callback");
     String spId = Encode.forJava(request.getParameter("spId"));
     if (StringUtils.isBlank(spId)) {
@@ -155,7 +157,7 @@
         }
     }
 
-    if (StringUtils.isNotBlank(newPassword) && useRecoveryV2API) {
+    if (newPassword != null && newPassword.length > 0 && useRecoveryV2API) {
 
         RecoveryApiV2 recoveryApiV2 = new RecoveryApiV2();
         String resetCode = request.getParameter("resetCode");
@@ -180,7 +182,7 @@
             request.getRequestDispatcher("error.jsp").forward(request, response);
             return;
         }
-    } else if (StringUtils.isNotBlank(newPassword)) {
+    } else if (newPassword != null && newPassword.length > 0) {
         NotificationApi notificationApi = new NotificationApi();
         ResetPasswordRequest resetPasswordRequest = new ResetPasswordRequest();
         List<Property> properties = new ArrayList<Property>();
@@ -270,6 +272,10 @@
             }
             request.getRequestDispatcher("error.jsp").forward(request, response);
             return;
+        } finally {
+            if (newPassword != null) {
+                Arrays.fill(newPassword, '\u0000');
+            }
         }
 
     } else {

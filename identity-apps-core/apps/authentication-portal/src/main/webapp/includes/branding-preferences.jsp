@@ -1,5 +1,5 @@
 <%--
-  ~ Copyright (c) 2023-2024, WSO2 LLC. (https://www.wso2.com).
+  ~ Copyright (c) 2023-2025, WSO2 LLC. (https://www.wso2.com).
   ~
   ~ WSO2 LLC. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -77,6 +77,7 @@
 
     // Preferences response object pointer keys.
     String PREFERENCE_KEY = "preference";
+    String RESOLVED_FROM_KEY = "resolvedFrom";
     String ACTIVE_THEME_KEY = "activeTheme";
     String COLORS_KEY = "colors";
     String THEME_KEY = "theme";
@@ -244,9 +245,12 @@
     String DEFAULT_RESOURCE_LOCALE = "en-US";
     String ORG_PREFERENCE_RESOURCE_TYPE = "ORG";
     String APP_PREFERENCE_RESOURCE_TYPE = "APP";
-    String RESOURCE_TYPE = "type";
+    String RESOURCE_TYPE_KEY = "type";
+    String RESOURCE_NAME_KEY = "name";
     String preferenceResourceType = ORG_PREFERENCE_RESOURCE_TYPE;
     String tenantRequestingPreferences = tenantForTheming;
+    JSONObject preferenceResolvedFrom = null;
+    String preferenceResolvedFromResourceName = tenantRequestingPreferences;
     String applicationRequestingPreferences = spAppId;
     String locale = userLocale != null ? userLocale.getLanguage() + "-" + userLocale.getCountry() : DEFAULT_RESOURCE_LOCALE;
     String resolutionStrategy = "DEFAULT";
@@ -292,7 +296,9 @@
 
         if (brandingPreferenceResponse.has(PREFERENCE_KEY)) {
             brandingPreference = brandingPreferenceResponse.getJSONObject(PREFERENCE_KEY);
-            preferenceResourceType = brandingPreferenceResponse.getString(RESOURCE_TYPE);
+            preferenceResolvedFrom = brandingPreferenceResponse.getJSONObject(RESOLVED_FROM_KEY);
+            preferenceResourceType = preferenceResolvedFrom.getString(RESOURCE_TYPE_KEY);
+            preferenceResolvedFromResourceName = preferenceResolvedFrom.getString(RESOURCE_NAME_KEY);
         }
 
 %>

@@ -594,6 +594,9 @@
                         } catch (IdentityProviderDataRetrievalClientException e) {
                             // Exception is ignored and the default `imageURL` value will be used as a fallback.
                         }
+                        if (imageURL == null) {
+                            imageURL = "libs/themes/wso2is/assets/images/identity-providers/enterprise-idp-illustration.svg";
+                        }
                         // If any IdP's name starts with `Sign in with`, then we need to remove the `Sign in with` part.
                         // If not, the UI will look weird with labels like `Sign in with Sign In With Google`.
                         String EXTERNAL_CONNECTION_PREFIX = "sign in with";
@@ -674,7 +677,10 @@
                     <% } else {
 
                         String logoPath = imageURL;
-                        if (!imageURL.isEmpty() && imageURL.contains("/")) {
+                        if (imageURL == null || imageURL.isEmpty()) {
+                            logoPath = "libs/themes/wso2is/assets/images/identity-providers/enterprise-idp-illustration.svg";
+                        }
+                        if (!imageURL.isEmpty() && imageURL.contains("assets/images/logos/")) {
                             String[] imageURLSegements = imageURL.split("/");
                             String logoFileName = imageURLSegements[imageURLSegements.length - 1];
 

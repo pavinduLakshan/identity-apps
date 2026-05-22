@@ -77,6 +77,7 @@
     boolean error = IdentityManagementEndpointUtil.getBooleanValue(request.getAttribute("error"));
     String errorCodeFromRequest = IdentityManagementEndpointUtil.getStringValue(request.getAttribute("errorCode"));
     String errorMsg = IdentityManagementEndpointUtil.getStringValue(request.getAttribute("errorMsg"));
+    boolean isRegValidationErrorFromUsernameRequestPage = Boolean.parseBoolean((String) request.getAttribute("isRegValidationErrorFromUsernameRequestPage"));
     String previousStep = Encode.forHtmlAttribute(request.getParameter("previous_step"));
     SelfRegistrationMgtClient selfRegistrationMgtClient = new SelfRegistrationMgtClient();
     Integer defaultPurposeCatId = null;
@@ -580,6 +581,7 @@
                                         </p>
                                     </div>
                                 </div>
+                                <% if (!isRegValidationErrorFromUsernameRequestPage) { %>
                                 <div id="confirmPasswordField" class="required field">
                                     <label for="password2" class="control-label">
                                         <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle, "Confirm.password")%>
@@ -595,6 +597,7 @@
                                     <i class="red exclamation circle fitted icon"></i>
                                     <span class="validation-error-message" id="password-mismatch-error-msg-text"></span>
                                 </div>
+                                <% } %>
                                 <% Claim emailNamePII =
                                         uniquePIIs.get(IdentityManagementEndpointConstants.ClaimURIs.EMAIL_CLAIM);
                                     if (emailNamePII != null) {
@@ -883,6 +886,15 @@
                                 <div class="ui divider hidden"></div>
                                 <div>
                                     <%--Terms/Privacy Policy--%>
+                                    <% if (isRegValidationErrorFromUsernameRequestPage) { %>
+                                    <p class="mt-5 mb-0 privacy">
+                                        <%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle, "when.you.click.sign.up.you.are.agreeing")%>
+                                        <a href="<%= StringEscapeUtils.escapeHtml4(privacyPolicyURL) %>" target="_blank"
+                                            data-testid="registration-form-privacy-link" rel="noopener noreferrer">
+                                            <%=i18n(recoveryResourceBundle, customText, "privacy.policy")%>
+                                        </a>
+                                    </p>
+                                    <% } else { %>
                                     <div id="termsCheckboxField" class="field">
                                         <div class="ui checkbox">
                                             <input id="termsCheckbox" type="checkbox"/>
@@ -895,6 +907,7 @@
                                             </label>
                                         </div>
                                     </div>
+                                    <% } %>
                                     <%--End Terms/Privacy Policy--%>
                                 </div>
                                 <div class="ui divider hidden"></div>
@@ -1303,6 +1316,7 @@
                     return false;
                 }
 
+                <% if (!isRegValidationErrorFromUsernameRequestPage) { %>
                 if(!$("#termsCheckbox")[0].checked){
                         error_msg.text("<%=IdentityManagementEndpointUtil.i18n(recoveryResourceBundle,
                             "Confirm.Privacy.Policy")%>");
@@ -1310,6 +1324,7 @@
                         $("html, body").animate({scrollTop: error_msg.offset().top}, 'slow');
                         return false;
                 }
+                <% } %>
 
                 <%
                 if(reCaptchaEnabled) {
@@ -2219,6 +2234,13 @@
             var passwordInput = document.getElementById("password");
             var confirmPasswordInput = document.getElementById("password2");
 
+            <% if (isRegValidationErrorFromUsernameRequestPage) { %>
+            // When redirected from the username request page, confirm password field is hidden.
+            if (!!passwordInput && passwordInput.value.trim() == "") {
+                return false;
+            }
+            return true;
+            <% } else { %>
             if ( (!!passwordInput &&  passwordInput.value.trim() == "")
                 || (!!confirmPasswordInput && confirmPasswordInput.value.trim() == "")
                 || (confirmPasswordInput.value.trim() !== passwordInput.value.trim()))  {
@@ -2226,6 +2248,7 @@
             }
 
             return true;
+            <% } %>
         }
 
         function changeSubmitButtonStatus() {
@@ -2235,12 +2258,17 @@
 
             // Checking for empty name fields.
             if (validateNameFields() && validatePasswordFields() && validatePassword()) {
+                <% if (isRegValidationErrorFromUsernameRequestPage) { %>
+                // No terms checkbox when redirected from username request page.
+                registrationBtn.prop("disabled", false).removeClass("disabled");
+                <% } else { %>
                 // Checking for consent checkbox status.
                 if (agreementChk.is(":checked")) {
                     registrationBtn.prop("disabled", false).removeClass("disabled");
                 } else {
                     registrationBtn.prop("disabled", true).addClass("disabled");
                 }
+                <% } %>
             } else {
                 registrationBtn.prop("disabled", true).addClass("disabled");
             }

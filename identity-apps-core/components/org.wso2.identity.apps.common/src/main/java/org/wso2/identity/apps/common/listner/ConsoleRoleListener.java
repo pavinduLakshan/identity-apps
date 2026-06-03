@@ -42,7 +42,10 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static org.wso2.carbon.identity.api.resource.collection.mgt.constant.APIResourceCollectionManagementConstants.APIResourceCollectionConfigBuilderConstants.CREATE_FEATURE_SCOPE_SUFFIX;
+import static org.wso2.carbon.identity.api.resource.collection.mgt.constant.APIResourceCollectionManagementConstants.APIResourceCollectionConfigBuilderConstants.DELETE_FEATURE_SCOPE_SUFFIX;
 import static org.wso2.carbon.identity.api.resource.collection.mgt.constant.APIResourceCollectionManagementConstants.APIResourceCollectionConfigBuilderConstants.EDIT_FEATURE_SCOPE_SUFFIX;
+import static org.wso2.carbon.identity.api.resource.collection.mgt.constant.APIResourceCollectionManagementConstants.APIResourceCollectionConfigBuilderConstants.UPDATE_FEATURE_SCOPE_SUFFIX;
 import static org.wso2.carbon.identity.api.resource.collection.mgt.constant.APIResourceCollectionManagementConstants.APIResourceCollectionConfigBuilderConstants.VIEW_FEATURE_SCOPE_SUFFIX;
 import static org.wso2.carbon.identity.role.v2.mgt.core.RoleConstants.CONSOLE_APP_AUDIENCE_NAME;
 import static org.wso2.carbon.identity.role.v2.mgt.core.RoleConstants.CONSOLE_ORG_SCOPE_PREFIX;
@@ -197,6 +200,36 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
                             newPermission.ifPresent(resolvedRolePermissions::add);
                         });
                     }
+                    // If the role has the create feature scope, then we add all the create scopes.
+                    if (apiResourceCollection.getCreateFeatureScope() != null &&
+                        apiResourceCollection.getCreateFeatureScope().equals(permission.getName())) {
+                        apiResourceCollection.getCreateScopes().forEach(createScope -> {
+                            Optional<Permission> newPermission = systemPermissions.stream()
+                                .filter(permission1 -> permission1.getName().equals(createScope))
+                                .findFirst();
+                            newPermission.ifPresent(resolvedRolePermissions::add);
+                        });
+                    }
+                    // If the role has the update feature scope, then we add all the update scopes.
+                    if (apiResourceCollection.getUpdateFeatureScope() != null &&
+                        apiResourceCollection.getUpdateFeatureScope().equals(permission.getName())) {
+                        apiResourceCollection.getUpdateScopes().forEach(updateScope -> {
+                            Optional<Permission> newPermission = systemPermissions.stream()
+                                .filter(permission1 -> permission1.getName().equals(updateScope))
+                                .findFirst();
+                            newPermission.ifPresent(resolvedRolePermissions::add);
+                        });
+                    }
+                    // If the role has the delete feature scope, then we add all the delete scopes.
+                    if (apiResourceCollection.getDeleteFeatureScope() != null &&
+                        apiResourceCollection.getDeleteFeatureScope().equals(permission.getName())) {
+                        apiResourceCollection.getDeleteScopes().forEach(deleteScope -> {
+                            Optional<Permission> newPermission = systemPermissions.stream()
+                                .filter(permission1 -> permission1.getName().equals(deleteScope))
+                                .findFirst();
+                            newPermission.ifPresent(resolvedRolePermissions::add);
+                        });
+                    }
                 });
             });
             return resolvedRolePermissions;
@@ -316,7 +349,10 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
                 permission.getName() != null && (permission.getName().startsWith(CONSOLE_SCOPE_PREFIX)
                 || permission.getName().startsWith(CONSOLE_ORG_SCOPE_PREFIX)) &&
                 (permission.getName().endsWith(VIEW_FEATURE_SCOPE_SUFFIX) ||
-                    permission.getName().endsWith(EDIT_FEATURE_SCOPE_SUFFIX)))
+                    permission.getName().endsWith(EDIT_FEATURE_SCOPE_SUFFIX) ||
+                    permission.getName().endsWith(CREATE_FEATURE_SCOPE_SUFFIX) ||
+                    permission.getName().endsWith(UPDATE_FEATURE_SCOPE_SUFFIX) ||
+                    permission.getName().endsWith(DELETE_FEATURE_SCOPE_SUFFIX)))
             .collect(Collectors.toList());
     }
 
@@ -332,7 +368,10 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
                 permission.getName() != null && (permission.getName().startsWith(CONSOLE_SCOPE_PREFIX)
                 || permission.getName().startsWith(CONSOLE_ORG_SCOPE_PREFIX)) &&
                 !(permission.getName().endsWith(VIEW_FEATURE_SCOPE_SUFFIX) ||
-                    permission.getName().endsWith(EDIT_FEATURE_SCOPE_SUFFIX)))
+                    permission.getName().endsWith(EDIT_FEATURE_SCOPE_SUFFIX) ||
+                    permission.getName().endsWith(CREATE_FEATURE_SCOPE_SUFFIX) ||
+                    permission.getName().endsWith(UPDATE_FEATURE_SCOPE_SUFFIX) ||
+                    permission.getName().endsWith(DELETE_FEATURE_SCOPE_SUFFIX)))
             .collect(Collectors.toList());
     }
 

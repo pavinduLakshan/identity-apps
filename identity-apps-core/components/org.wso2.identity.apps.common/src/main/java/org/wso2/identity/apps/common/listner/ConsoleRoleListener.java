@@ -263,8 +263,85 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
                     }
                 });
             });
-            return new ArrayList<>(resolvedRolePermissions);
+            List<Permission> upgradedPermissions = new ArrayList<>(resolvedRolePermissions);
+            resolveWriteFeatureScopes(upgradedPermissions, apiResourceCollections, systemPermissions);
+            return upgradedPermissions;
         }
+    }
+
+    /**
+     * Keep the edit (write) feature scope and the granular write feature scopes (create, update, delete) of a console
+     * role consistent with each other. This supports backward compatibility between the legacy write model and the
+     * new granular permission model, so that a role resolves correctly regardless of which model it was created with:
+     *   - If the role has all of the create, update and delete feature scopes, then the edit (write) feature
+     *     scope is added.
+     *   - If the role has the edit (write) feature scope, then the create, update and delete feature scopes are added.
+     *
+     * Only the feature scopes are added here; the internal scopes corresponding to these feature scopes are already
+     * resolved earlier in {@link #getUpgradedPermissions} (the edit branch adds the write scopes, which cover the
+     * create/update/delete internal scopes, and the granular branches add the create/update/delete internal scopes).
+     *
+     * @param resolvedRolePermissions Resolved role permissions to be updated in place.
+     * @param apiResourceCollections  API resource collections.
+     * @param systemPermissions       System permissions used to resolve permission details from permission names.
+     */
+    private void resolveWriteFeatureScopes(List<Permission> resolvedRolePermissions,
+                                           List<APIResourceCollection> apiResourceCollections,
+                                           List<Permission> systemPermissions) {
+
+        Set<String> resolvedPermissionNames = resolvedRolePermissions.stream().map(Permission::getName)
+            .collect(Collectors.toCollection(HashSet::new));
+        apiResourceCollections.forEach(apiResourceCollection -> {
+            String editFeatureScope = apiResourceCollection.getEditFeatureScope();
+            String createFeatureScope = apiResourceCollection.getCreateFeatureScope();
+            String updateFeatureScope = apiResourceCollection.getUpdateFeatureScope();
+            String deleteFeatureScope = apiResourceCollection.getDeleteFeatureScope();
+
+            boolean hasEdit = editFeatureScope != null && resolvedPermissionNames.contains(editFeatureScope);
+            boolean hasCreate = createFeatureScope != null && resolvedPermissionNames.contains(createFeatureScope);
+            boolean hasUpdate = updateFeatureScope != null && resolvedPermissionNames.contains(updateFeatureScope);
+            boolean hasDelete = deleteFeatureScope != null && resolvedPermissionNames.contains(deleteFeatureScope);
+
+            // If the role has all the granular write feature scopes, it is equivalent to the edit (write) feature
+            // scope. Hence, add the edit feature scope.
+            if (hasCreate && hasUpdate && hasDelete && editFeatureScope != null && !hasEdit) {
+                addResolvedScope(editFeatureScope, systemPermissions, resolvedRolePermissions, resolvedPermissionNames);
+            }
+            // If the role has the edit (write) feature scope, it is equivalent to having all the granular write
+            // feature scopes. Hence, add the create, update and delete feature scopes.
+            if (hasEdit) {
+                addResolvedScope(createFeatureScope, systemPermissions, resolvedRolePermissions,
+                    resolvedPermissionNames);
+                addResolvedScope(updateFeatureScope, systemPermissions, resolvedRolePermissions,
+                    resolvedPermissionNames);
+                addResolvedScope(deleteFeatureScope, systemPermissions, resolvedRolePermissions,
+                    resolvedPermissionNames);
+            }
+        });
+    }
+
+    /**
+     * Resolve the given scope name against the system permissions and add it to the resolved role permissions if it is
+     * not already present.
+     *
+     * @param scope                   Scope name to resolve and add.
+     * @param systemPermissions       System permissions used to resolve permission details from permission names.
+     * @param resolvedRolePermissions Resolved role permissions to be updated in place.
+     * @param resolvedPermissionNames Names of the already resolved permissions, used to avoid duplicates.
+     */
+    private void addResolvedScope(String scope, List<Permission> systemPermissions,
+                                  List<Permission> resolvedRolePermissions, Set<String> resolvedPermissionNames) {
+
+        if (scope == null || resolvedPermissionNames.contains(scope)) {
+            return;
+        }
+        systemPermissions.stream()
+            .filter(systemPermission -> systemPermission.getName().equals(scope))
+            .findFirst()
+            .ifPresent(systemPermission -> {
+                resolvedRolePermissions.add(systemPermission);
+                resolvedPermissionNames.add(scope);
+            });
     }
 
     private boolean shouldSkipPermissionResolution(RoleBasicInfo role) {

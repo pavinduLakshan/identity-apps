@@ -21,13 +21,11 @@ import { LocaleMeta } from "../../models";
 
 export const meta: LocaleMeta = {
     code: "nl-NL",
-    direction: "ltr",
     flag: "nl",
     name: "Nederlands (Nederland)",
     namespaces: [
         I18nModuleConstants.COMMON_NAMESPACE,
         I18nModuleConstants.MY_ACCOUNT_NAMESPACE,
-        I18nModuleConstants.EXTENSIONS_NAMESPACE,
-        I18nModuleConstants.COMMON_USERS_NAMESPACE
+        I18nModuleConstants.EXTENSIONS_NAMESPACE
     ]
 };

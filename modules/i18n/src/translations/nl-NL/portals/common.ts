@@ -35,126 +35,10 @@ export const common: CommonNS = {
     applicationName: "Naam van de toepassing",
     applications: "Toepassingen",
     approvalStatus: "Goedkeuringsstatus",
-    approvals: "Goedkeuringen",
-    approvalsPage: {
-        list: {
-            columns: {
-                actions: "Acties",
-                name: "Naam"
-            }
-        },
-        modals: {
-            description: "Beoordeel de operationele taken die uw goedkeuring vereisen",
-            header: "Goedkeuringen",
-            subHeader: "Beoordeel de operationele taken die uw goedkeuring vereisen"
-        },
-        notifications: {
-            fetchApprovalDetails: {
-                error: {
-                    description: "{{description}}",
-                    message: "Fout bij het ophalen van de goedkeuringsdetails"
-                },
-                genericError: {
-                    description: "De goedkeuringsdetails konden niet worden opgehaald.",
-                    message: "Er is een fout opgetreden"
-                }
-            },
-            fetchPendingApprovals: {
-                error: {
-                    description: "{{description}}",
-                    message: "Fout bij het ophalen van openstaande goedkeuringen"
-                },
-                genericError: {
-                    description: "De openstaande goedkeuringen konden niet worden opgehaald.",
-                    message: "Er is een fout opgetreden"
-                }
-            },
-            statusUpdate: {
-                approved: {
-                    description: "Het goedkeuringsverzoek is goedgekeurd.",
-                    message: "Goedkeuringsverzoek goedgekeurd"
-                },
-                claimed: {
-                    description: "Het goedkeuringsverzoek is geclaimd.",
-                    message: "Goedkeuringsverzoek geclaimd"
-                },
-                rejected: {
-                    description: "Het goedkeuringsverzoek is afgewezen.",
-                    message: "Goedkeuringsverzoek afgewezen"
-                },
-                released: {
-                    description: "Het goedkeuringsverzoek is vrijgegeven.",
-                    message: "Goedkeuringsverzoek vrijgegeven"
-                }
-            },
-            updatePendingApprovals: {
-                error: {
-                    description: "{{description}}",
-                    message: "Fout bij het bijwerken van de goedkeuring"
-                },
-                genericError: {
-                    description: "Het openstaande goedkeuringsverzoek kon niet worden bijgewerkt.",
-                    message: "Er is een fout opgetreden"
-                },
-                success: {
-                    description: "Het goedkeuringsverzoek is succesvol bijgewerkt.",
-                    message: "Bijwerken geslaagd"
-                }
-            }
-        },
-        operationTypes: {
-            addRole: "Rol toevoegen",
-            addUser: "Gebruiker toevoegen",
-            all: "Alle bewerkingen",
-            deleteRole: "Rol verwijderen",
-            deleteUser: "Gebruiker verwijderen",
-            selfRegisterUser: "Zelfregistratie van gebruiker",
-            updateRolesOfUser: "Gebruikers van de rol bijwerken"
-        },
-        placeholders: {
-            emptyApprovalFilter: {
-                action: "Alles bekijken",
-                subtitle: "Er zijn momenteel geen goedkeuringen met de status {{status}}.",
-                title: "Geen resultaten gevonden"
-            },
-            emptyApprovalList: {
-                action: "",
-                subtitle: "Er zijn momenteel geen goedkeuringen om te beoordelen.",
-                title: "Geen goedkeuringen"
-            },
-            emptySearchResults: {
-                action: "Alles bekijken",
-                subtitles: {
-                    0: "We konden de workflow waarnaar u zocht niet vinden.",
-                    1: "Controleer of u een workflow met deze naam heeft in",
-                    2: "het systeem."
-                },
-                title: "Geen goedkeuringen"
-            },
-            searchApprovals: "Zoeken op workflownaam"
-        },
-        propertyMessages: {
-            assignedUsersDeleted: "De toegewezen gebruikers zijn verwijderd.",
-            roleDeleted: "De rol is verwijderd.",
-            selfRegistration: "Zelfregistratie",
-            unassignedUsersDeleted: "De niet-toegewezen gebruikers zijn verwijderd."
-        },
-        search: {
-            placeholder: "Zoeken op verzoek-ID"
-        },
-        subTitle: "Beoordeel de operationele taken die uw goedkeuring vereisen",
-        title: "Goedkeuringen"
-    },
     approve: "Goedkeuren",
-    approved: "Goedgekeurd",
     apps: "Toepassingen",
-    assignYourself: "Wijs aan uzelf toe",
     assignee: "Gemachtigde",
     assignees: "Controleurs",
-    asyncOperationErrorMessage: {
-        description: "Er is iets misgegaan",
-        message: "Er is een onverwachte fout opgetreden. Probeer het later opnieuw."
-    },
     authentication: "Authenticatie",
     authenticator: "Authenticator",
     authenticator_plural: "Authenticators",
@@ -170,6 +54,7 @@ export const common: CommonNS = {
         heading: "Er is iets misgegaan",
         primaryActionText: "Toepassing opnieuw laden"
     },
+    claim: "Claimen",
     clear: "Wissen",
     clientId: "Client-ID",
     close: "Sluiten",
@@ -179,15 +64,12 @@ export const common: CommonNS = {
     confirm: "Bevestigen",
     contains: "Bevat",
     continue: "Doorgaan",
-    copied: "Gekopieerd!",
     copyToClipboard: "Kopiëren naar klembord",
     create: "Aanmaken",
     createdOn: "Aangemaakt op",
     dangerZone: "Gevarenzone",
     darkMode: "Donkere modus",
-    default: "Standaard",
     delete: "Verwijderen",
-    deprecated: "Deze configuratie is verouderd en wordt in een toekomstige versie verwijderd.",
     description: "Beschrijving",
     deviceModel: "Apparaatmodel",
     disable: "uitschakelen",
@@ -214,7 +96,6 @@ export const common: CommonNS = {
     goBackHome: "Terug naar startpagina",
     goFullScreen: "Volledig scherm openen",
     good: "Goed",
-    greaterThanOrEqual: "Groter dan of gelijk aan",
     help: "Help",
     hide: "Verbergen",
     hidePassword: "Wachtwoord verbergen",
@@ -228,7 +109,6 @@ export const common: CommonNS = {
     lastSeen: "Laatst gezien",
     lastUpdatedOn: "Laatst bijgewerkt op",
     learnMore: "Meer informatie",
-    lessThanOrEqual: "Kleiner dan of gelijk aan",
     lightMode: "Lichte modus",
     loading: "Laden",
     loginTime: "Aanmeldtijd",
@@ -251,15 +131,11 @@ export const common: CommonNS = {
     new: "Nieuw",
     next: "Volgende",
     noResultsFound: "Geen resultaten gevonden",
-    none: "Geen",
     okay: "Oké",
     operatingSystem: "Besturingssysteem",
-    operationType: "Type bewerking",
     operations: "Bewerkingen",
     organizationName: "{{orgName}} organisatie",
     overview: "Overzicht",
-    parameter: "Parameter",
-    pending: "In afwachting",
     personalInfo: "Persoonlijke gegevens",
     pin: "Vastmaken",
     pinned: "Vastgemaakt",
@@ -271,30 +147,25 @@ export const common: CommonNS = {
     priority: "Prioriteit",
     privacy: "Privacy",
     properties: "Eigenschappen",
-    publish: "Publiceren",
     ready: "Gereed",
     regenerate: "Opnieuw genereren",
     register: "Registreren",
     reject: "Afwijzen",
-    rejected: "Afgewezen",
+    release: "Vrijgeven",
     remove: "Verwijderen",
     removeAll: "Alles verwijderen",
     required: "Dit is verplicht",
     reserved: "Gereserveerd",
     resetFilters: "Filters opnieuw instellen",
     retry: "Opnieuw proberen",
-    revert: "Terugdraaien",
     revoke: "Intrekken",
     revokeAll: "Alles intrekken",
     samples: "Voorbeelden",
     save: "Opslaan",
-    saveDraft: "Concept opslaan",
     sdks: "SDK's",
     search: "Zoeken",
     searching: "Zoeken",
     security: "Beveiliging",
-    selectAll: "Alles selecteren",
-    selectNone: "Niets selecteren",
     services: "Diensten",
     settings: "Instellingen",
     setup: "Installeren",
@@ -315,7 +186,6 @@ export const common: CommonNS = {
     terminateSession: "Sessie beëindigen",
     tooShort: "Te kort",
     type: "Type",
-    unassign: "Toewijzing opheffen",
     unpin: "Losmaken",
     unpinned: "Losgemaakt",
     update: "Bijwerken",
@@ -323,7 +193,6 @@ export const common: CommonNS = {
     verified: "Geverifieerd",
     verify: "Verifiëren",
     view: "Bekijken",
-    viewDetails: "Details bekijken",
     weak: "Zwak",
     weakPassword: "De sterkte van het wachtwoord moet minstens goed zijn."
 };

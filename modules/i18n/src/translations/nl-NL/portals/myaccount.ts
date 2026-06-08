@@ -433,54 +433,6 @@ export const myAccount: MyAccountNS = {
                 }
             }
         },
-        "policyConsentManagement": {
-            "consentedOnLabel": "Actief vanaf",
-            "dangerZones": {
-                "revoke": {
-                    "actionTitle": "Intrekken",
-                    "header": "Beleidstoestemming intrekken",
-                    "subheader": "Deze actie trekt uw toestemming voor dit beleid in. Mogelijk wordt u gevraagd opnieuw toestemming te geven wanneer u de service de volgende keer gebruikt."
-                }
-            },
-            "modals": {
-                "revokeModal": {
-                    "heading": "Toestemming intrekken voor {{policyName}}",
-                    "message": "Hiermee trekt u uw toestemming voor dit beleid in. Mogelijk wordt u gevraagd opnieuw toestemming te geven wanneer u de service de volgende keer gebruikt. Weet u zeker dat u wilt doorgaan?"
-                }
-            },
-            "notifications": {
-                "fetch": {
-                    "error": {
-                        "description": "Er is een fout opgetreden bij het ophalen van uw beleidstoestemmingen.",
-                        "message": "Ophalen mislukt"
-                    },
-                    "genericError": {
-                        "description": "Er is een fout opgetreden bij het ophalen van uw beleidstoestemmingen.",
-                        "message": "Ophalen mislukt"
-                    },
-                    "success": {
-                        "description": "Uw beleidstoestemmingen zijn succesvol opgehaald.",
-                        "message": "Ophalen geslaagd"
-                    }
-                },
-                "revoke": {
-                    "error": {
-                        "description": "Er is een fout opgetreden bij het intrekken van de beleidstoestemming.",
-                        "message": "Intrekken mislukt"
-                    },
-                    "genericError": {
-                        "description": "Er is een fout opgetreden bij het intrekken van de beleidstoestemming.",
-                        "message": "Intrekken mislukt"
-                    },
-                    "success": {
-                        "description": "De beleidstoestemming is succesvol ingetrokken.",
-                        "message": "Toestemming ingetrokken"
-                    }
-                }
-            },
-            "policyUrlLabel": "Beleid bekijken",
-            "versionLabel": "Versie {{version}}"
-        },
         "cookieConsent": {
             "confirmButton": "Ik begrijp het",
             "content": "We gebruiken cookies om u de best mogelijke algemene ervaring te garanderen. Deze cookies worden gebruikt om een doorlopende sessie te onderhouden en tegelijkertijd vloeiende en gepersonaliseerde diensten te bieden. Voor meer informatie over hoe we cookies gebruiken, raadpleegt u ons <1>Cookiebeleid</1>."
@@ -546,13 +498,6 @@ export const myAccount: MyAccountNS = {
                     "name": "My Account"
                 },
                 "tooltip": "Apps"
-            },
-            "dropdown": {
-                "footer": {
-                    "cookiePolicy": "Cookies",
-                    "privacyPolicy": "Privacy",
-                    "termsOfService": "Voorwaarden"
-                }
             },
             "organizationLabel": "Dit account wordt beheerd door"
         },
@@ -701,12 +646,8 @@ export const myAccount: MyAccountNS = {
                     "scan": {
                         "additionNote": "De QR-code is succesvol aan uw profiel toegevoegd",
                         "authenticatorApps": "Authenticatortoepassingen",
-                        "copiedToClipboard": "Gekopieerd!",
-                        "copyToClipboard": "Kopiëren",
                         "generate": "Een nieuwe code genereren",
                         "heading": "Scan deze QR-code met een authenticatortoepassing",
-                        "hideSecretKey": "Geheim verbergen",
-                        "manualEntryLabel": "Voer de code handmatig in",
                         "messageBody": "U kunt een compatibele authenticatortoepassing uit deze lijst gebruiken :",
                         "messageHeading": "Heeft u geen authenticatortoepassing?",
                         "regenerateConfirmLabel": "Bevestig het opnieuw genereren van een nieuwe QR-code",
@@ -714,7 +655,6 @@ export const myAccount: MyAccountNS = {
                             "extended": "Wanneer u een nieuwe QR-code opnieuw genereert, moet u deze scannen en uw authenticatortoepassing opnieuw installeren. U kunt zich niet meer aanmelden met de vorige QR-code.",
                             "generic": "Wanneer u een nieuwe QR-code opnieuw genereert, moet u deze scannen en uw authenticatortoepassing opnieuw installeren. Uw vorige configuratie werkt niet meer."
                         },
-                        "showSecretKey": "Geheim tonen"
                     },
                     "toolTip": "Heeft u geen toepassing? Download een authenticatortoepassing zoals Google Authenticator uit de <1>App Store</1> of <3>Google Play</3>",
                     "verify": {
@@ -1117,6 +1057,242 @@ export const myAccount: MyAccountNS = {
                 }
             }
         },
+        "privacy": {
+            "about": {
+                "description":
+                    "WSO2 Identity Server (in dit beleid aangeduid als \"WSO2 IS\") is een open-source " +
+                    "identiteitsbeheer- en rechtenserver die is gebaseerd op open standaarden en specificaties.",
+                "heading": "Over WSO2 Identity Server"
+            },
+            "privacyPolicy": {
+                "collectionOfPersonalInfo": {
+                    "description": {
+                        "list1": {
+                            0: "WSO2 IS gebruikt uw IP-adres om verdachte aanmeldpogingen bij uw account te detecteren.",
+                            1:
+                                "WSO2 IS gebruikt attributen zoals uw voornaam, achternaam, enzovoort om een rijke en" +
+                                " gepersonaliseerde gebruikerservaring te bieden.",
+                            2: "WSO2 IS gebruikt uw beveiligingsvragen en antwoorden alleen om accountherstel mogelijk te maken."
+                        },
+                        "para1": "WSO2 IS verzamelt uw gegevens alleen om aan uw toegangsvereisten te voldoen. Bijvoorbeeld:"
+                    },
+                    "heading": "Verzameling van persoonlijke gegevens",
+                    "trackingTechnologies": {
+                        "description": {
+                            "list1": {
+                                0:
+                                    "Gegevens verzamelen vanaf de gebruikersprofielpagina waar u uw persoonlijke" +
+                                    " gegevens invoert.",
+                                1: "Uw IP-adres volgen via HTTP-verzoeken, HTTP-headers en TCP/IP.",
+                                2: "Uw geografische gegevens volgen via het IP-adres.",
+                                3:
+                                    "Uw aanmeldgeschiedenis volgen met browsercookies. Raadpleeg ons" +
+                                    " {{cookiePolicyLink}} voor meer informatie."
+                            },
+                            "para1": "WSO2 IS verzamelt uw gegevens door:"
+                        },
+                        "heading": "Trackingtechnologieën"
+                    }
+                },
+                "description": {
+                    "para1":
+                        "Dit beleid beschrijft hoe WSO2 IS uw persoonlijke gegevens vastlegt, de doeleinden van" +
+                        " de verzameling en informatie over het bewaren van uw persoonlijke gegevens.",
+                    "para2":
+                        "Houd er rekening mee dat dit beleid alleen ter referentie is en van toepassing is op de software " +
+                        "als product. WSO2 LLC. en de ontwikkelaars hebben geen toegang tot de gegevens die in " +
+                        "WSO2 IS worden bewaard. Raadpleeg de sectie <1>disclaimer</1> voor meer informatie.",
+                    "para3":
+                        "Entiteiten, organisaties of personen die het gebruik en beheer van WSO2 IS controleren, " +
+                        "moeten hun eigen privacybeleid opstellen waarin wordt uiteengezet hoe gegevens door de " +
+                        "betreffende entiteit, organisatie of persoon worden beheerd of verwerkt."
+                },
+                "disclaimer": {
+                    "description": {
+                        "list1": {
+                            0:
+                                "WSO2, zijn werknemers, partners en gelieerde ondernemingen hebben geen toegang tot en " +
+                                "vereisen, bewaren, verwerken of beheren geen gegevens, inclusief persoonlijke gegevens " +
+                                "die in WSO2 IS zijn opgenomen. Alle gegevens, inclusief persoonlijke gegevens, worden beheerd en " +
+                                "verwerkt door de entiteit of persoon die WSO2 IS uitvoert. WSO2, zijn werknemers, partners " +
+                                "en gelieerde ondernemingen zijn geen gegevensverwerker of gegevensbeheerder in de zin van " +
+                                "enige regelgeving inzake gegevensprivacy. WSO2 geeft geen garanties en aanvaardt geen " +
+                                "verantwoordelijkheid of aansprakelijkheid in verband met de rechtmatigheid, de wijze en " +
+                                "de doeleinden waarvoor WSO2 IS door dergelijke entiteiten of personen wordt gebruikt.",
+                            1:
+                                "Dit privacybeleid is bedoeld ter informatie voor de entiteit of personen die WSO2 IS " +
+                                "uitvoeren en beschrijft de processen en functionaliteit binnen WSO2 IS met betrekking tot " +
+                                "de bescherming van persoonlijke gegevens. Het is de verantwoordelijkheid van entiteiten " +
+                                "en personen die WSO2 IS uitvoeren om hun eigen regels en processen voor de persoonlijke " +
+                                "gegevens van gebruikers op te stellen en te beheren. Dergelijke regels en processen kunnen " +
+                                "het hierin beschreven gebruiks-, opslag- en openbaarmakingsbeleid wijzigen. Gebruikers " +
+                                "moeten daarom het privacybeleid raadplegen van de entiteit of personen die WSO2 IS uitvoeren " +
+                                "voor details over de persoonlijke gegevens van gebruikers."
+                        }
+                    },
+                    "heading": "Disclaimer"
+                },
+                "disclosureOfPersonalInfo": {
+                    "description":
+                        "WSO2 IS maakt persoonlijke gegevens alleen bekend aan de relevante toepassingen (ook " +
+                        "bekend als Service Providers) die bij WSO2 IS zijn geregistreerd. Deze toepassingen zijn " +
+                        "geregistreerd door de identiteitsbeheerder van uw entiteit of organisatie. Persoonlijke " +
+                        "gegevens worden alleen bekendgemaakt voor de doeleinden waarvoor ze zijn verzameld (of voor " +
+                        "een gebruik dat als consistent met dat doel is aangemerkt), zoals beheerd door dergelijke Service Providers, " +
+                        "tenzij u anderszins toestemming hebt gegeven of wanneer dit wettelijk vereist is.",
+                    "heading": "Openbaarmaking van persoonlijke gegevens",
+                    "legalProcess": {
+                        "description":
+                            "Houd er rekening mee dat de organisatie, entiteit of persoon die WSO2 IS uitvoert, " +
+                            "gedwongen kan worden uw persoonlijke gegevens met of zonder uw toestemming bekend te maken " +
+                            "wanneer dit wettelijk vereist is na een behoorlijk en rechtmatig proces.",
+                        "heading": "Juridisch proces"
+                    }
+                },
+                "heading": "Privacybeleid",
+                "moreInfo": {
+                    "changesToPolicy": {
+                        "description": {
+                            "para1":
+                                "Bijgewerkte versies van WSO2 IS kunnen wijzigingen in dit beleid bevatten en " +
+                                "herzieningen van dit beleid worden in dergelijke upgrades opgenomen. Dergelijke wijzigingen " +
+                                "zijn alleen van toepassing op gebruikers die ervoor kiezen bijgewerkte versies te gebruiken.",
+                            "para2":
+                                "De organisatie die WSO2 IS uitvoert, kan het privacybeleid van tijd tot tijd herzien. " +
+                                "U vindt het meest recente geldende beleid via de betreffende link die wordt verstrekt " +
+                                "door de organisatie die WSO2 IS uitvoert. De organisatie zal wijzigingen in het " +
+                                "privacybeleid via haar officiële openbare kanalen bekendmaken."
+                        },
+                        "heading": "Wijzigingen in dit beleid"
+                    },
+                    "contactUs": {
+                        "description": {
+                            "para1":
+                                "Neem contact op met WSO2 als u vragen of zorgen heeft over dit privacybeleid."
+                        },
+                        "heading": "Neem contact met ons op"
+                    },
+                    "heading": "Meer informatie",
+                    "yourChoices": {
+                        "description": {
+                            "para1":
+                                "Als u al een gebruikersaccount binnen WSO2 IS heeft, heeft u het recht om " +
+                                "uw account te deactiveren als u dit privacybeleid onaanvaardbaar vindt.",
+                            "para2":
+                                "Als u geen account heeft en niet akkoord gaat met ons privacybeleid, " +
+                                "kunt u ervoor kiezen er geen aan te maken."
+                        },
+                        "heading": "Uw keuzes"
+                    }
+                },
+                "storageOfPersonalInfo": {
+                    "heading": "Opslag van persoonlijke gegevens",
+                    "howLong": {
+                        "description": {
+                            "list1": {
+                                0: "Huidig wachtwoord",
+                                1: "Eerder gebruikte wachtwoorden"
+                            },
+                            "para1":
+                                "WSO2 IS bewaart uw persoonlijke gegevens zolang u een actieve gebruiker van ons " +
+                                "systeem bent. U kunt uw persoonlijke gegevens op elk moment bijwerken via de beschikbare selfservice-" +
+                                "gebruikersportalen.",
+                            "para2":
+                                "WSO2 IS kan gehashte geheimen bewaren om u een extra beveiligingsniveau te bieden. " +
+                                "Dit omvat:"
+                        },
+                        "heading": "Hoelang uw persoonlijke gegevens worden bewaard"
+                    },
+                    "requestRemoval": {
+                        "description": {
+                            "para1":
+                                "U kunt de beheerder verzoeken uw account te verwijderen. De beheerder is " +
+                                "de beheerder van de organisatie waaronder u bent geregistreerd, of de " +
+                                "superbeheerder als u de organisatiefunctie niet gebruikt.",
+                            "para2":
+                                "Daarnaast kunt u verzoeken om alle sporen van uw activiteiten te anonimiseren " +
+                                "die WSO2 IS mogelijk heeft bewaard in logboeken, databases of analytische opslag."
+                        },
+                        "heading": "Hoe u verwijdering van uw persoonlijke gegevens kunt aanvragen"
+                    },
+                    "where": {
+                        "description": {
+                            "para1":
+                                "WSO2 IS slaat uw persoonlijke gegevens op in beveiligde databases. WSO2 IS " +
+                                "past passende, in de sector geaccepteerde beveiligingsmaatregelen toe om de database " +
+                                "waarin uw persoonlijke gegevens worden bewaard te beschermen. WSO2 IS als product draagt " +
+                                "uw gegevens niet over aan en deelt uw gegevens niet met derden of andere locaties.",
+                            "para2":
+                                "WSO2 IS kan encryptie gebruiken om uw persoonlijke gegevens met een extra " +
+                                "beveiligingsniveau te bewaren."
+                        },
+                        "heading": "Waar uw persoonlijke gegevens worden opgeslagen"
+                    }
+                },
+                "useOfPersonalInfo": {
+                    "description": {
+                        "list1": {
+                            0:
+                                "Om u een gepersonaliseerde gebruikerservaring te bieden. WSO2 IS gebruikt hiervoor uw naam en " +
+                                "geüploade profielfoto's.",
+                            1:
+                                "Om uw account te beschermen tegen onbevoegde toegang of mogelijke hackpogingen. " +
+                                "WSO2 IS gebruikt hiervoor HTTP- of TCP/IP-headers.",
+                            2:
+                                "Om statistische gegevens af te leiden voor analytische doeleinden met betrekking tot verbeteringen van systeemprestaties. " +
+                                "WSO2 IS bewaart na statistische berekeningen geen persoonlijke gegevens. " +
+                                "Daarom bevat het statistische rapport geen middelen om een individuele persoon te identificeren."
+                        },
+                        "para1":
+                            "WSO2 IS gebruikt uw persoonlijke gegevens alleen voor de doeleinden waarvoor ze zijn " +
+                            "verzameld (of voor een gebruik dat als consistent met dat doel is aangemerkt).",
+                        "para2": "WSO2 IS gebruikt uw persoonlijke gegevens alleen voor de volgende doeleinden.",
+                        "subList1": {
+                            "heading": "Dit omvat:",
+                            "list": {
+                                0: "IP-adres",
+                                1: "Browservingerafdruk",
+                                2: "Cookies"
+                            }
+                        },
+                        "subList2": {
+                            "heading": "WSO2 IS kan het volgende gebruiken:",
+                            "list": {
+                                0: "IP-adres om geografische gegevens af te leiden",
+                                1: "Browservingerafdruk om de browsertechnologie en/of versie te bepalen"
+                            }
+                        }
+                    },
+                    "heading": "Gebruik van persoonlijke gegevens"
+                },
+                "whatIsPersonalInfo": {
+                    "description": {
+                        "list1": {
+                            0:
+                                "Uw gebruikersnaam (behalve in gevallen waarin de door uw werkgever aangemaakte gebruikersnaam " +
+                                "onder een contract valt)",
+                            1: "Uw geboortedatum/leeftijd",
+                            2: "IP-adres dat wordt gebruikt om aan te melden",
+                            3: "Uw apparaat-ID als u een apparaat (bijv. telefoon of tablet) gebruikt om aan te melden"
+                        },
+                        "list2": {
+                            0: "Stad/land van waaruit u de TCP/IP-verbinding tot stand bracht",
+                            1: "Tijdstip waarop u zich heeft aangemeld (jaar, maand, week, uur of minuut)",
+                            2: "Type apparaat dat u heeft gebruikt om aan te melden (bijv. telefoon of tablet)",
+                            3: "Besturingssysteem en algemene browserinformatie"
+                        },
+                        "para1":
+                            "WSO2 IS beschouwt alles wat betrekking heeft op u en waarmee u kunt worden geïdentificeerd als " +
+                            "uw persoonlijke gegevens. Dit omvat, maar is niet beperkt tot:",
+                        "para2":
+                            "WSO2 IS verzamelt echter ook de volgende informatie die niet als persoonlijke gegevens wordt beschouwd, " +
+                            "maar alleen voor <1>statistische</1> doeleinden wordt gebruikt. De reden hiervoor " +
+                            "is dat deze informatie niet kan worden gebruikt om u te volgen."
+                    },
+                    "heading": "Wat zijn persoonlijke gegevens?"
+                }
+            }
+        },
         "profile": {
             "actions": {
                 "deleteEmail": "E-mailadres verwijderen",
@@ -1247,9 +1423,6 @@ export const myAccount: MyAccountNS = {
                     }
                 },
                 "generic": {
-                    "dropdown": {
-                        "placeholder": "Selecteer uw {{FieldName}}"
-                    },
                     "inputs": {
                         "placeholder": "Voer uw {{fieldName}} in",
                         "readonly": {
@@ -1257,13 +1430,9 @@ export const myAccount: MyAccountNS = {
                             "popup": "Neem contact op met de beheerder om uw {{fieldName}} bij te werken"
                         },
                         "validations": {
-                            "duplicate": "{{fieldName}} mag geen dubbele waarden hebben",
                             "empty": "Het attribuut {{fieldName}} is verplicht",
                             "invalidFormat": "Het formaat van de ingevoerde {{fieldName}} is onjuist"
                         }
-                    },
-                    "radioGroup": {
-                        "optionNone": "Geen"
                     }
                 },
                 "mobileChangeForm": {
@@ -1314,20 +1483,11 @@ export const myAccount: MyAccountNS = {
                     "content": "Bevestig uw e-mailadres zodat u het aan uw profiel kunt toevoegen",
                     "header": "Bevestiging in afwachting!"
                 },
-                "emailVerification": {
-                    "content": "Dit e-mailadres wordt gebruikt om verificatie-e-mails te verzenden wanneer tweefactorauthenticatie is ingeschakeld en om herstelcodes te verzenden in geval van herstel van een gebruikersnaam/wachtwoord. Om dit e-mailadres bij te werken, moet u het nieuwe e-mailadres verifiëren door de verificatiecode in te voeren die naar uw nieuwe e-mailadres is verzonden. Klik op bijwerken als u wilt doorgaan."
-                },
                 "mobileVerification": {
                     "content": "Dit mobiele nummer wordt gebruikt voor het verzenden van SMS-OTP wanneer tweefactorauthenticatie is ingeschakeld en voor het verzenden van herstelcodes in geval van herstel van een gebruikersnaam/wachtwoord. Om dit nummer bij te werken, moet u het nieuwe nummer verifiëren door de verificatiecode in te voeren die naar uw nieuwe nummer is verzonden. Klik op bijwerken als u wilt doorgaan."
                 }
             },
             "modals": {
-                "customMultiAttributeDeleteConfirmation": {
-                    "assertionHint": "Bevestig uw actie.",
-                    "content": "Deze actie is onomkeerbaar en verwijdert de geselecteerde waarde definitief.",
-                    "description": "Als u deze geselecteerde waarde verwijdert, wordt deze permanent uit uw profiel verwijderd.",
-                    "heading": "Weet u het zeker?"
-                },
                 "emailAddressDeleteConfirmation": {
                     "assertionHint": "Bevestig uw actie.",
                     "content": "Deze actie is onomkeerbaar en verwijdert het e-mailadres permanent.",
@@ -1443,40 +1603,6 @@ export const myAccount: MyAccountNS = {
                 }
             }
         },
-        "selfSignUp": {
-            "preference": {
-                "notifications": {
-                    "error": {
-                        "description": "{{description}}.",
-                        "message": "Fout bij het ophalen van de zelfregistratievoorkeuren"
-                    },
-                    "genericError": {
-                        "description": "Er is een fout opgetreden bij het ophalen van de zelfregistratievoorkeuren.",
-                        "message": "Er is iets misgegaan"
-                    },
-                    "success": {
-                        "description": "Zelfregistratievoorkeuren succesvol opgehaald.",
-                        "message": "Zelfregistratievoorkeuren succesvol opgehaald"
-                    }
-                }
-            }
-        },
-        "systemNotificationAlert": {
-            "resend": "Opnieuw verzenden",
-            "selfSignUp": {
-                "awaitingAccountConfirmation": "Uw account is nog niet actief. We hebben een activeringslink naar uw geregistreerde e-mailadres gestuurd. Heeft u een nieuwe link nodig?",
-                "notifications": {
-                    "resendError": {
-                        "description": "Er is een fout opgetreden bij het opnieuw verzenden van de accountbevestigingsmail.",
-                        "message": "Er is iets misgegaan"
-                    },
-                    "resendSuccess": {
-                        "description": "Accountbevestigingsmail succesvol opnieuw verzonden.",
-                        "message": "Accountbevestigingsmail succesvol opnieuw verzonden"
-                    }
-                }
-            }
-        },
         "userAvatar": {
             "infoPopover": "Deze afbeelding is opgehaald uit de <1>Gravatar</1>-service.",
             "urlUpdateHeader": "Voer de URL van een afbeelding in om uw profielfoto bij te werken"
@@ -1553,67 +1679,6 @@ export const myAccount: MyAccountNS = {
             }
         },
         "verificationOnUpdate": {
-            "modal": {
-                "common": {
-                    "step2": {
-                        "hint": "Heeft u geen code ontvangen?",
-                        "resend": "Opnieuw verzenden",
-                        "resendSuccess": "Het verzoek om de code opnieuw te verzenden is succesvol verzonden",
-                        "validation": {
-                            "otpRequired": "Voer de verificatiecode in"
-                        },
-                        "verificationFailure": "Verificatie mislukt. Probeer het opnieuw."
-                    }
-                },
-                "email": {
-                    "step1": {
-                        "content": {
-                            "label": "Voer uw nieuwe e-mailadres in"
-                        },
-                        "heading": "Verifieer uw e-mailadres",
-                        "validation": {
-                            "invalidFormat": "Voer een geldig e-mailadres in",
-                            "required": "E-mailadres vereist"
-                        }
-                    },
-                    "step2": {
-                        "content": {
-                            "label": "Er is een verificatiecode naar uw e-mailadres verzonden. Voer de onderstaande code in om uw e-mailadres te verifiëren."
-                        },
-                        "heading": "Verifieer uw e-mailadres"
-                    },
-                    "step3": {
-                        "content": "Geslaagd! Uw e-mailadres is succesvol geverifieerd."
-                    }
-                },
-                "notifications": {
-                    "resendError": {
-                        "description": "Er is een fout opgetreden bij het opnieuw verzenden van de verificatiecode",
-                        "message": "Er is een probleem opgetreden"
-                    }
-                },
-                "sms": {
-                    "step1": {
-                        "content": {
-                            "label": "Voer uw nieuwe mobiele nummer in"
-                        },
-                        "heading": "Verifieer uw mobiele nummer",
-                        "validation": {
-                            "invalidFormat": "Voer een geldig mobiel nummer in",
-                            "required": "Mobiel nummer vereist"
-                        }
-                    },
-                    "step2": {
-                        "content": {
-                            "label": "Er is een verificatiecode naar uw mobiele nummer verzonden. Voer de onderstaande code in om uw mobiele nummer te verifiëren."
-                        },
-                        "heading": "Verifieer uw mobiele nummer"
-                    },
-                    "step3": {
-                        "content": "Geslaagd! Uw mobiele nummer is succesvol geverifieerd."
-                    }
-                }
-            },
             "preference": {
                 "notifications": {
                     "error": {
@@ -1692,10 +1757,6 @@ export const myAccount: MyAccountNS = {
         "applications": {
             "subTitle": "Ontdek en open uw toepassingen",
             "title": "Toepassingen"
-        },
-        "consents": {
-            "subTitle": "Beheer de toestemmingen die u heeft gegeven voor toepassingen en geaccepteerde beleidsregels",
-            "title": "Toestemmingen"
         },
         "overview": {
             "subTitle": "Beheer uw persoonlijke gegevens, accountbeveiliging en privacy-instellingen",
@@ -1794,15 +1855,6 @@ export const myAccount: MyAccountNS = {
             "placeholders": {
                 "emptyConsentList": {
                     "heading": "U heeft geen toestemmingen gegeven"
-                }
-            }
-        },
-        "policyConsentManagement": {
-            "description": "Bekijk de beleidsregels die u heeft geaccepteerd.",
-            "heading": "Beleidstoestemmingen",
-            "placeholders": {
-                "emptyConsentList": {
-                    "heading": "U heeft geen beleidstoestemmingen geaccepteerd"
                 }
             }
         },

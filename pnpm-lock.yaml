@@ -199,7 +199,7 @@ importers:
         version: 14.3.1(@types/react@18.0.18)(react-dom@18.3.1)(react@18.3.1)
       '@testing-library/user-event':
         specifier: ^14.5.2
-        version: 14.6.1(@testing-library/dom@9.3.4)
+        version: 14.6.1(@testing-library/dom@7.31.2)
       '@types/crypto-js':
         specifier: ^3.1.43
         version: 3.1.47
@@ -455,728 +455,6 @@ importers:
       write-file-webpack-plugin:
         specifier: ^4.5.1
         version: 4.5.1
-
-  apps/console:
-    dependencies:
-      '@asgardeo/auth-react':
-        specifier: ^5.1.2
-        version: 5.2.3(@babel/runtime-corejs3@7.26.0)(react-dom@18.3.1)(react@18.3.1)
-      '@emotion/react':
-        specifier: ^11.11.0
-        version: 11.14.0(@types/react@18.0.18)(react@18.3.1)
-      '@emotion/styled':
-        specifier: ^11.11.0
-        version: 11.14.0(@emotion/react@11.14.0)(@types/react@18.0.18)(react@18.3.1)
-      '@monaco-editor/react':
-        specifier: ^4.5.1
-        version: 4.6.0(monaco-editor@0.52.2)(react-dom@18.3.1)(react@18.3.1)
-      '@mui/icons-material':
-        specifier: ^5.11.16
-        version: 5.16.14(@mui/material@5.13.0)(@types/react@18.0.18)(react@18.3.1)
-      '@mui/lab':
-        specifier: 5.0.0-alpha.129
-        version: 5.0.0-alpha.129(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@mui/material@5.13.0)(@types/react@18.0.18)(react-dom@18.3.1)(react@18.3.1)
-      '@mui/material':
-        specifier: 5.13.0
-        version: 5.13.0(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react@18.0.18)(react-dom@18.3.1)(react@18.3.1)
-      '@mui/system':
-        specifier: ^5.12.3
-        version: 5.16.14(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react@18.0.18)(react@18.3.1)
-      '@mui/utils':
-        specifier: ^5.12.3
-        version: 5.16.14(@types/react@18.0.18)(react@18.3.1)
-      '@oxygen-ui/react':
-        specifier: ^2.3.4
-        version: 2.3.4(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@mui/icons-material@5.16.14)(@mui/lab@5.0.0-alpha.129)(@mui/material@5.13.0)(@mui/system@5.16.14)(@mui/utils@5.16.14)(@types/react@18.0.18)(react-dom@18.3.1)(react@18.3.1)(typescript@4.9.5)
-      '@oxygen-ui/react-icons':
-        specifier: ^2.3.4
-        version: 2.3.4(react-dom@18.3.1)(react@18.3.1)(typescript@4.9.5)
-      '@wso2is/access-control':
-        specifier: ^3.3.19
-        version: link:../../modules/access-control
-      '@wso2is/admin.actions.v1':
-        specifier: ^1.11.50
-        version: link:../../features/admin.actions.v1
-      '@wso2is/admin.administrators.v1':
-        specifier: ^2.29.185
-        version: link:../../features/admin.administrators.v1
-      '@wso2is/admin.alternative-login-identifier.v1':
-        specifier: ^1.5.185
-        version: link:../../features/admin.alternative-login-identifier.v1
-      '@wso2is/admin.api-resources.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.api-resources.v1
-      '@wso2is/admin.api-resources.v2':
-        specifier: ^2.25.185
-        version: link:../../features/admin.api-resources.v2
-      '@wso2is/admin.application-templates.v1':
-        specifier: ^1.4.185
-        version: link:../../features/admin.application-templates.v1
-      '@wso2is/admin.applications.v1':
-        specifier: ^2.31.33
-        version: link:../../features/admin.applications.v1
-      '@wso2is/admin.authentication.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.authentication.v1
-      '@wso2is/admin.authorization.v1':
-        specifier: ^2.25.82
-        version: link:../../features/admin.authorization.v1
-      '@wso2is/admin.branding.v1':
-        specifier: ^2.28.42
-        version: link:../../features/admin.branding.v1
-      '@wso2is/admin.certificates.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.certificates.v1
-      '@wso2is/admin.claims.v1':
-        specifier: ^2.27.95
-        version: link:../../features/admin.claims.v1
-      '@wso2is/admin.connections.v1':
-        specifier: ^2.33.68
-        version: link:../../features/admin.connections.v1
-      '@wso2is/admin.console-settings.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.console-settings.v1
-      '@wso2is/admin.core.v1':
-        specifier: ^2.39.11
-        version: link:../../features/admin.core.v1
-      '@wso2is/admin.email-and-sms.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.email-and-sms.v1
-      '@wso2is/admin.email-management.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.email-management.v1
-      '@wso2is/admin.email-providers.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.email-providers.v1
-      '@wso2is/admin.extensions.v1':
-        specifier: ^2.36.110
-        version: link:../../features/admin.extensions.v1
-      '@wso2is/admin.feature-gate.v1':
-        specifier: ^1.4.185
-        version: link:../../features/admin.feature-gate.v1
-      '@wso2is/admin.groups.v1':
-        specifier: ^2.27.95
-        version: link:../../features/admin.groups.v1
-      '@wso2is/admin.home.v1':
-        specifier: ^1.6.185
-        version: link:../../features/admin.home.v1
-      '@wso2is/admin.identity-verification-providers.v1':
-        specifier: ^2.27.185
-        version: link:../../features/admin.identity-verification-providers.v1
-      '@wso2is/admin.impersonation.v1':
-        specifier: ^1.6.185
-        version: link:../../features/admin.impersonation.v1
-      '@wso2is/admin.logs.v1':
-        specifier: ^1.5.186
-        version: link:../../features/admin.logs.v1
-      '@wso2is/admin.oidc-scopes.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.oidc-scopes.v1
-      '@wso2is/admin.org-insights.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.org-insights.v1
-      '@wso2is/admin.organization-discovery.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.organization-discovery.v1
-      '@wso2is/admin.organizations.v1':
-        specifier: ^2.26.185
-        version: link:../../features/admin.organizations.v1
-      '@wso2is/admin.policy-administration.v1':
-        specifier: ^1.0.101
-        version: link:../../features/admin.policy-administration.v1
-      '@wso2is/admin.private-key-jwt.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.private-key-jwt.v1
-      '@wso2is/admin.push-providers.v1':
-        specifier: ^1.0.74
-        version: link:../../features/admin.push-providers.v1
-      '@wso2is/admin.remote-repository-configuration.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.remote-repository-configuration.v1
-      '@wso2is/admin.remote-userstores.v1':
-        specifier: ^1.7.141
-        version: link:../../features/admin.remote-userstores.v1
-      '@wso2is/admin.roles.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.roles.v1
-      '@wso2is/admin.roles.v2':
-        specifier: ^2.27.129
-        version: link:../../features/admin.roles.v2
-      '@wso2is/admin.saml2-configuration.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.saml2-configuration.v1
-      '@wso2is/admin.secrets.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.secrets.v1
-      '@wso2is/admin.server-configurations.v1':
-        specifier: ^2.32.110
-        version: link:../../features/admin.server-configurations.v1
-      '@wso2is/admin.session-management.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.session-management.v1
-      '@wso2is/admin.sms-providers.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.sms-providers.v1
-      '@wso2is/admin.sms-templates.v1':
-        specifier: ^1.0.184
-        version: link:../../features/admin.sms-templates.v1
-      '@wso2is/admin.subscription.v1':
-        specifier: ^1.5.185
-        version: link:../../features/admin.subscription.v1
-      '@wso2is/admin.template-core.v1':
-        specifier: ^1.5.139
-        version: link:../../features/admin.template-core.v1
-      '@wso2is/admin.tenants.v1':
-        specifier: ^2.28.159
-        version: link:../../features/admin.tenants.v1
-      '@wso2is/admin.username-validation.v1':
-        specifier: ^1.5.185
-        version: link:../../features/admin.username-validation.v1
-      '@wso2is/admin.users.v1':
-        specifier: ^2.30.95
-        version: link:../../features/admin.users.v1
-      '@wso2is/admin.userstores.v1':
-        specifier: ^2.27.11
-        version: link:../../features/admin.userstores.v1
-      '@wso2is/admin.validation.v1':
-        specifier: ^2.27.123
-        version: link:../../features/admin.validation.v1
-      '@wso2is/admin.workflow-approvals.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.workflow-approvals.v1
-      '@wso2is/admin.wsfed-configuration.v1':
-        specifier: ^2.25.185
-        version: link:../../features/admin.wsfed-configuration.v1
-      '@wso2is/core':
-        specifier: ^2.6.5
-        version: link:../../modules/core
-      '@wso2is/dynamic-forms':
-        specifier: ^2.4.39
-        version: link:../../modules/dynamic-forms
-      '@wso2is/form':
-        specifier: ^2.6.34
-        version: link:../../modules/form
-      '@wso2is/forms':
-        specifier: ^2.3.21
-        version: link:../../modules/forms
-      '@wso2is/i18n':
-        specifier: ^2.20.1
-        version: link:../../modules/i18n
-      '@wso2is/react-components':
-        specifier: ^2.9.11
-        version: link:../../modules/react-components
-      '@wso2is/theme':
-        specifier: ^2.6.11
-        version: link:../../modules/theme
-      '@wso2is/validation':
-        specifier: ^2.4.1
-        version: link:../../modules/validation
-      axios:
-        specifier: ^0.19.2
-        version: 0.19.2
-      codemirror:
-        specifier: ^5.52.0
-        version: 5.65.18
-      country-language:
-        specifier: ^0.1.7
-        version: 0.1.7
-      deep-equal:
-        specifier: ^2.2.2
-        version: 2.2.3
-      file-saver:
-        specifier: ^2.0.5
-        version: 2.0.5
-      history:
-        specifier: ^4.9.0
-        version: 4.10.1
-      html-react-parser:
-        specifier: ^2.0.0
-        version: 2.0.0(react@18.3.1)
-      i18next:
-        specifier: ^21.9.1
-        version: 21.10.0
-      i18next-browser-languagedetector:
-        specifier: ^6.1.5
-        version: 6.1.8
-      i18next-xhr-backend:
-        specifier: ^3.2.2
-        version: 3.2.2
-      js-beautify:
-        specifier: ^1.13.0
-        version: 1.15.1
-      lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
-      moment:
-        specifier: ^2.24.0
-        version: 2.30.1
-      mustache:
-        specifier: ^4.2.0
-        version: 4.2.0
-      node-forge:
-        specifier: ^0.10.0
-        version: 0.10.0
-      rc-tree:
-        specifier: ^4.0.0-beta.2
-        version: 4.2.2(react-dom@18.3.1)(react@18.3.1)
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
-      react-draggable:
-        specifier: ^4.2.0
-        version: 4.4.6(react-dom@18.3.1)(react@18.3.1)
-      react-helmet:
-        specifier: ^5.2.1
-        version: 5.2.1(react@18.3.1)
-      react-i18next:
-        specifier: ^11.18.5
-        version: 11.18.6(i18next@21.10.0)(react-dom@18.3.1)(react@18.3.1)
-      react-joyride:
-        specifier: ^2.3.0
-        version: 2.9.3(@types/react@18.0.18)(react-dom@18.3.1)(react@18.3.1)
-      react-notification-system:
-        specifier: ^0.4.0
-        version: 0.4.0(react-dom@18.3.1)(react@18.3.1)
-      react-redux:
-        specifier: ^7.2.9
-        version: 7.2.9(react-dom@18.3.1)(react@18.3.1)
-      react-router-dom:
-        specifier: ^4.3.1
-        version: 4.3.1(react@18.3.1)
-      reactflow:
-        specifier: 11.7.2
-        version: 11.7.2(@types/react@18.0.18)(react-dom@18.3.1)(react@18.3.1)
-      recharts:
-        specifier: ^2.6.2
-        version: 2.15.0(react-dom@18.3.1)(react@18.3.1)
-      reduce-reducers:
-        specifier: ^1.0.4
-        version: 1.0.4
-      redux:
-        specifier: ^4.0.4
-        version: 4.2.1
-      redux-form:
-        specifier: ^8.3.7
-        version: 8.3.10(react-redux@7.2.9)(react@18.3.1)(redux@4.2.1)
-      redux-mock-store:
-        specifier: ^1.5.4
-        version: 1.5.5(redux@4.2.1)
-      redux-thunk:
-        specifier: ^2.3.0
-        version: 2.4.2(redux@4.2.1)
-      regenerator-runtime:
-        specifier: ^0.13.9
-        version: 0.13.11
-      semantic-ui-react:
-        specifier: ^2.1.3
-        version: 2.1.5(react-dom@18.3.1)(react@18.3.1)
-      slashes:
-        specifier: ^2.0.2
-        version: 2.0.2
-      styled-components:
-        specifier: ^4.4.1
-        version: 4.4.1(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
-      swr:
-        specifier: ^2.0.0
-        version: 2.3.0(react@18.3.1)
-      uuid:
-        specifier: ^8.3.0
-        version: 8.3.2
-    devDependencies:
-      '@pmmmwh/react-refresh-webpack-plugin':
-        specifier: ^0.4.3
-        version: 0.4.3(react-refresh@0.9.0)(webpack-dev-server@3.11.3)(webpack@5.84.1)
-      '@svgr/webpack':
-        specifier: 4.3.2
-        version: 4.3.2
-      '@testing-library/dom':
-        specifier: ^9.3.4
-        version: 9.3.4
-      '@testing-library/jest-dom':
-        specifier: ^6.4.2
-        version: 6.6.3
-      '@testing-library/react':
-        specifier: ^14.2.1
-        version: 14.3.1(@types/react@18.0.18)(react-dom@18.3.1)(react@18.3.1)
-      '@testing-library/user-event':
-        specifier: ^14.5.2
-        version: 14.6.1(@testing-library/dom@9.3.4)
-      '@types/file-saver':
-        specifier: ^2.0.1
-        version: 2.0.7
-      '@types/history':
-        specifier: ^4.7.3
-        version: 4.7.11
-      '@types/jest':
-        specifier: ^29.5.12
-        version: 29.5.14
-      '@types/lodash-es':
-        specifier: ^4.17.4
-        version: 4.17.12
-      '@types/node':
-        specifier: ^13.9.2
-        version: 13.13.52
-      '@types/node-forge':
-        specifier: ^0.9.3
-        version: 0.9.10
-      '@types/react':
-        specifier: 18.0.18
-        version: 18.0.18
-      '@types/react-dom':
-        specifier: ^18.0.6
-        version: 18.3.5(@types/react@18.0.18)
-      '@types/react-notification-system':
-        specifier: 0.2.39
-        version: 0.2.39
-      '@types/react-redux':
-        specifier: ^7.1.25
-        version: 7.1.34
-      '@types/react-router':
-        specifier: ^5.1.18
-        version: 5.1.20
-      '@types/react-router-dom':
-        specifier: ^5.1.3
-        version: 5.3.3
-      '@types/reactour':
-        specifier: ^1.18.1
-        version: 1.18.5
-      '@types/redux-mock-store':
-        specifier: ^1.0.2
-        version: 1.5.0
-      '@types/testing-library__jest-dom':
-        specifier: ^5.14.3
-        version: 5.14.9
-      '@types/uuid':
-        specifier: ^9.0.1
-        version: 9.0.8
-      '@types/webpack-env':
-        specifier: ^1.16.0
-        version: 1.18.5
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^6.5.0
-        version: 6.5.0(@typescript-eslint/parser@6.5.0)(eslint@8.46.0)(typescript@4.9.5)
-      '@typescript-eslint/parser':
-        specifier: ^6.5.0
-        version: 6.5.0(eslint@8.46.0)(typescript@4.9.5)
-      connect-history-api-fallback:
-        specifier: ^2.0.0
-        version: 2.0.0
-      copy-webpack-plugin:
-        specifier: ^12.0.2
-        version: 12.0.2(webpack@5.84.1)
-      css-loader:
-        specifier: ^1.0.0
-        version: 1.0.1(webpack@5.84.1)
-      eslint:
-        specifier: 8.46.0
-        version: 8.46.0
-      eslint-plugin-import:
-        specifier: ^2.20.2
-        version: 2.31.0(@typescript-eslint/parser@6.5.0)(eslint@8.46.0)
-      eslint-plugin-jest-dom:
-        specifier: ^4.0.1
-        version: 4.0.3(eslint@8.46.0)
-      eslint-plugin-jsonc:
-        specifier: ^2.15.1
-        version: 2.18.2(eslint@8.46.0)
-      eslint-plugin-react:
-        specifier: 7.30.0
-        version: 7.30.0(eslint@8.46.0)
-      eslint-plugin-react-hooks:
-        specifier: ^4.0.0
-        version: 4.6.2(eslint@8.46.0)
-      eslint-plugin-testing-library:
-        specifier: ^5.0.5
-        version: 5.11.1(eslint@8.46.0)(typescript@4.9.5)
-      eslint-webpack-plugin:
-        specifier: ^2.5.3
-        version: 2.7.0(eslint@8.46.0)(webpack@5.84.1)
-      fork-ts-checker-webpack-plugin:
-        specifier: ^6.1.0
-        version: 6.5.3(eslint@8.46.0)(typescript@4.9.5)(webpack@5.84.1)
-      jest:
-        specifier: ^29.7.0
-        version: 29.7.0(@types/node@13.13.52)(ts-node@8.10.2)
-      jest-environment-jsdom:
-        specifier: ^29.7.0
-        version: 29.7.0
-      jest-environment-jsdom-global:
-        specifier: ^4.0.0
-        version: 4.0.0(jest-environment-jsdom@29.7.0)
-      json-minimizer-webpack-plugin:
-        specifier: ^5.0.0
-        version: 5.0.0(webpack@5.84.1)
-      msw:
-        specifier: ^0.36.8
-        version: 0.36.8
-      process:
-        specifier: ^0.11.10
-        version: 0.11.10
-      react-refresh:
-        specifier: ^0.9.0
-        version: 0.9.0
-      redux-devtools-extension:
-        specifier: ^2.13.8
-        version: 2.13.9(redux@4.2.1)
-      rimraf:
-        specifier: ^3.0.2
-        version: 3.0.2
-      style-loader:
-        specifier: ^0.23.1
-        version: 0.23.1
-      thread-loader:
-        specifier: ^2.1.3
-        version: 2.1.3(webpack@5.84.1)
-      ts-jest:
-        specifier: ^29.1.2
-        version: 29.1.5(@babel/core@7.26.0)(babel-jest@26.6.3)(esbuild@0.18.20)(jest@29.7.0)(typescript@4.9.5)
-      typescript:
-        specifier: ^4.6.4
-        version: 4.9.5
-
-  apps/myaccount:
-    dependencies:
-      '@asgardeo/auth-react':
-        specifier: ^5.1.2
-        version: 5.2.3(@babel/runtime-corejs3@7.26.0)(react-dom@18.3.1)(react@18.3.1)
-      '@babel/polyfill':
-        specifier: ^7.0.0
-        version: 7.12.1
-      '@mui/material':
-        specifier: 5.13.0
-        version: 5.13.0(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react@18.0.18)(react-dom@18.3.1)(react@18.3.1)
-      '@mui/system':
-        specifier: ^5.12.3
-        version: 5.16.14(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@types/react@18.0.18)(react@18.3.1)
-      '@oxygen-ui/react':
-        specifier: ^2.3.4
-        version: 2.3.4(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@mui/icons-material@5.16.14)(@mui/lab@5.0.0-alpha.110)(@mui/material@5.13.0)(@mui/system@5.16.14)(@mui/utils@5.16.14)(@types/react@18.0.18)(react-dom@18.3.1)(react@18.3.1)(typescript@4.9.5)
-      '@oxygen-ui/react-icons':
-        specifier: ^2.3.4
-        version: 2.3.4(react-dom@18.3.1)(react@18.3.1)(typescript@4.9.5)
-      '@wso2is/access-control':
-        specifier: ^3.3.19
-        version: link:../../modules/access-control
-      '@wso2is/admin.organizations.v1':
-        specifier: ^2.26.185
-        version: link:../../features/admin.organizations.v1
-      '@wso2is/common.branding.v1':
-        specifier: ^2.26.42
-        version: link:../../features/common.branding.v1
-      '@wso2is/core':
-        specifier: ^2.6.5
-        version: link:../../modules/core
-      '@wso2is/forms':
-        specifier: ^2.3.21
-        version: link:../../modules/forms
-      '@wso2is/i18n':
-        specifier: ^2.20.1
-        version: link:../../modules/i18n
-      '@wso2is/react-components':
-        specifier: ^2.9.11
-        version: link:../../modules/react-components
-      '@wso2is/theme':
-        specifier: ^2.6.11
-        version: link:../../modules/theme
-      '@wso2is/validation':
-        specifier: ^2.4.1
-        version: link:../../modules/validation
-      axios:
-        specifier: ^0.19.2
-        version: 0.19.2
-      history:
-        specifier: ^4.9.0
-        version: 4.10.1
-      i18next:
-        specifier: ^21.9.1
-        version: 21.10.0
-      i18next-browser-languagedetector:
-        specifier: ^6.1.5
-        version: 6.1.8
-      i18next-xhr-backend:
-        specifier: ^3.2.2
-        version: 3.2.2
-      lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
-      moment:
-        specifier: ^2.24.0
-        version: 2.30.1
-      path-browserify:
-        specifier: ^1.0.1
-        version: 1.0.1
-      postcss-loader:
-        specifier: ^3.0.0
-        version: 3.0.0
-      qrcode.react:
-        specifier: ^1.0.0
-        version: 1.0.1(react@18.3.1)
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
-      react-helmet:
-        specifier: ^5.2.1
-        version: 5.2.1(react@18.3.1)
-      react-i18next:
-        specifier: ^11.18.5
-        version: 11.18.6(i18next@21.10.0)(react-dom@18.3.1)(react@18.3.1)
-      react-notification-system:
-        specifier: ^0.4.0
-        version: 0.4.0(react-dom@18.3.1)(react@18.3.1)
-      react-redux:
-        specifier: ^7.2.9
-        version: 7.2.9(react-dom@18.3.1)(react@18.3.1)
-      react-router-dom:
-        specifier: ^4.3.1
-        version: 4.3.1(react@18.3.1)
-      react-top-loading-bar:
-        specifier: ^1.2.0
-        version: 1.2.0(prop-types@15.8.1)(react-dom@18.3.1)(react@18.3.1)
-      redux:
-        specifier: ^4.0.4
-        version: 4.2.1
-      redux-thunk:
-        specifier: ^2.3.0
-        version: 2.4.2(redux@4.2.1)
-      regenerator-runtime:
-        specifier: ^0.13.9
-        version: 0.13.11
-      semantic-ui-react:
-        specifier: ^2.1.3
-        version: 2.1.5(react-dom@18.3.1)(react@18.3.1)
-      swr:
-        specifier: ^2.0.0
-        version: 2.3.0(react@18.3.1)
-      uuid:
-        specifier: ^8.3.0
-        version: 8.3.2
-    devDependencies:
-      '@testing-library/jest-dom':
-        specifier: ^6.4.2
-        version: 6.6.3
-      '@types/history':
-        specifier: ^4.7.3
-        version: 4.7.11
-      '@types/jest':
-        specifier: ^29.5.12
-        version: 29.5.14
-      '@types/lodash-es':
-        specifier: ^4.17.4
-        version: 4.17.12
-      '@types/node':
-        specifier: ^13.9.2
-        version: 13.13.52
-      '@types/react':
-        specifier: 18.0.18
-        version: 18.0.18
-      '@types/react-dom':
-        specifier: ^18.0.6
-        version: 18.3.5(@types/react@18.0.18)
-      '@types/react-notification-system':
-        specifier: 0.2.39
-        version: 0.2.39
-      '@types/react-redux':
-        specifier: ^7.1.25
-        version: 7.1.34
-      '@types/react-router':
-        specifier: ^5.1.18
-        version: 5.1.20
-      '@types/react-router-dom':
-        specifier: ^5.1.3
-        version: 5.3.3
-      '@types/redux-mock-store':
-        specifier: ^1.0.2
-        version: 1.5.0
-      '@types/uuid':
-        specifier: ^9.0.1
-        version: 9.0.8
-      '@types/webpack-env':
-        specifier: ^1.16.0
-        version: 1.18.5
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^6.5.0
-        version: 6.5.0(@typescript-eslint/parser@6.5.0)(eslint@8.46.0)(typescript@4.9.5)
-      '@typescript-eslint/parser':
-        specifier: ^6.5.0
-        version: 6.5.0(eslint@8.46.0)(typescript@4.9.5)
-      connect-history-api-fallback:
-        specifier: ^2.0.0
-        version: 2.0.0
-      copy-webpack-plugin:
-        specifier: ^12.0.2
-        version: 12.0.2(webpack@5.84.1)
-      css-loader:
-        specifier: ^1.0.0
-        version: 1.0.1(webpack@5.84.1)
-      eslint:
-        specifier: 8.46.0
-        version: 8.46.0
-      eslint-plugin-import:
-        specifier: ^2.20.2
-        version: 2.31.0(@typescript-eslint/parser@6.5.0)(eslint@8.46.0)
-      eslint-plugin-jest-dom:
-        specifier: ^4.0.1
-        version: 4.0.3(eslint@8.46.0)
-      eslint-plugin-jsonc:
-        specifier: ^2.15.1
-        version: 2.18.2(eslint@8.46.0)
-      eslint-plugin-react:
-        specifier: 7.30.0
-        version: 7.30.0(eslint@8.46.0)
-      eslint-plugin-react-hooks:
-        specifier: ^4.0.0
-        version: 4.6.2(eslint@8.46.0)
-      eslint-plugin-testing-library:
-        specifier: ^5.0.5
-        version: 5.11.1(eslint@8.46.0)(typescript@4.9.5)
-      eslint-webpack-plugin:
-        specifier: ^3.1.1
-        version: 3.2.0(eslint@8.46.0)(webpack@5.84.1)
-      jest:
-        specifier: ^29.7.0
-        version: 29.7.0(@types/node@13.13.52)(ts-node@8.10.2)
-      jest-environment-jsdom:
-        specifier: ^26.3.0
-        version: 26.6.2
-      jest-environment-jsdom-global:
-        specifier: ^4.0.0
-        version: 4.0.0(jest-environment-jsdom@26.6.2)
-      json-minimizer-webpack-plugin:
-        specifier: ^5.0.0
-        version: 5.0.0(webpack@5.84.1)
-      msw:
-        specifier: ^0.36.8
-        version: 0.36.8
-      process:
-        specifier: ^0.11.10
-        version: 0.11.10
-      react-refresh:
-        specifier: ^0.9.0
-        version: 0.9.0
-      redux-devtools-extension:
-        specifier: ^2.13.8
-        version: 2.13.9(redux@4.2.1)
-      rimraf:
-        specifier: ^3.0.2
-        version: 3.0.2
-      style-loader:
-        specifier: ^0.23.1
-        version: 0.23.1
-      thread-loader:
-        specifier: ^2.1.3
-        version: 2.1.3(webpack@5.84.1)
-      ts-jest:
-        specifier: ^29.1.2
-        version: 29.1.5(@babel/core@7.26.0)(babel-jest@26.6.3)(esbuild@0.18.20)(jest@29.7.0)(typescript@4.9.5)
-      typescript:
-        specifier: ^4.6.4
-        version: 4.9.5
 
   features:
     dependencies:
@@ -22745,6 +22023,7 @@ packages:
     dependencies:
       core-js: 2.6.12
       regenerator-runtime: 0.13.11
+    dev: true
 
   /@babel/preset-env@7.26.0(@babel/core@7.26.0):
     resolution: {integrity: sha512-H84Fxq0CQJNdPFT2DrfnylZ3cf5K43rGfWK4LJGPpjKHiZlk0/RzwEus3PDDZZg+/Er7lCA03MVacueUuXdzfw==}
@@ -25146,7 +24425,7 @@ packages:
   /@mui/base@5.0.0-alpha.108(@types/react@18.0.18)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-KjzRUts2i/ODlMfywhFTqTzQl+Cr9nlDSZxJcnYjrbOV/iRyQNBTDoiFJt+XEdRi0fZBHnk74AFbnP56ehybsA==}
     engines: {node: '>=12.0.0'}
-    deprecated: This package has been replaced by @base-ui-components/react
+    deprecated: This package has been replaced by @base-ui/react
     peerDependencies:
       '@types/react': 18.0.18
       react: ^17.0.0 || ^18.0.0
@@ -30229,13 +29508,13 @@ packages:
       '@testing-library/dom': 7.31.2
     dev: true
 
-  /@testing-library/user-event@14.6.1(@testing-library/dom@9.3.4):
+  /@testing-library/user-event@14.6.1(@testing-library/dom@7.31.2):
     resolution: {integrity: sha512-vq7fv0rnt+QTXgPxr5Hjc210p6YKq2kmdziLgnsZGgLJ9e6VAShx1pACLuRjd/AS/sr7phAR58OIIpf0LlmQNw==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
     dependencies:
-      '@testing-library/dom': 9.3.4
+      '@testing-library/dom': 7.31.2
     dev: true
 
   /@tokenizer/token@0.3.0:
@@ -30585,13 +29864,6 @@ packages:
       '@types/json-schema': 7.0.15
     dev: true
 
-  /@types/eslint@8.56.12:
-    resolution: {integrity: sha512-03ruubjWyOHlmljCVoxSuNDdmfZDzsrrz0P2LeJsOXr+ZwFQ+0yQIwNCwt/GYhV7Z31fgtXJTAEs+FYlEL851g==}
-    dependencies:
-      '@types/estree': 1.0.6
-      '@types/json-schema': 7.0.15
-    dev: true
-
   /@types/eslint@9.6.1:
     resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
     dependencies:
@@ -30783,14 +30055,6 @@ packages:
 
   /@types/js-yaml@3.12.3:
     resolution: {integrity: sha512-otRe77JNNWzoVGLKw8TCspKswRoQToys4tuL6XYVBFxjgeM0RUrx7m3jkaTdxILxeGry3zM8mGYkGXMeQ02guA==}
-    dev: true
-
-  /@types/jsdom@20.0.1:
-    resolution: {integrity: sha512-d0r18sZPmMQr1eG35u12FZfhIXNrnsPU/g5wvRKCUf/tOGilKKwYMYGqh33BNR6ba+2gkHw1EUiHoN3mn7E5IQ==}
-    dependencies:
-      '@types/node': 13.13.52
-      '@types/tough-cookie': 4.0.5
-      parse5: 7.2.1
     dev: true
 
   /@types/json-schema@7.0.15:
@@ -31078,10 +30342,6 @@ packages:
     resolution: {integrity: sha512-HsJ+z3QuETzP3cswwtzt2vEIiHBk/dCcHGhbmG5X3ecnwFD/lPrMpliGXxSCg03L9AhrdwA4Oz/qfspkDW+xGQ==}
     dependencies:
       '@types/node': 13.13.52
-    dev: true
-
-  /@types/tough-cookie@4.0.5:
-    resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
     dev: true
 
   /@types/trusted-types@2.0.7:
@@ -31689,13 +30949,6 @@ packages:
     dependencies:
       acorn: 7.4.1
       acorn-walk: 7.2.0
-    dev: true
-
-  /acorn-globals@7.0.1:
-    resolution: {integrity: sha512-umOSDSDrfHbTNPuNpC2NSnnA3LUrqpevPb4T9jRx4MagXNS0rs+gwiTcAvqCRmsD6utzsrzNt+ebm00SNWiC3Q==}
-    dependencies:
-      acorn: 8.14.0
-      acorn-walk: 8.3.4
     dev: true
 
   /acorn-import-assertions@1.9.0(acorn@8.14.0):
@@ -33261,16 +32514,19 @@ packages:
     engines: {node: '>=4'}
     dependencies:
       callsites: 2.0.0
+    dev: true
 
   /caller-path@2.0.0:
     resolution: {integrity: sha512-MCL3sf6nCSXOwCTzvPKhN18TU7AHTvdtam8DAogxcrJ8Rjfbbg7Lgng64H9Iy+vUV6VGFClN/TyxBkAebLRR4A==}
     engines: {node: '>=4'}
     dependencies:
       caller-callsite: 2.0.0
+    dev: true
 
   /callsites@2.0.0:
     resolution: {integrity: sha512-ksWePWBloaWPxJYQ8TL0JHvtci6G5QTKwQ95RcWAa/lzoAKuAOflGdAK92hpHXjkwb8zLxoLNUoNYZgVsaJzvQ==}
     engines: {node: '>=4'}
+    dev: true
 
   /callsites@3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
@@ -34090,6 +33346,7 @@ packages:
       is-directory: 0.3.1
       js-yaml: 3.13.1
       parse-json: 4.0.0
+    dev: true
 
   /cosmiconfig@6.0.0:
     resolution: {integrity: sha512-xb3ZL6+L8b9JLLCx3ZdoZy4+2ECphCMo2PwqgP1tlfVq6M6YReyzBJtvWWtbDSpNr9hn96pkCiZqUcFEc+54Qg==}
@@ -34609,10 +33866,6 @@ packages:
     resolution: {integrity: sha512-p3pvU7r1MyyqbTk+WbNJIgJjG2VmTIaB10rI93LzVPrmDJKkzKYMtxxyAvQXR/NS6otuzveI7+7BBq3SjBS2mw==}
     dev: true
 
-  /cssom@0.5.0:
-    resolution: {integrity: sha512-iKuQcq+NdHqlAcwUY0o/HL69XQrUaQdMjmStJ8JFmUaiiQErlhrmuigkg/CU4E2J0IyUKUrMAgl36TvN67MqTw==}
-    dev: true
-
   /cssstyle@2.3.0:
     resolution: {integrity: sha512-AZL67abkUzIuvcHqk7c09cezpGNcxUxU4Ioi/05xHk4DQeTkWmGYftIE6ctU6AEt+Gn4n1lDStOtj7FKycP71A==}
     engines: {node: '>=8'}
@@ -34770,15 +34023,6 @@ packages:
       abab: 2.0.6
       whatwg-mimetype: 2.3.0
       whatwg-url: 8.7.0
-    dev: true
-
-  /data-urls@3.0.2:
-    resolution: {integrity: sha512-Jy/tj3ldjZJo63sVAvg6LHt2mHvl4V6AgRAmNDtLdm7faqtsx+aJG42rsyCo9JCoRVKwPFzKlIPx3DIibwSIaQ==}
-    engines: {node: '>=12'}
-    dependencies:
-      abab: 2.0.6
-      whatwg-mimetype: 3.0.0
-      whatwg-url: 11.0.0
     dev: true
 
   /data-view-buffer@1.0.2:
@@ -35334,14 +34578,6 @@ packages:
       webidl-conversions: 5.0.0
     dev: true
 
-  /domexception@4.0.0:
-    resolution: {integrity: sha512-A2is4PLG+eeSfoTMA95/s4pvAoSo2mKtiM5jlHkAVewmiO8ISFTFKZjH7UAM1Atli/OT/7JHOrJRJiMKUZKYBw==}
-    engines: {node: '>=12'}
-    deprecated: Use your platform's native DOMException instead
-    dependencies:
-      webidl-conversions: 7.0.0
-    dev: true
-
   /domhandler@2.3.0:
     resolution: {integrity: sha512-q9bUwjfp7Eif8jWxxxPSykdRZAb6GkguBGSgvvCrhI9wB71W2K/Kvv4E61CF/mcCfnVJDeDWx/Vb/uAqbDj6UQ==}
     dependencies:
@@ -35853,16 +35089,6 @@ packages:
     optionalDependencies:
       source-map: 0.6.1
 
-  /eslint-compat-utils@0.6.4(eslint@8.46.0):
-    resolution: {integrity: sha512-/u+GQt8NMfXO8w17QendT4gvO5acfxQsAKirAt0LVxDnr2N8YLCVbregaNc/Yhp7NM128DwCaRvr8PLDfeNkQw==}
-    engines: {node: '>=12'}
-    peerDependencies:
-      eslint: '>=6.0.0'
-    dependencies:
-      eslint: 8.46.0
-      semver: 7.6.3
-    dev: true
-
   /eslint-config-prettier@9.1.0(eslint@8.46.0):
     resolution: {integrity: sha512-NSWl5BFQWEPi1j4TjVNItzYV7dZXZ+wP6I6ZhrBGpChQhZRUaElihE9uRRkcbRnNb76UMKDF3r+WTmNcGPKsqw==}
     hasBin: true
@@ -35880,22 +35106,6 @@ packages:
       resolve: 1.22.10
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /eslint-json-compat-utils@0.2.1(eslint@8.46.0)(jsonc-eslint-parser@2.4.0):
-    resolution: {integrity: sha512-YzEodbDyW8DX8bImKhAcCeu/L31Dd/70Bidx2Qex9OFUtgzXLqtfWL4Hr5fM/aCCB8QUZLuJur0S9k6UfgFkfg==}
-    engines: {node: '>=12'}
-    peerDependencies:
-      '@eslint/json': '*'
-      eslint: '*'
-      jsonc-eslint-parser: ^2.4.0
-    peerDependenciesMeta:
-      '@eslint/json':
-        optional: true
-    dependencies:
-      eslint: 8.46.0
-      esquery: 1.6.0
-      jsonc-eslint-parser: 2.4.0
     dev: true
 
   /eslint-module-utils@2.12.0(@typescript-eslint/parser@6.5.0)(eslint-import-resolver-node@0.3.9)(eslint@8.46.0):
@@ -35974,25 +35184,6 @@ packages:
       '@testing-library/dom': 8.20.1
       eslint: 8.46.0
       requireindex: 1.2.0
-    dev: true
-
-  /eslint-plugin-jsonc@2.18.2(eslint@8.46.0):
-    resolution: {integrity: sha512-SDhJiSsWt3nItl/UuIv+ti4g3m4gpGkmnUJS9UWR3TrpyNsIcnJoBRD7Kof6cM4Rk3L0wrmY5Tm3z7ZPjR2uGg==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    peerDependencies:
-      eslint: '>=6.0.0'
-    dependencies:
-      '@eslint-community/eslint-utils': 4.4.1(eslint@8.46.0)
-      eslint: 8.46.0
-      eslint-compat-utils: 0.6.4(eslint@8.46.0)
-      eslint-json-compat-utils: 0.2.1(eslint@8.46.0)(jsonc-eslint-parser@2.4.0)
-      espree: 9.6.1
-      graphemer: 1.4.0
-      jsonc-eslint-parser: 2.4.0
-      natural-compare: 1.4.0
-      synckit: 0.6.2
-    transitivePeerDependencies:
-      - '@eslint/json'
     dev: true
 
   /eslint-plugin-jsx-a11y@6.5.1(eslint@8.46.0):
@@ -36124,22 +35315,6 @@ packages:
       micromatch: 4.0.8
       normalize-path: 3.0.0
       schema-utils: 3.3.0
-      webpack: 5.84.1(@swc/core@1.3.99)(esbuild@0.18.20)(webpack-cli@4.10.0)
-    dev: true
-
-  /eslint-webpack-plugin@3.2.0(eslint@8.46.0)(webpack@5.84.1):
-    resolution: {integrity: sha512-avrKcGncpPbPSUHX6B3stNGzkKFto3eL+DKM4+VyMrVnhPc3vRczVlCq3uhuFOdRvDHTVXuzwk1ZKUrqDQHQ9w==}
-    engines: {node: '>= 12.13.0'}
-    peerDependencies:
-      eslint: ^7.0.0 || ^8.0.0
-      webpack: 5.84.1
-    dependencies:
-      '@types/eslint': 8.56.12
-      eslint: 8.46.0
-      jest-worker: 28.1.3
-      micromatch: 4.0.8
-      normalize-path: 3.0.0
-      schema-utils: 4.3.0
       webpack: 5.84.1(@swc/core@1.3.99)(esbuild@0.18.20)(webpack-cli@4.10.0)
     dev: true
 
@@ -38459,6 +37634,7 @@ packages:
     engines: {node: '>=4'}
     dependencies:
       import-from: 2.1.0
+    dev: true
 
   /import-cwd@3.0.0:
     resolution: {integrity: sha512-4pnzH16plW+hgvRECbDWpQl3cqtvSofHWh44met7ESfZ8UZOWWddm8hEyDTqREJ9RbYHY8gi8DqmaelApoOGMg==}
@@ -38473,6 +37649,7 @@ packages:
     dependencies:
       caller-path: 2.0.0
       resolve-from: 3.0.0
+    dev: true
 
   /import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
@@ -38486,6 +37663,7 @@ packages:
     engines: {node: '>=4'}
     dependencies:
       resolve-from: 3.0.0
+    dev: true
 
   /import-from@3.0.0:
     resolution: {integrity: sha512-CiuXOFFSzkU5x/CR0+z7T91Iht4CXgfCxVOFRhh2Zyhg5wOpWvvDLQUsWl+gcN+QscYBjez8hDCt85O7RLDttQ==}
@@ -38820,6 +37998,7 @@ packages:
   /is-directory@0.3.1:
     resolution: {integrity: sha512-yVChGzahRFvbkscn2MlwGismPO12i9+znNruC5gVEntG3qu0xQMzsGg/JFbrsqDOHtHFPci+V5aP5T9I+yeKqw==}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /is-docker@2.2.1:
     resolution: {integrity: sha512-F+i2BKsFrH66iaUFc0woD8sLy8getkwTwtOBjvs56Cx4CgJDeKQeqfz8wAYiSb8JOprWhHH5p77PbmYCvvUuXQ==}
@@ -39645,24 +38824,6 @@ packages:
       jest-environment-jsdom: 26.6.2
     dev: true
 
-  /jest-environment-jsdom-global@4.0.0(jest-environment-jsdom@26.6.2):
-    resolution: {integrity: sha512-qEV8j61oV5XhOBUQbrld2nMYKnp/AGINUaoYTtkwJ9rjvMNRN7ZaZ/dgoPpW83oFtrSiVM1gie6ajdsKFBUlLA==}
-    engines: {node: '>= 14'}
-    peerDependencies:
-      jest-environment-jsdom: 22.x || 23.x || 24.x || 25.x || 26.x || 27.x || 28.x || 29.x
-    dependencies:
-      jest-environment-jsdom: 26.6.2
-    dev: true
-
-  /jest-environment-jsdom-global@4.0.0(jest-environment-jsdom@29.7.0):
-    resolution: {integrity: sha512-qEV8j61oV5XhOBUQbrld2nMYKnp/AGINUaoYTtkwJ9rjvMNRN7ZaZ/dgoPpW83oFtrSiVM1gie6ajdsKFBUlLA==}
-    engines: {node: '>= 14'}
-    peerDependencies:
-      jest-environment-jsdom: 22.x || 23.x || 24.x || 25.x || 26.x || 27.x || 28.x || 29.x
-    dependencies:
-      jest-environment-jsdom: 29.7.0
-    dev: true
-
   /jest-environment-jsdom@26.6.2:
     resolution: {integrity: sha512-jgPqCruTlt3Kwqg5/WVFyHIOJHsiAvhcp2qiR2QQstuG9yWox5+iHpU3ZrcBxW14T4fe5Z68jAfLRh7joCSP2Q==}
     engines: {node: '>= 10.14.2'}
@@ -39677,29 +38838,6 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - canvas
-      - supports-color
-      - utf-8-validate
-    dev: true
-
-  /jest-environment-jsdom@29.7.0:
-    resolution: {integrity: sha512-k9iQbsf9OyOfdzWH8HDmrRT0gSIcX+FLNW7IQq94tFX0gynPwqDTW0Ho6iMVNjGz/nb+l/vW3dWM2bbLLpkbXA==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    peerDependencies:
-      canvas: ^2.5.0
-    peerDependenciesMeta:
-      canvas:
-        optional: true
-    dependencies:
-      '@jest/environment': 29.7.0
-      '@jest/fake-timers': 29.7.0
-      '@jest/types': 29.6.3
-      '@types/jsdom': 20.0.1
-      '@types/node': 13.13.52
-      jest-mock: 29.7.0
-      jest-util: 29.7.0
-      jsdom: 20.0.3
-    transitivePeerDependencies:
-      - bufferutil
       - supports-color
       - utf-8-validate
     dev: true
@@ -40238,15 +39376,6 @@ packages:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  /jest-worker@28.1.3:
-    resolution: {integrity: sha512-CqRA220YV/6jCo8VWvAt1KKx6eek1VIHMPeLEbpcfSfkEeWyBNppynM/o6q+Wmw+sOhos2ml34wZbSX3G13//g==}
-    engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
-    dependencies:
-      '@types/node': 13.13.52
-      merge-stream: 2.0.0
-      supports-color: 8.1.1
-    dev: true
-
   /jest-worker@29.7.0:
     resolution: {integrity: sha512-eIz2msL/EzL9UFTFFx7jBTkeZfku0yUAyZZZmJ93H2TYEiroIx2PQjEXcwYtYl8zXCxb+PAmA2hLIt/6ZEkPHw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -40510,47 +39639,6 @@ packages:
       - utf-8-validate
     dev: true
 
-  /jsdom@20.0.3:
-    resolution: {integrity: sha512-SYhBvTh89tTfCD/CRdSOm13mOBa42iTaTyfyEWBdKcGdPxPtLFBXuHR8XHb33YNYaP+lLbmSvBTsnoesCNJEsQ==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      canvas: ^2.5.0
-    peerDependenciesMeta:
-      canvas:
-        optional: true
-    dependencies:
-      abab: 2.0.6
-      acorn: 8.14.0
-      acorn-globals: 7.0.1
-      cssom: 0.5.0
-      cssstyle: 2.3.0
-      data-urls: 3.0.2
-      decimal.js: 10.4.3
-      domexception: 4.0.0
-      escodegen: 2.1.0
-      form-data: 4.0.1
-      html-encoding-sniffer: 3.0.0
-      http-proxy-agent: 5.0.0
-      https-proxy-agent: 5.0.1
-      is-potential-custom-element-name: 1.0.1
-      nwsapi: 2.2.16
-      parse5: 7.2.1
-      saxes: 6.0.0
-      symbol-tree: 3.2.4
-      tough-cookie: 4.1.4
-      w3c-xmlserializer: 4.0.0
-      webidl-conversions: 7.0.0
-      whatwg-encoding: 2.0.0
-      whatwg-mimetype: 3.0.0
-      whatwg-url: 11.0.0
-      ws: 8.18.0
-      xml-name-validator: 4.0.0
-    transitivePeerDependencies:
-      - bufferutil
-      - supports-color
-      - utf-8-validate
-    dev: true
-
   /jsesc@1.3.0:
     resolution: {integrity: sha512-Mke0DA0QjUWuJlhsE0ZPPhYiJkRap642SmI/4ztCFaUs6V2AiH1sfecc+57NgaryfAA2VR3v6O+CSjC1jZJKOA==}
     hasBin: true
@@ -40596,18 +39684,9 @@ packages:
       webpack: 5.84.1(@swc/core@1.3.99)(esbuild@0.18.20)(webpack-cli@4.10.0)
     dev: true
 
-  /json-minimizer-webpack-plugin@5.0.0(webpack@5.84.1):
-    resolution: {integrity: sha512-GT/SZolN2p405EMGjMTBvAVi2+y035p1tSOuLpWbp5QTMl080OHx4DEGXfUH6vbnGw5Z/QKfBe+KpP9Dj0qLmA==}
-    engines: {node: '>= 18.12.0'}
-    peerDependencies:
-      webpack: 5.84.1
-    dependencies:
-      schema-utils: 4.3.0
-      webpack: 5.84.1(@swc/core@1.3.99)(esbuild@0.18.20)(webpack-cli@4.10.0)
-    dev: true
-
   /json-parse-better-errors@1.0.2:
     resolution: {integrity: sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==}
+    dev: true
 
   /json-parse-even-better-errors@2.3.1:
     resolution: {integrity: sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==}
@@ -43383,6 +42462,7 @@ packages:
     dependencies:
       error-ex: 1.3.2
       json-parse-better-errors: 1.0.2
+    dev: true
 
   /parse-json@5.2.0:
     resolution: {integrity: sha512-ayCKvm/phCGxOkYRSCM82iDwct8/EonSEgCSxWxD7ve6jHggsFl4fZVQBPRNgQoKiuV/odhFrGzQXZwbifC8Rg==}
@@ -43416,12 +42496,6 @@ packages:
 
   /parse5@6.0.1:
     resolution: {integrity: sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==}
-
-  /parse5@7.2.1:
-    resolution: {integrity: sha512-BuBYQYlv1ckiPdQi/ohiivi9Sagc9JG+Ozs0r7b/0iK3sKmrb0b9FdWdBbOdx6hBCM/F9Ir82ofnBhtZOjCRPQ==}
-    dependencies:
-      entities: 4.5.0
-    dev: true
 
   /parseurl@1.3.3:
     resolution: {integrity: sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==}
@@ -43863,6 +42937,7 @@ packages:
     dependencies:
       cosmiconfig: 5.2.1
       import-cwd: 2.1.0
+    dev: true
 
   /postcss-load-config@3.1.4(postcss@8.5.1):
     resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==}
@@ -43889,6 +42964,7 @@ packages:
       postcss: 7.0.39
       postcss-load-config: 2.1.2
       schema-utils: 1.0.0
+    dev: true
 
   /postcss-loader@4.3.0(postcss@7.0.39)(webpack@5.84.1):
     resolution: {integrity: sha512-M/dSoIiNDOo8Rk0mUqoj4kpGq91gcxCfb9PoyZVdZ76/AuhxylHDYZblNE8o+EQ9AMSASeMFEKxZf5aU6wlx1Q==}
@@ -44790,21 +43866,6 @@ packages:
 
       (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
     dev: true
-
-  /qr.js@0.0.0:
-    resolution: {integrity: sha512-c4iYnWb+k2E+vYpRimHqSu575b1/wKl4XFeJGpFmrJQz5I88v9aY2czh7s0w36srfCM1sXgC/xpoJz5dJfq+OQ==}
-    dev: false
-
-  /qrcode.react@1.0.1(react@18.3.1):
-    resolution: {integrity: sha512-8d3Tackk8IRLXTo67Y+c1rpaiXjoz/Dd2HpcMdW//62/x8J1Nbho14Kh8x974t9prsLHN6XqVgcnRiBGFptQmg==}
-    peerDependencies:
-      react: ^15.5.3 || ^16.0.0 || ^17.0.0
-    dependencies:
-      loose-envify: 1.4.0
-      prop-types: 15.8.1
-      qr.js: 0.0.0
-      react: 18.3.1
-    dev: false
 
   /qs@6.13.0:
     resolution: {integrity: sha512-+38qI9SOr8tfZ4QmJNplMUxqjbe7LKvvZgWdExBOmd+egZTtjLB67Gu0HRX3u/XOq7UU2Nx6nsjvS16Z9uwfpg==}
@@ -46605,13 +45666,6 @@ packages:
       xmlchars: 2.2.0
     dev: true
 
-  /saxes@6.0.0:
-    resolution: {integrity: sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==}
-    engines: {node: '>=v12.22.7'}
-    dependencies:
-      xmlchars: 2.2.0
-    dev: true
-
   /scheduler@0.19.1:
     resolution: {integrity: sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==}
     dependencies:
@@ -48006,13 +47060,6 @@ packages:
   /synchronous-promise@2.0.17:
     resolution: {integrity: sha512-AsS729u2RHUfEra9xJrE39peJcc2stq2+poBXX8bcM08Y6g9j/i/PUzwNQqkaJde7Ntg1TO7bSREbR5sdosQ+g==}
 
-  /synckit@0.6.2:
-    resolution: {integrity: sha512-Vhf+bUa//YSTYKseDiiEuQmhGCoIF3CVBhunm3r/DQnYiGT4JssmnKQc44BIyOZRK2pKjXXAgbhfmbeoC9CJpA==}
-    engines: {node: '>=12.20'}
-    dependencies:
-      tslib: 2.8.1
-    dev: true
-
   /tapable@1.1.3:
     resolution: {integrity: sha512-4WK/bYZmj8xLr+HUCODHGF1ZFzsYffasLUgEiMBY4fgtltdO6B4WJtlSbPaDTLpYTcGVwM2qLnFTICEcNxs3kA==}
     engines: {node: '>=6'}
@@ -48353,13 +47400,6 @@ packages:
       punycode: 2.3.1
     dev: true
 
-  /tr46@3.0.0:
-    resolution: {integrity: sha512-l7FvfAHlcmulp8kr+flpQZmVwtu7nfRV7NZujtN0OqES8EL4O4e0qqzL0DC5gAvx/ZC/9lk6rhcUwYvkBnBnYA==}
-    engines: {node: '>=12'}
-    dependencies:
-      punycode: 2.3.1
-    dev: true
-
   /tree-changes@0.11.3:
     resolution: {integrity: sha512-r14mvDZ6tqz8PRQmlFKjhUVngu4VZ9d92ON3tp0EGpFBE6PAHOq8Bx8m8ahbNoGE3uI/npjYcJiqVydyOiYXag==}
     dependencies:
@@ -48533,7 +47573,7 @@ packages:
       bs-logger: 0.2.6
       esbuild: 0.18.20
       fast-json-stable-stringify: 2.1.0
-      jest: 29.7.0(@types/node@13.13.52)(ts-node@8.10.2)
+      jest: 29.7.0(@types/node@18.11.9)
       jest-util: 29.7.0
       json5: 2.2.3
       lodash.memoize: 4.1.2
@@ -49374,13 +48414,6 @@ packages:
       xml-name-validator: 3.0.0
     dev: true
 
-  /w3c-xmlserializer@4.0.0:
-    resolution: {integrity: sha512-d+BFHzbiCx6zGfz0HyQ6Rg69w9k19nviJspaj4yNscGjrHu94sVP+aRm75yEbCh+r2/yR+7q6hux9LVtbuTGBw==}
-    engines: {node: '>=14'}
-    dependencies:
-      xml-name-validator: 4.0.0
-    dev: true
-
   /walk-up-path@1.0.0:
     resolution: {integrity: sha512-hwj/qMDUEjCU5h0xr90KGCf0tg0/LgJbmOWgrWKYlcJZM7XvquvUJZ0G/HMGr7F7OQMOUuPHWP9JpriinkAlkg==}
     dev: true
@@ -49437,11 +48470,6 @@ packages:
   /webidl-conversions@6.1.0:
     resolution: {integrity: sha512-qBIvFLGiBpLjfwmYAaHPXsn+ho5xZnGvyGvsarywGNc8VyQJUMHJ8OBKGGrPER0okBeMDaan4mNBlgBROxuI8w==}
     engines: {node: '>=10.4'}
-    dev: true
-
-  /webidl-conversions@7.0.0:
-    resolution: {integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==}
-    engines: {node: '>=12'}
     dev: true
 
   /webpack-bundle-analyzer@4.10.2:
@@ -49822,19 +48850,6 @@ packages:
     resolution: {integrity: sha512-M4yMwr6mAnQz76TbJm914+gPpB/nCwvZbJU28cUD6dR004SAxDLOOSUaB1JDRqLtaOV/vi0IC5lEAGFgrjGv/g==}
     dev: true
 
-  /whatwg-mimetype@3.0.0:
-    resolution: {integrity: sha512-nt+N2dzIutVRxARx1nghPKGv1xHikU7HKdfafKkLNLindmPU/ch3U31NOCGGA/dmPcmb1VlofO0vnKAcsm0o/Q==}
-    engines: {node: '>=12'}
-    dev: true
-
-  /whatwg-url@11.0.0:
-    resolution: {integrity: sha512-RKT8HExMpoYx4igMiVMY83lN6UeITKJlBQ+vR/8ZJ8OCdSiN3RwCq+9gH0+Xzj0+5IrM6i4j/6LuvzbZIQgEcQ==}
-    engines: {node: '>=12'}
-    dependencies:
-      tr46: 3.0.0
-      webidl-conversions: 7.0.0
-    dev: true
-
   /whatwg-url@5.0.0:
     resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
     dependencies:
@@ -50114,11 +49129,6 @@ packages:
 
   /xml-name-validator@3.0.0:
     resolution: {integrity: sha512-A5CUptxDsvxKJEU3yO6DuWBSJz/qizqzJKOMIfUJHETbBw/sFaDxgd6fxm1ewUaM0jZ444Fc5vC5ROYurg/4Pw==}
-    dev: true
-
-  /xml-name-validator@4.0.0:
-    resolution: {integrity: sha512-ICP2e+jsHvAj2E2lIHxa5tjXRlKDJo4IdvPvCXbXQGdzSfmSpNVyIKMvoZHjDY9DP0zV17iI85o90vRFXNccRw==}
-    engines: {node: '>=12'}
     dev: true
 
   /xmlchars@2.2.0:

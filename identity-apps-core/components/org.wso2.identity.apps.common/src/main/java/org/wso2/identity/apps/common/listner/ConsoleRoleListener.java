@@ -158,8 +158,11 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
     }
 
     /**
-     * This method resolves the new permissions for the console roles. In this method, we resolve two type of console
-     * roles. 1. Console roles created after 7.0.0. 2. Console roles created in 7.0.0.
+     * This method resolves the new permissions for the console roles. In this method, we resolve 3 type of console
+     * roles.
+     *      1. Console roles created after 7.0.0.
+     *      2. Console roles created in 7.0.0.
+     *      3. Console roles with granular permissions (create, update, delete) added instead of edit permission.
      *
      * @param rolePermissions List of permissions of the role.
      * @param tenantDomain    Tenant domain.
@@ -173,6 +176,7 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
         List<Permission> systemPermissions = getSystemPermission(tenantDomain);
         List<APIResourceCollection> apiResourceCollections = getAPIResourceCollections(tenantDomain);
         List<Permission> consoleFeaturePermissions = getConsoleFeaturePermissions(rolePermissions);
+        List<Permission> upgradedPermissions;
         if (!consoleFeaturePermissions.isEmpty()) {
             // This is where we handle the new console roles (console roles created after 7.0.0) permissions.
             // We check whether the role has the view feature scope or edit feature scope. If the role has the
@@ -232,7 +236,7 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
                     }
                 });
             });
-            return resolvedRolePermissions;
+            upgradedPermissions = new ArrayList<>(resolvedRolePermissions);
         } else {
             // This is where we handle the initial console roles (console roles created in 7.0.0) permissions.
             // Here we assume these role only contains legacy feature scope not the new feature scopes.
@@ -263,23 +267,23 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
                     }
                 });
             });
-            List<Permission> upgradedPermissions = new ArrayList<>(resolvedRolePermissions);
-            resolveWriteFeatureScopes(upgradedPermissions, apiResourceCollections, systemPermissions);
-            return upgradedPermissions;
+            upgradedPermissions = new ArrayList<>(resolvedRolePermissions);
         }
+        resolveWriteFeatureScopes(upgradedPermissions, apiResourceCollections, systemPermissions);
+        return upgradedPermissions;
     }
 
     /**
-     * Keep the edit (write) feature scope and the granular write feature scopes (create, update, delete) of a console
-     * role consistent with each other. This supports backward compatibility between the legacy write model and the
-     * new granular permission model, so that a role resolves correctly regardless of which model it was created with:
-     *   - If the role has all of the create, update and delete feature scopes, then the edit (write) feature
-     *     scope is added.
-     *   - If the role has the edit (write) feature scope, then the create, update and delete feature scopes are added.
+     * This supports backward compatibility between the legacy write model and the new granular permission model,
+     * so that a role resolves correctly regardless of which model it was created with:
+     *   - The edit (write) feature scope is equivalent to having the create, update, delete and view feature scopes.
+     *     So if the role has the edit feature scope, then the create, update, delete and view feature scopes are added.
+     *   - View feature scope is explicitly added when edit, create, update, delete feature scope is selected.
+     *   - If `create, update, delete` present-> Add `edit` (write)
+     *   - If `edit` (write) -> Add `create, update and delete`
      *
      * Only the feature scopes are added here; the internal scopes corresponding to these feature scopes are already
-     * resolved earlier in {@link #getUpgradedPermissions} (the edit branch adds the write scopes, which cover the
-     * create/update/delete internal scopes, and the granular branches add the create/update/delete internal scopes).
+     * resolved earlier in {@link #getUpgradedPermissions}.
      *
      * @param resolvedRolePermissions Resolved role permissions to be updated in place.
      * @param apiResourceCollections  API resource collections.
@@ -302,20 +306,24 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
             boolean hasUpdate = updateFeatureScope != null && resolvedPermissionNames.contains(updateFeatureScope);
             boolean hasDelete = deleteFeatureScope != null && resolvedPermissionNames.contains(deleteFeatureScope);
 
-            // If the role has all the granular write feature scopes, it is equivalent to the edit (write) feature
-            // scope. Hence, add the edit feature scope.
-            if (hasCreate && hasUpdate && hasDelete && editFeatureScope != null && !hasEdit) {
-                addResolvedScope(editFeatureScope, systemPermissions, resolvedRolePermissions, resolvedPermissionNames);
-            }
-            // If the role has the edit (write) feature scope, it is equivalent to having all the granular write
-            // feature scopes. Hence, add the create, update and delete feature scopes.
+            // The edit feature scope is equivalent to having the create, update, delete feature scopes.
             if (hasEdit) {
-                addResolvedScope(createFeatureScope, systemPermissions, resolvedRolePermissions,
-                    resolvedPermissionNames);
-                addResolvedScope(updateFeatureScope, systemPermissions, resolvedRolePermissions,
-                    resolvedPermissionNames);
-                addResolvedScope(deleteFeatureScope, systemPermissions, resolvedRolePermissions,
-                    resolvedPermissionNames);
+                if (!hasCreate) {
+                     addResolvedScope(createFeatureScope, systemPermissions, resolvedRolePermissions,
+                         resolvedPermissionNames);
+                }
+                if (!hasUpdate) {
+                     addResolvedScope(updateFeatureScope, systemPermissions, resolvedRolePermissions,
+                         resolvedPermissionNames);
+                }
+                if (!hasDelete) {
+                     addResolvedScope(deleteFeatureScope, systemPermissions, resolvedRolePermissions,
+                         resolvedPermissionNames);
+                }
+            }
+            // If the role has all the granular write feature scopes, it is equivalent to the edit feature scope.
+            if (hasCreate && hasUpdate && hasDelete && !hasEdit) {
+                addResolvedScope(editFeatureScope, systemPermissions, resolvedRolePermissions, resolvedPermissionNames);
             }
         });
     }

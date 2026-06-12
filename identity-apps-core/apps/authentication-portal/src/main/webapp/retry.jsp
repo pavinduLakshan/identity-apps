@@ -165,7 +165,7 @@
                     </p>
                 <%
                     } else if (StringUtils.equals(errorCode, IdentityCoreConstants.USER_ACCOUNT_LOCKED_ERROR_CODE) &&
-                            StringUtils.isBlank(remainingAttempts)) {
+                            (StringUtils.isBlank(remainingAttempts) || "0".equals(remainingAttempts.trim()))) {
                 %>
                     <h3 class="ui header text-center slogan-message mt-3 mb-6">
                         <%=AuthenticationEndpointUtil.i18n(resourceBundle, "unable.to.proceed")%>

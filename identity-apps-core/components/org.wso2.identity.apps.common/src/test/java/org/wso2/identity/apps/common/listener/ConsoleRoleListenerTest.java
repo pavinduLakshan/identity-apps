@@ -28,6 +28,7 @@ import org.wso2.carbon.identity.api.resource.collection.mgt.model.APIResourceCol
 import org.wso2.carbon.identity.api.resource.collection.mgt.model.APIResourceCollectionSearchResult;
 import org.wso2.carbon.identity.api.resource.mgt.APIResourceManager;
 import org.wso2.carbon.identity.application.common.model.Scope;
+import org.wso2.carbon.identity.core.util.IdentityUtil;
 import org.wso2.carbon.identity.role.v2.mgt.core.model.Permission;
 import org.wso2.carbon.identity.role.v2.mgt.core.model.Role;
 import org.wso2.identity.apps.common.internal.AppsCommonDataHolder;
@@ -92,6 +93,7 @@ public class ConsoleRoleListenerTest {
     private AutoCloseable closeable;
 
     private MockedStatic<AppsCommonDataHolder> appsCommonDataHolder;
+    private MockedStatic<IdentityUtil> identityUtil;
 
     @Mock
     private APIResourceManager apiResourceManager;
@@ -103,14 +105,25 @@ public class ConsoleRoleListenerTest {
 
         consoleRoleListener = new ConsoleRoleListener();
         appsCommonDataHolder = mockStatic(AppsCommonDataHolder.class);
+        identityUtil = mockStatic(IdentityUtil.class);
+        identityUtil.when(() -> IdentityUtil.getProperty(anyString())).thenReturn("true");
         closeable = MockitoAnnotations.openMocks(this);
     }
 
     @AfterMethod
     public void tearDown() throws Exception {
 
+        identityUtil.close();
         appsCommonDataHolder.close();
         closeable.close();
+    }
+
+    /**
+     * Switch the granular console permission flag off for an off-mode test.
+     */
+    private void disableGranularConsolePermissions() {
+
+        identityUtil.when(() -> IdentityUtil.getProperty(anyString())).thenReturn("false");
     }
 
     @Test
@@ -181,6 +194,44 @@ public class ConsoleRoleListenerTest {
         Set<String> resolved = names(role.getPermissions());
         assertTrue(resolved.containsAll(Arrays.asList(INTERNAL_USER_CREATE, INTERNAL_USER_UPDATE,
             INTERNAL_USER_DELETE)), "Granular feature scopes must resolve to their internal scopes.");
+    }
+
+    @Test
+    public void testPostGetRoleGranularDisabledIgnoresGranularScopes() throws Exception {
+
+        // Granular off + a role carrying only granular create/update/delete feature scopes: the granular scopes are
+        // inert. They are neither resolved to their internal scopes nor derived into the edit feature scope.
+        disableGranularConsolePermissions();
+        mockDataHolder(allSystemScopes(), Collections.singletonList(collectionWithEditInWriteScopes()));
+        Role role = buildRole("granular", CONSOLE_APP_AUDIENCE_NAME,
+            Arrays.asList(perm(USERS_CREATE), perm(USERS_UPDATE), perm(USERS_DELETE)));
+
+        consoleRoleListener.postGetRole(role, "roleId", TENANT_DOMAIN);
+
+        Set<String> resolved = names(role.getPermissions());
+        assertFalse(resolved.contains(USERS_EDIT),
+            "Granular feature scopes must not be derived into the edit feature scope when granular is off.");
+        assertFalse(resolved.contains(INTERNAL_USER_CREATE) || resolved.contains(INTERNAL_USER_UPDATE)
+            || resolved.contains(INTERNAL_USER_DELETE), "Granular feature scopes must not be resolved when off.");
+        assertFalse(resolved.contains(USERS_CREATE) || resolved.contains(USERS_UPDATE)
+            || resolved.contains(USERS_DELETE), "Granular feature scopes must not be returned when off.");
+    }
+
+    @Test
+    public void testPostGetRoleGranularDisabledDoesNotDeriveGranularFromEdit() throws Exception {
+
+        // Granular off + an edit role: the edit feature scope is returned, but it must NOT expand into the granular
+        // create/update/delete feature scopes (forward derivation is skipped).
+        disableGranularConsolePermissions();
+        mockDataHolder(allSystemScopes(), Collections.singletonList(collectionWithEditInWriteScopes()));
+        Role role = buildRole("editor", CONSOLE_APP_AUDIENCE_NAME, Collections.singletonList(perm(USERS_EDIT)));
+
+        consoleRoleListener.postGetRole(role, "roleId", TENANT_DOMAIN);
+
+        Set<String> resolved = names(role.getPermissions());
+        assertTrue(resolved.contains(USERS_EDIT), "The edit feature scope must be returned when off.");
+        assertFalse(resolved.contains(USERS_CREATE) || resolved.contains(USERS_UPDATE)
+            || resolved.contains(USERS_DELETE), "Granular feature scopes must not be derived from edit when off.");
     }
 
     @Test
@@ -337,6 +388,19 @@ public class ConsoleRoleListenerTest {
         collection.setCreateScopes(Collections.singletonList(INTERNAL_USER_CREATE));
         collection.setUpdateScopes(Collections.singletonList(INTERNAL_USER_UPDATE));
         collection.setDeleteScopes(Collections.singletonList(INTERNAL_USER_DELETE));
+        return collection;
+    }
+
+    /**
+     * A users collection whose write scopes also carry the edit feature scope, mirroring the runtime config builder
+     * which places the edit feature scope in the write scope set. Used by the off-mode tests so resolving the edit
+     * feature scope yields the edit marker in the response.
+     */
+    private APIResourceCollection collectionWithEditInWriteScopes() {
+
+        APIResourceCollection collection = usersCollection();
+        collection.setWriteScopes(Arrays.asList(USERS_EDIT, INTERNAL_USER_CREATE, INTERNAL_USER_UPDATE,
+            INTERNAL_USER_DELETE));
         return collection;
     }
 

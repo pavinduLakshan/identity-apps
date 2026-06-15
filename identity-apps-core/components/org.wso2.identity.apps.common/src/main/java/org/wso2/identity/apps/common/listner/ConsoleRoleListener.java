@@ -26,6 +26,7 @@ import org.wso2.carbon.identity.application.common.IdentityApplicationManagement
 import org.wso2.carbon.identity.application.common.model.ApplicationBasicInfo;
 import org.wso2.carbon.identity.application.common.model.Scope;
 import org.wso2.carbon.identity.application.mgt.ApplicationManagementService;
+import org.wso2.carbon.identity.core.util.IdentityUtil;
 import org.wso2.carbon.identity.role.v2.mgt.core.RoleConstants;
 import org.wso2.carbon.identity.role.v2.mgt.core.RoleManagementService;
 import org.wso2.carbon.identity.role.v2.mgt.core.exception.IdentityRoleManagementException;
@@ -55,6 +56,9 @@ import static org.wso2.carbon.identity.role.v2.mgt.core.RoleConstants.CONSOLE_SC
  * Console role listener to populate organization console application roles permissions.
  */
 public class ConsoleRoleListener extends AbstractRoleManagementListener {
+
+    private static final String USE_GRANULAR_CONSOLE_PERMISSIONS_CONFIG =
+        "ConsoleSettings.UseGranularConsolePermissions";
 
     @Override
     public int getDefaultOrderId() {
@@ -204,35 +208,37 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
                             newPermission.ifPresent(resolvedRolePermissions::add);
                         });
                     }
-                    // If the role has the create feature scope, then we add all the create scopes.
-                    if (apiResourceCollection.getCreateFeatureScope() != null &&
-                        apiResourceCollection.getCreateFeatureScope().equals(permission.getName())) {
-                        apiResourceCollection.getCreateScopes().forEach(createScope -> {
-                            Optional<Permission> newPermission = systemPermissions.stream()
-                                .filter(permission1 -> permission1.getName().equals(createScope))
-                                .findFirst();
-                            newPermission.ifPresent(resolvedRolePermissions::add);
-                        });
-                    }
-                    // If the role has the update feature scope, then we add all the update scopes.
-                    if (apiResourceCollection.getUpdateFeatureScope() != null &&
-                        apiResourceCollection.getUpdateFeatureScope().equals(permission.getName())) {
-                        apiResourceCollection.getUpdateScopes().forEach(updateScope -> {
-                            Optional<Permission> newPermission = systemPermissions.stream()
-                                .filter(permission1 -> permission1.getName().equals(updateScope))
-                                .findFirst();
-                            newPermission.ifPresent(resolvedRolePermissions::add);
-                        });
-                    }
-                    // If the role has the delete feature scope, then we add all the delete scopes.
-                    if (apiResourceCollection.getDeleteFeatureScope() != null &&
-                        apiResourceCollection.getDeleteFeatureScope().equals(permission.getName())) {
-                        apiResourceCollection.getDeleteScopes().forEach(deleteScope -> {
-                            Optional<Permission> newPermission = systemPermissions.stream()
-                                .filter(permission1 -> permission1.getName().equals(deleteScope))
-                                .findFirst();
-                            newPermission.ifPresent(resolvedRolePermissions::add);
-                        });
+                    if (isGranularConsolePermissionsEnabled()) {
+                        // If the role has the create feature scope, then we add all the create scopes.
+                        if (apiResourceCollection.getCreateFeatureScope() != null &&
+                            apiResourceCollection.getCreateFeatureScope().equals(permission.getName())) {
+                            apiResourceCollection.getCreateScopes().forEach(createScope -> {
+                                Optional<Permission> newPermission = systemPermissions.stream()
+                                    .filter(permission1 -> permission1.getName().equals(createScope))
+                                    .findFirst();
+                                newPermission.ifPresent(resolvedRolePermissions::add);
+                            });
+                        }
+                        // If the role has the update feature scope, then we add all the update scopes.
+                        if (apiResourceCollection.getUpdateFeatureScope() != null &&
+                            apiResourceCollection.getUpdateFeatureScope().equals(permission.getName())) {
+                            apiResourceCollection.getUpdateScopes().forEach(updateScope -> {
+                                Optional<Permission> newPermission = systemPermissions.stream()
+                                    .filter(permission1 -> permission1.getName().equals(updateScope))
+                                    .findFirst();
+                                newPermission.ifPresent(resolvedRolePermissions::add);
+                            });
+                        }
+                        // If the role has the delete feature scope, then we add all the delete scopes.
+                        if (apiResourceCollection.getDeleteFeatureScope() != null &&
+                            apiResourceCollection.getDeleteFeatureScope().equals(permission.getName())) {
+                            apiResourceCollection.getDeleteScopes().forEach(deleteScope -> {
+                                Optional<Permission> newPermission = systemPermissions.stream()
+                                    .filter(permission1 -> permission1.getName().equals(deleteScope))
+                                    .findFirst();
+                                newPermission.ifPresent(resolvedRolePermissions::add);
+                            });
+                        }
                     }
                 });
             });
@@ -274,6 +280,16 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
     }
 
     /**
+     * Check whether the granular console permission model (create/update/delete feature scopes) is enabled.
+     *
+     * @return True if granular console permissions are enabled.
+     */
+    private boolean isGranularConsolePermissionsEnabled() {
+
+        return Boolean.parseBoolean(IdentityUtil.getProperty(USE_GRANULAR_CONSOLE_PERMISSIONS_CONFIG));
+    }
+
+    /**
      * This supports backward compatibility between the legacy write model and the new granular permission model,
      * so that a role resolves correctly regardless of which model it was created with:
      *   - The edit (write) feature scope is equivalent to having the create, update, delete and view feature scopes.
@@ -307,7 +323,7 @@ public class ConsoleRoleListener extends AbstractRoleManagementListener {
             boolean hasDelete = deleteFeatureScope != null && resolvedPermissionNames.contains(deleteFeatureScope);
 
             // The edit feature scope is equivalent to having the create, update, delete feature scopes.
-            if (hasEdit) {
+            if (hasEdit && isGranularConsolePermissionsEnabled()) {
                 if (!hasCreate) {
                      addResolvedScope(createFeatureScope, systemPermissions, resolvedRolePermissions,
                          resolvedPermissionNames);

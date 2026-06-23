@@ -131,7 +131,7 @@
                             <h4 class="app-name-container">
                                 <strong id="app-name"
                                         class="text-capitalize text-typography primary login-portal-app-font"
-                                        data-content=<%=Encode.forHtml(request.getParameter("application"))%>>
+                                        data-content="<%=Encode.forHtmlAttribute(request.getParameter("application"))%>">
                                     <%=Encode.forHtml(request.getParameter("application"))%>
                                 </strong>
                                 <%=AuthenticationEndpointUtil.i18n(resourceBundle, "request.access.profile")%>

@@ -205,7 +205,7 @@
                                         AuthenticationEndpointUtil.isValidMultiOptionURI(multiOptionURI)) {
                                 %>
                                     <a
-                                        onclick="window.location.href='<%=Encode.forHtmlAttribute(multiOptionURI)%>';"
+                                        onclick="window.location.href='<%=Encode.forJavaScript(multiOptionURI)%>';"
                                         target="_blank"
                                         class="ui primary basic button link-button"
                                         rel="noopener noreferrer"

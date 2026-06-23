@@ -653,7 +653,7 @@
                                 <div class="required field">
                                     <input type="text" name="missing-<%=Encode.forHtmlAttribute(claim)%>"
                                            id="<%=Encode.forHtmlAttribute(claim)%>" class="form-control"
-                                           required="required" placeholder=<%=IdentityManagementEndpointUtil.i18nBase64(recoveryResourceBundle, claimDisplayName)%>>
+                                           required="required" placeholder="<%=IdentityManagementEndpointUtil.i18nBase64(recoveryResourceBundle, claimDisplayName)%>">
                                 </div>
                                 <% }
                                 }%>

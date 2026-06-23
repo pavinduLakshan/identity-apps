@@ -1029,7 +1029,7 @@
                                         id="<%=Encode.forHtmlAttribute(claim)%>" class="form-control"
                                         onblur="showFieldValidationStatus(this)"
                                         oninput="hideFieldValidationStatus(this)"
-                                        required="required" placeholder=<%=IdentityManagementEndpointUtil.i18nBase64(recoveryResourceBundle, claimDisplayName)%>>
+                                        required="required" placeholder="<%=IdentityManagementEndpointUtil.i18nBase64(recoveryResourceBundle, claimDisplayName)%>">
                                 </div>
                                 <% }
                                 }%>

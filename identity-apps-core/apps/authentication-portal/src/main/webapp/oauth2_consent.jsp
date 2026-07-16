@@ -382,7 +382,7 @@
                                                         for (String scope : openIdScopes) {
                                                 %>
                                                 <div class="item mt-2">
-                                                    <i aria-hidden="true" class="circle tiny icon primary consent-item-bullet" id=("<%=scope%>")></i>
+                                                    <i aria-hidden="true" class="circle tiny icon primary consent-item-bullet" id="<%=Encode.forHtmlAttribute(scope)%>"></i>
                                                     <div class="content mt-2 pl-1 consentItem">
                                                         <div class="header light-font">
                                                             <%=Encode.forHtml(scope)%>
@@ -400,7 +400,7 @@
                                                     <% for (String permission : scopeEntry.getValue()) { %>
                                                         <div class="required mandatoryClaim mb-2 consentItem">
                                                             <div class="ui" style="display: flex">
-                                                                <i aria-hidden="true" class="circle tiny icon primary consent-item-bullet" id=("<%=scopeEntry.getKey()%>")></i>
+                                                                <i aria-hidden="true" class="circle tiny icon primary consent-item-bullet" id="<%=Encode.forHtmlAttribute(scopeEntry.getKey())%>"></i>
                                                                 <div class="header light-font">
                                                                     <%=Encode.forHtml(permission)%>
                                                                 </div>
@@ -431,8 +431,8 @@
                                                     %>
                                                         <div class="mt-1 pl-2">
                                                             <div class="ui checkbox" style="display: flex">
-                                                                <input type="checkbox" class="hidden" name="<%=authorizationDetailEntry.getKey()%>" id="<%=authorizationDetailEntry.getKey()%>" />
-                                                                <label id="<%=authorizationDetailEntry.getKey()%>" for="<%=authorizationDetailEntry.getKey()%>">
+                                                                <input type="checkbox" class="hidden" name="<%=Encode.forHtmlAttribute(authorizationDetailEntry.getKey())%>" id="<%=Encode.forHtmlAttribute(authorizationDetailEntry.getKey())%>" />
+                                                                <label id="<%=Encode.forHtmlAttribute(authorizationDetailEntry.getKey())%>" for="<%=Encode.forHtmlAttribute(authorizationDetailEntry.getKey())%>">
                                                                     <%=Encode.forHtml(authorizationDetailEntry.getValue())%>
                                                                 </label>
                                                             </div>

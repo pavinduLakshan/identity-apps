@@ -216,7 +216,7 @@
                                         for (Map.Entry<String, List<String>> scopeEntry : scopeEntries) {
                                 %>
                                         <div class="item mt-2">
-                                            <i aria-hidden="true" class="circle tiny icon primary consent-item-bullet" id=("<%=scopeEntry.getKey()%>")></i>
+                                            <i aria-hidden="true" class="circle tiny icon primary consent-item-bullet" id="<%=Encode.forHtmlAttribute(scopeEntry.getKey())%>"></i>
                                             <div class="content mt-2">
                                                 <div class="header light-font">
                                                     <%=Encode.forHtml(StringUtils.capitalize(scopeEntry.getKey()))%>
@@ -229,7 +229,7 @@
                                                             <% for (String permission : scopeEntry.getValue()) { %>
                                                                 <div class="mt-1 pl-2">
                                                                     <div class="ui checkbox" style="display: flex">
-                                                                        <i class="circle notch tiny icon primary consent-item-bullet" id=("<%=permission%>")></i>
+                                                                        <i class="circle notch tiny icon primary consent-item-bullet" id="<%=Encode.forHtmlAttribute(permission)%>"></i>
                                                                         <span>
                                                                             <%=Encode.forHtml(permission)%>
                                                                         </span>
@@ -273,8 +273,8 @@
                                                     %>
                                                         <div class="mt-1 pl-2">
                                                             <div class="ui checkbox" style="display: flex">
-                                                                <input type="checkbox" class="hidden" name="<%=authorizationDetailEntry.getKey()%>" id="<%=authorizationDetailEntry.getKey()%>" />
-                                                                <label id="<%=authorizationDetailEntry.getKey()%>" for="<%=authorizationDetailEntry.getKey()%>">
+                                                                <input type="checkbox" class="hidden" name="<%=Encode.forHtmlAttribute(authorizationDetailEntry.getKey())%>" id="<%=Encode.forHtmlAttribute(authorizationDetailEntry.getKey())%>" />
+                                                                <label id="<%=Encode.forHtmlAttribute(authorizationDetailEntry.getKey())%>" for="<%=Encode.forHtmlAttribute(authorizationDetailEntry.getKey())%>">
                                                                     <%=Encode.forHtml(authorizationDetailEntry.getValue())%>
                                                                 </label>
                                                             </div>

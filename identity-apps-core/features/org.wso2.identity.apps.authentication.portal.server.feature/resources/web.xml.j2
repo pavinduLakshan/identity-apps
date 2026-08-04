@@ -68,6 +68,12 @@
             <param-value>{{ event.default_listener.validation.enable }}</param-value>
         </context-param>
     {% endif %}
+    {% if authentication.authenticator.totp.parameters.showSecretKeyInEnrollment is defined %}
+        <context-param>
+            <param-name>ShowTOTPSecretKeyInEnrollment</param-name>
+            <param-value>{{ authentication.authenticator.totp.parameters.showSecretKeyInEnrollment }}</param-value>
+        </context-param>
+    {% endif %}
     <!-- **************** End of Application specific configurations ************************* -->
 
     <!-- *************** Global configurations ********************** -->
